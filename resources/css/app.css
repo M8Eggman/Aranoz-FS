@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    /* Brand colors */
+    --blue: #ecfdff;
+    --pink-red: #ff3368;
+
+    /* Complementary palette */
+    --steel-blue: #5888b7;
+    --soft-mint: #ecf8f8;
+    --dark-pink: #e24175;
+    --muted-blue: #86a5c2;
+    --charcoal: #1b1b1d;
+    --golden-brown: #ac9758;
+    --aqua-gray: #bcd9d4;
+    --mauve-gray: #bba9b5;
+    --soft-gray: #d2cfd6;
+    --sage: #c3c3a1;
+}
