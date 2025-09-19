@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('order_number')->unique();
             $table->decimal('total_price', 9, 2);
-            $table->enum('status', ['pending', 'confirmed']);
-            $table->foreignId('user_id');
+            $table->enum('status', ['pending', 'confirmed', 'archived'])->default('pending');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
