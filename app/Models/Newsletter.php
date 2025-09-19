@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Color extends Model
+class Newsletter extends Model
 {
-    /** @use HasFactory<\Database\Factories\ColorFactory> */
+    /** @use HasFactory<\Database\Factories\NewsletterFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'email',
     ];
-
-    public function product()
-    {
-        $this->hasMany(Product::class);
-    }
 }

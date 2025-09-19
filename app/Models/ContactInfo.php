@@ -9,4 +9,15 @@ class ContactInfo extends Model
 {
     /** @use HasFactory<\Database\Factories\ContactInfoFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'street',
+        'state',
+        'city',
+        'country_code',
+        'zip_code',
+        'number',
+        'email',
+        'phone_number',
+    ];
 }

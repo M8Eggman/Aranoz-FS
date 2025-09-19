@@ -9,4 +9,14 @@ class Promotion extends Model
 {
     /** @use HasFactory<\Database\Factories\PromotionFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'percentage',
+    ];
+
+    public function products()
+    {
+        $this->hasMany(Product::class);
+    }
 }

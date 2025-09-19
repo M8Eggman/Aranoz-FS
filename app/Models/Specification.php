@@ -9,4 +9,21 @@ class Specification extends Model
 {
     /** @use HasFactory<\Database\Factories\SpecificationFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'width',
+        'height',
+        'depth',
+        'weight',
+        'quality_checking',
+        'freshness_duration',
+        'packaging',
+        'content',
+        'product_id',
+    ];
+
+    public function product()
+    {
+        $this->belongsTo(Product::class);
+    }
 }

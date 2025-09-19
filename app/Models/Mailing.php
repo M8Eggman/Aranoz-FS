@@ -9,4 +9,12 @@ class Mailing extends Model
 {
     /** @use HasFactory<\Database\Factories\MailingFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'email',
+        'subject',
+        'message',
+        'status',
+        'isArchived',
+    ];
 }
