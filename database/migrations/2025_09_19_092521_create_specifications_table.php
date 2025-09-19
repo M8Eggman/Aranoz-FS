@@ -12,14 +12,14 @@ return new class extends Migration {
     {
         Schema::create('specifications', function (Blueprint $table) {
             $table->id();
-            $table->string('width');
-            $table->string('height');
-            $table->string('depth');
-            $table->string('weight');
-            $table->boolean('quality_checking')->default(true);
-            $table->string('freshness_duration');
-            $table->string('packaging');
-            $table->integer('content');
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
+            $table->string('depth')->nullable();
+            $table->string('weight')->nullable();
+            $table->boolean('quality_checking')->nullable()->default(true);
+            $table->string('freshness_duration')->nullable();
+            $table->string('packaging')->nullable();
+            $table->integer('content')->nullable();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->timestamps();
         });
