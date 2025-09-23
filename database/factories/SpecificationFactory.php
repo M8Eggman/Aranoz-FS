@@ -22,10 +22,10 @@ class SpecificationFactory extends Factory
             'depth' => $this->faker->numberBetween(20, 100) . ' cm',
             'weight' => $this->faker->randomFloat(2, 1, 100) . ' kg',
             'quality_checking' => $this->faker->boolean(90),
-            'freshness_duration' => $this->faker->numberBetween(1, 24) . ' mois',
+            'freshness_duration' => null,
             'packaging' => $this->faker->randomElement(['Carton', 'Plastique', 'Bois', 'Métal']),
             'content' => $this->faker->numberBetween(1, 10),
-            'product_id' => null, // assigné dans le seeder
+            'product_id' => null,
         ];
     }
 }
