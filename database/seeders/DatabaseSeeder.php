@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
             ContactInfoSeeder::class,
             CountrySeeder::class,
+            PromotionSeeder::class,
+            OrderSeeder::class,
+            MailingSeeder::class,
         ]);
     }
 }

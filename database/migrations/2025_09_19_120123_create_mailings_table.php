@@ -15,7 +15,9 @@ return new class extends Migration {
             $table->string('email');
             $table->string('subject');
             $table->text('message');
+            // lu ou pas lu
             $table->boolean('status')->default(false);
+            // archivé ou pas
             $table->boolean('isArchived')->default(false);
             $table->timestamps();
         });

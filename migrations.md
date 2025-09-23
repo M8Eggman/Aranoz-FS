@@ -72,8 +72,8 @@
         -   image_rear (url/fichier)
         -   image_left_side (url/fichier)
         -   image_right_side (url/fichier)
+        -   promotion → integer (nullable)
         -   color_id → FK `colors.id`
-        -   promo_id → FK `promotions.id` (nullable)
         -   category_id → FK `product_categories.id`
         -   **Relations :**
             -   belongsTo Color
@@ -138,10 +138,12 @@
 
 -   **Orders**
     -   order_number (unique)
+    -   sub_total_price
     -   total_price
     -   status (enum: pending, confirmed)
     -   isArchived (boolean)
     -   user_id → FK `users.id`
+    -   promo_id → FK `promotions.id`
     -   **Relations :**
         -   belongsTo User
         -   hasMany OrderItems
