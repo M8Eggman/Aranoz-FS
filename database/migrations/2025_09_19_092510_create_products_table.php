@@ -23,10 +23,14 @@ return new class extends Migration {
             $table->string('image_right_side')->nullable();
             $table->foreignId('color_id')->constrained('colors');
             $table->foreignId('category_id')->constrained('product_categories');
-            $table->foreignId('promo_id')->nullable()->constrained('promotions')->nullOnDelete();
+            // Promotions sur le produits
+            $table->unsignedTinyInteger('promotion')->nullable();
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE products ADD CONSTRAINT check_promotion CHECK (promotion >= 0 AND promotion <= 100)');
     }
+
 
     /**
      * Reverse the migrations.

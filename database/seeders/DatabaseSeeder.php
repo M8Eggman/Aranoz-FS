@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ContactInfo;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,8 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             ProductSeeder::class,
             CommentSeeder::class,
+            ContactInfoSeeder::class,
+            CountrySeeder::class,
         ]);
     }
 }

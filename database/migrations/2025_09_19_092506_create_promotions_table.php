@@ -10,13 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        // Promotions sur la commande
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedTinyInteger('percentage');
             $table->timestamps();
         });
-        
+
         // contrainte pour forcer un entier entre 0 et 100 compris
         DB::statement('ALTER TABLE promotions ADD CONSTRAINT check_percentage CHECK (percentage >= 0 AND percentage <= 100)');
     }

@@ -17,42 +17,37 @@ class UserSeeder extends Seeder
       [
         'name' => 'Alice',
         'email' => 'alice@example.com',
-        'password' => Hash::make('password'),
-        'image' => 'alice.jpg',
+        'image' => 'user/alice.jpg',
         'role_id' => 1, // User
       ],
       [
         'name' => 'Bob',
         'email' => 'bob@example.com',
-        'password' => Hash::make('password'),
-        'image' => 'bob.jpg',
+        'image' => 'user/bob.jpg',
         'role_id' => 2, // Community Manager
       ],
       [
         'name' => 'Charlie',
         'email' => 'charlie@example.com',
-        'password' => Hash::make('password'),
-        'image' => 'charlie.jpg',
+        'image' => 'user/charlie.jpg',
         'role_id' => 3, // Agent
       ],
       [
         'name' => 'Diane',
         'email' => 'diane@example.com',
-        'password' => Hash::make('password'),
-        'image' => 'diane.jpg',
+        'image' => 'user/diane.jpg',
         'role_id' => 4, // Webmaster
       ],
       [
         'name' => 'Eric',
         'email' => 'eric@example.com',
-        'password' => Hash::make('password'),
-        'image' => 'eric.jpg',
+        'image' => 'user/eric.jpg',
         'role_id' => 5, // Admin
       ],
     ];
 
-    foreach ($users as $user) {
-      User::create($user);
+    foreach ($users as $u) {
+      User::factory()->create($u);
     }
   }
 }
