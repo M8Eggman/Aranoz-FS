@@ -34,6 +34,14 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            // Envoi les gates dans le front
+            'can' => [
+                'isAdmin' => $request->user()?->can('is-admin') ?? false,
+                'isWebmaster' => $request->user()?->can('is-webmaster') ?? false,
+                'isAgent' => $request->user()?->can('is-agent') ?? false,
+                'isCommunityManager' => $request->user()?->can('is-community-manager') ?? false,
+                'isUser' => $request->user()?->can('is-user') ?? false,
+            ]
         ];
     }
 }
