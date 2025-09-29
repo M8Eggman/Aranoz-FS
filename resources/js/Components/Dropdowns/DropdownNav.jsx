@@ -7,6 +7,7 @@ export default function DropdownNav({
     label = "",
     image = null,
     options = [],
+    auth = false,
 }) {
     return (
         <div className={styles.dropdown}>
@@ -14,7 +15,10 @@ export default function DropdownNav({
                 {image && <img className={styles.image} src={image} alt="" />}
                 {label} <IoMdArrowDropdown className="inline-block" />
             </div>
-            <div className={styles.content}>
+            <div
+                className={styles.content}
+                style={auth ? { left: "initial", right: 0 } : {}}
+            >
                 <ul>
                     {options.map((option, index) => (
                         <li key={index}>

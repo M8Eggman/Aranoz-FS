@@ -127,6 +127,7 @@ export default function BackNav() {
             <div className={styles.actions}>
                 {auth?.user && (
                     <DropdownNav
+                        auth={true}
                         label={auth.user.name}
                         image={
                             auth.user?.image

@@ -34,7 +34,7 @@
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     min-width: 10rem;
-    z-index: 10;
+    z-index: 100;
     visibility: hidden;
     pointer-events: none;
     transform-origin: top;
@@ -69,4 +69,10 @@
 
 .content li:active {
     backdrop-filter: brightness(90%);
+}
+
+@media screen and (max-width: 1200px) {
+    .content {
+        left: 0;
+    }
 }

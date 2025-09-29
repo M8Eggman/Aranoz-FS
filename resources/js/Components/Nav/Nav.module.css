@@ -6,8 +6,7 @@
     background: var(--rose-pale);
     padding: var(--space-sm) var(--space-md);
     font-family: sans-serif;
-    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    gap: var(--space-md);
     z-index: 50;
 }
 
@@ -86,13 +85,13 @@
 
 @media screen and (max-width: 1200px) {
     .nav {
+        justify-content: space-between;
         padding: var(--space-md) var(--space-lg);
     }
 
     .brandContainer {
         position: relative;
         display: flex;
-        width: 100%;
         align-items: center;
         gap: var(--space-md);
     }
@@ -102,7 +101,9 @@
     }
 
     .menu {
-        display: none;
+        transform: scaleY(0%);
+        visibility: hidden;
+        pointer-events: none;
         flex-direction: column;
         align-items: start;
         position: absolute;
@@ -114,10 +115,15 @@
         z-index: 100;
         box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transform-origin: top;
+        transition: 200ms ease;
+        padding-bottom: 10px;
     }
 
     .menu.menuOpen {
-        display: flex;
+        transform: scaleY(100%);
+        visibility: visible;
+        pointer-events: all;
     }
 
     .menu li {
