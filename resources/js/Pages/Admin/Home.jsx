@@ -4,64 +4,72 @@ import AdminHeader from "@/Components/Header/Header";
 import QuickAccessCard from "@/Components/Cards/QuickAccessCard";
 import styles from "./Home.module.css";
 
-export default function AdminHome() {
+export default function AdminHome({ auth }) {
+    const role = auth.user?.role?.name;
+
     const quickAccessCards = [
         {
             title: "Categories",
-            description: "Gérez vos produits, blogs et tags rapidement",
+            description: "Manage your products, blogs, and tags quickly",
             links: [
                 { text: "Product Categories", route: "admin.home" },
                 { text: "Blog Categories", route: "admin.home" },
                 { text: "Tags", route: "admin.home" },
             ],
+            roles: ["admin", "community_manager"],
         },
         {
             title: "Orders",
-            description: "Suivez et gérez vos commandes en attente ou validées",
+            description: "Track and manage pending or validated orders",
             links: [
                 { text: "Pending", route: "admin.home" },
                 { text: "Validated", route: "admin.home" },
                 { text: "All Orders", route: "admin.home" },
             ],
-        },
-        {
-            title: "Blogs",
-            description: "Créez ou consultez vos articles de blog facilement",
-            links: [
-                { text: "Create a Blog", route: "admin.home" },
-                { text: "All Blogs", route: "admin.home" },
-            ],
+            roles: ["admin", "agent"],
         },
         {
             title: "Products",
-            description:
-                "Ajoutez de nouveaux produits ou consultez votre catalogue",
+            description: "Add new products or browse your catalog",
             links: [
                 { text: "Create a Product", route: "admin.home" },
                 { text: "All Products", route: "admin.home" },
             ],
+            roles: ["admin", "webmaster"],
         },
         {
             title: "Mailbox",
-            description:
-                "Consultez les messages et archives de votre boîte mail",
+            description: "Check your messages and archives",
             links: [
                 { text: "Archived", route: "admin.home" },
                 { text: "All Messages", route: "admin.home" },
             ],
+            roles: ["admin", "agent"],
         },
         {
-            title: "Contact Info",
-            description: "Accédez rapidement aux informations de contact",
-            links: [{ text: "Manage Contact Info", route: "admin.home" }],
+            title: "Blogs",
+            description: "Create or view your blog posts easily",
+            links: [
+                { text: "Create a Blog", route: "admin.home" },
+                { text: "All Blogs", route: "admin.home" },
+            ],
+            roles: ["admin", "community_manager"],
         },
+
         {
             title: "Users",
-            description: "Gérez les utilisateurs et leurs rôles",
+            description: "Manage users and their roles",
             links: [
                 { text: "All Users", route: "admin.home" },
                 { text: "Roles & Permissions", route: "admin.home" },
             ],
+            roles: ["admin"],
+        },
+        {
+            title: "Contact Info",
+            description: "Edit your contact information",
+            links: [{ text: "Manage Contact Info", route: "admin.home" }],
+            roles: ["admin", "webmaster"],
         },
     ];
 
@@ -71,14 +79,16 @@ export default function AdminHome() {
             <div className={styles.container}>
                 <h3>Quick Access</h3>
                 <div className={styles.cardContainer}>
-                    {quickAccessCards.map((card, i) => (
-                        <QuickAccessCard
-                            key={i}
-                            title={card.title}
-                            description={card.description}
-                            links={card.links}
-                        />
-                    ))}
+                    {quickAccessCards
+                        .filter((card) => card.roles.includes(role))
+                        .map((card, i) => (
+                            <QuickAccessCard
+                                key={i}
+                                title={card.title}
+                                description={card.description}
+                                links={card.links}
+                            />
+                        ))}
                 </div>
             </div>
         </>

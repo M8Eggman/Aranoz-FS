@@ -1,87 +1,141 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Nav.module.css";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import DropdownNav from "../Dropdowns/DropdownNav";
+import { VscThreeBars } from "react-icons/vsc";
 
 export default function BackNav() {
-    const { auth, can } = usePage().props;
+    const { auth } = usePage().props;
+    const role = auth.user?.role?.name;
 
-    // Contenues du dropdown
-    const categoriesOptions = [
-        { type: "link", route: "admin.home", text: "Product Categories" },
-        { type: "link", route: "admin.home", text: "Blog Categories" },
-        { type: "link", route: "admin.home", text: "Tags" },
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const navItems = [
+        {
+            type: "link",
+            label: "Contact Info",
+            route: "admin.home",
+            roles: ["admin", "webmaster"],
+        },
+        {
+            type: "link",
+            label: "Users",
+            route: "admin.home",
+            roles: ["admin"],
+        },
+        {
+            type: "dropdown",
+            label: "Categories",
+            options: [
+                {
+                    type: "link",
+                    route: "admin.home",
+                    text: "Product Categories",
+                },
+                { type: "link", route: "admin.home", text: "Blog Categories" },
+                { type: "link", route: "admin.home", text: "Tags" },
+            ],
+            roles: ["admin", "community_manager"],
+        },
+        {
+            type: "dropdown",
+            label: "Orders",
+            options: [
+                { type: "link", route: "admin.home", text: "Pending" },
+                { type: "link", route: "admin.home", text: "Validated" },
+                { type: "link", route: "admin.home", text: "Archived" },
+                { type: "link", route: "admin.home", text: "All Orders" },
+            ],
+            roles: ["admin", "agent"],
+        },
+        {
+            type: "dropdown",
+            label: "Blogs",
+            options: [
+                { type: "link", route: "admin.home", text: "Create a Blog" },
+                { type: "link", route: "admin.home", text: "All Blogs" },
+            ],
+            roles: ["admin", "community_manager"],
+        },
+        {
+            type: "dropdown",
+            label: "Products",
+            options: [
+                { type: "link", route: "admin.home", text: "Create a Product" },
+                { type: "link", route: "admin.home", text: "All Products" },
+            ],
+            roles: ["admin", "webmaster"],
+        },
+        {
+            type: "dropdown",
+            label: "Mailbox",
+            options: [
+                { type: "link", route: "admin.home", text: "Archived" },
+                { type: "link", route: "admin.home", text: "All Messages" },
+            ],
+            roles: ["admin", "agent"],
+        },
     ];
-    const ordersOptions = [
-        { type: "link", route: "admin.home", text: "Pending" },
-        { type: "link", route: "admin.home", text: "Validated" },
-        { type: "link", route: "admin.home", text: "Archived" },
-        { type: "link", route: "admin.home", text: "All Orders" },
-    ];
-    const blogsOptions = [
-        { type: "link", route: "admin.home", text: "Create a Blog" },
-        { type: "link", route: "admin.home", text: "All Blogs" },
-    ];
-    const productsOptions = [
-        { type: "link", route: "admin.home", text: "Create a Product" },
-        { type: "link", route: "admin.home", text: "All Products" },
-    ];
-    const mailboxOptions = [
-        { type: "link", route: "admin.home", text: "Archived" },
-        { type: "link", route: "admin.home", text: "All Messages" },
-    ];
+
     const authOptions = [
-        { type: "button", onClick: () => {}, text: "Log Out" },
+        {
+            type: "button",
+            onClick: () => {
+                router.post(route("logout"));
+            },
+            text: "Log Out",
+        },
         { type: "link", route: "home", text: "Back Home" },
     ];
 
     return (
         <nav className={styles.nav}>
-            <Link className={styles.brand} href={route("home")}>
-                Admin{" "}
-                <span className={styles.label}>{auth.user?.role.name}</span>
-            </Link>
+            <div className={styles.brandContainer}>
+                <button
+                    className={styles.burger}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    <VscThreeBars />
+                </button>
+                <Link className={styles.brand} href={route("home")}>
+                    Admin <span className={styles.label}>{role}</span>
+                </Link>
+            </div>
 
-            <ul className={styles.menu}>
-                <li>
-                    <Link className={styles.link} href={route("admin.home")}>
-                        Contact Info
-                    </Link>
-                </li>
-                <li>
-                    <Link className={styles.link} href={route("admin.home")}>
-                        Users
-                    </Link>
-                </li>
-                <li>
-                    <DropdownNav
-                        label="Categories"
-                        options={categoriesOptions}
-                    />
-                </li>
-                <li>
-                    <DropdownNav label="Orders" options={ordersOptions} />
-                </li>
-                <li>
-                    <DropdownNav label="Blogs" options={blogsOptions} />
-                </li>
-                <li>
-                    <DropdownNav label="Products" options={productsOptions} />
-                </li>
-                <li>
-                    <DropdownNav label="Mailbox" options={mailboxOptions} />
-                </li>
+            <ul className={`${styles.menu} ${menuOpen ? styles.menuOpen : ""}`}>
+                {navItems
+                    .filter((item) => item.roles.includes(role))
+                    .map((item, i) => (
+                        <li key={i}>
+                            {item.type === "link" ? (
+                                <Link
+                                    className={styles.link}
+                                    href={route(item.route)}
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    {item.label}
+                                </Link>
+                            ) : (
+                                <DropdownNav
+                                    label={item.label}
+                                    options={item.options}
+                                />
+                            )}
+                        </li>
+                    ))}
             </ul>
-
             <div className={styles.actions}>
-                <DropdownNav
-                    image={
-                        auth?.user?.image
-                            ? auth.user.image
-                            : "/storage/user/templateU.svg" // fallback image
-                    }
-                    options={authOptions}
-                />
+                {auth?.user && (
+                    <DropdownNav
+                        label={auth.user.name}
+                        image={
+                            auth.user?.image
+                                ? auth.user.image
+                                : "/storage/user/templateU.svg"
+                        }
+                        options={authOptions}
+                    />
+                )}
             </div>
         </nav>
     );
