@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 :root {
+    --white: #ffffff;
+    --black: #000000;
+
     /* Brand colors */
     --blue: #ecfdff;
     --pink-red: #ff3368;
@@ -18,4 +21,39 @@
     --mauve-gray: #bba9b5;
     --soft-gray: #d2cfd6;
     --sage: #c3c3a1;
+    --rose-pale: #fdd4d4;
+
+    /* Font sizes */
+    --font-h1: clamp(2.25rem, 5.5vw, 3.25rem);
+    --font-h2: clamp(2rem, 5vw, 2.75rem);
+    --font-h3: clamp(1.75rem, 4.5vw, 2.25rem);
+    --font-h4: clamp(1.5rem, 3.8vw, 2rem);
+    --font-h5: clamp(1.25rem, 3vw, 1.625rem);
+    --font-h6: clamp(1.125rem, 2.5vw, 1.375rem);
+
+    --font-xs: clamp(0.75rem, 1.2vw, 0.875rem);
+    --font-sm: clamp(0.875rem, 1.5vw, 1rem);
+    --font-md: clamp(1rem, 1.8vw, 1.125rem);
+    --font-lg: clamp(1.125rem, 2vw, 1.375rem);
+    --font-xl: clamp(1.25rem, 2.4vw, 1.5rem);
+    --font-2xl: clamp(1.5rem, 3vw, 1.875rem);
+    --font-3xl: clamp(1.875rem, 3.8vw, 2.25rem);
+
+    /* Spacing */
+    --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+    --space-sm: clamp(0.5rem, 1vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --space-xl: clamp(2rem, 4vw, 3rem);
+    --space-2xl: clamp(3rem, 6vw, 4rem);
+    --space-3xl: clamp(4rem, 8vw, 6rem);
+
+    /* Gap */
+    --gap-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+    --gap-sm: clamp(0.5rem, 1vw, 1rem);
+    --gap-md: clamp(1rem, 2vw, 1.5rem);
+    --gap-lg: clamp(1.5rem, 3vw, 2rem);
+    --gap-xl: clamp(2rem, 4vw, 3rem);
+    --gap-2xl: clamp(3rem, 6vw, 4rem);
+    --gap-3xl: clamp(4rem, 8vw, 6rem);
 }

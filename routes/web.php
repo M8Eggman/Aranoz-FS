@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/admin/home', [HomeController::class, 'admin_home'])->name('admin.home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

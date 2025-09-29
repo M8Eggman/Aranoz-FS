@@ -15,4 +15,12 @@ class HomeController extends Controller
 
         return Inertia::render('Home', compact('canLogin', 'canRegister'));
     }
+
+    public function admin_home()
+    {
+        $canLogin = Route::has('login');
+        $canRegister = Route::has('register');
+
+        return Inertia::render('Admin/Home', compact('canLogin', 'canRegister'));
+    }
 }

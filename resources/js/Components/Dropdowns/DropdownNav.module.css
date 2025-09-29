@@ -1,0 +1,63 @@
+.dropdown {
+    position: relative;
+}
+.trigger {
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: var(--font-md);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding: var(--space-xs);
+}
+
+.image {
+    border-radius: 100%;
+    border: 5px var(--pink-red) solid;
+}
+
+.content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--pink-red);
+    color: var(--white);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    min-width: 10rem;
+    z-index: 10;
+    visibility: hidden;
+    pointer-events: none;
+    transform-origin: top;
+    transform: scaleY(0%);
+    transition: 200ms ease;
+}
+
+.dropdown:hover .content {
+    visibility: visible;
+    pointer-events: all;
+    display: block;
+    transform: scaleY(100%);
+}
+
+.content ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.content li {
+    white-space: nowrap;
+    padding: var(--space-sm);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    border-radius: 4px;
+    transition: 200ms ease;
+}
+
+.content li:hover {
+    backdrop-filter: brightness(90%);
+}
+
+.content li:active {
+    backdrop-filter: brightness(90%);
+}
