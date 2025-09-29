@@ -20,15 +20,20 @@ class ProductSeeder extends Seeder
         $categories = ProductCategorie::all();
         $colors = Color::all();
 
+        // Crée une liste de path de toutes les images dans storage/products
         $images = Storage::disk('public')->allFiles('products');
 
         // Crée 20 produits
         Product::factory(20)->make()->each(function ($product) use ($categories, $colors, $images) {
+            // Récupère une images au hasard
             $image = basename($images[array_rand($images)]);
+
+            // L'assigne a toute les images
             $product->image_main = $image;
             $product->image_rear = $image;
             $product->image_left_side = $image;
             $product->image_right_side = $image;
+            
             $product->category_id = $categories->random()->id;
             $product->color_id = $colors->random()->id;
             $product->save();
