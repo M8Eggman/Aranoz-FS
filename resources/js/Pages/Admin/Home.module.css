@@ -1,0 +1,20 @@
+.container {
+    padding-inline: var(--space-3xl);
+    padding-block: var(--space-lg);
+}
+
+.container > h3 {
+    font-size: var(--font-h4);
+    font-weight: 600;
+    color: var(--dark-pink);
+    margin-bottom: var(--space-md);
+    border-left: 4px solid var(--dark-pink);
+    padding-left: var(--space-sm);
+    letter-spacing: 0.5px;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+}

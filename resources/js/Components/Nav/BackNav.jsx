@@ -38,7 +38,8 @@ export default function BackNav() {
     return (
         <nav className={styles.nav}>
             <Link className={styles.brand} href={route("home")}>
-                Admin <span className={styles.label}>{auth.user?.role}</span>
+                Admin{" "}
+                <span className={styles.label}>{auth.user?.role.name}</span>
             </Link>
 
             <ul className={styles.menu}>
@@ -68,14 +69,14 @@ export default function BackNav() {
                     <DropdownNav label="Products" options={productsOptions} />
                 </li>
                 <li>
-                    <DropdownNav label="Products" options={mailboxOptions} />
+                    <DropdownNav label="Mailbox" options={mailboxOptions} />
                 </li>
             </ul>
 
             <div className={styles.actions}>
                 <DropdownNav
                     image={
-                        auth?.user
+                        auth?.user?.image
                             ? auth.user.image
                             : "/storage/user/templateU.svg" // fallback image
                     }

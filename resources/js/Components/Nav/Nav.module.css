@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background: var(--rose-pale); 
+    background: var(--rose-pale);
     padding: var(--space-sm) var(--space-md);
     font-family: sans-serif;
 }
@@ -15,6 +15,15 @@
     align-items: center;
     gap: var(--gap-xs);
     padding: var(--space-xs);
+    transition: 200ms ease;
+}
+
+.link:hover {
+    color: var(--dark-pink);
+}
+
+.link:active {
+    color: var(--dark-pink);
 }
 
 .brand {

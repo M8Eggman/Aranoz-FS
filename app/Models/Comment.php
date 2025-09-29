@@ -20,16 +20,16 @@ class Comment extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function blog()
     {
-        $this->belongsTo(Blog::class);
+        return $this->belongsTo(Blog::class);
     }
 
     public function category()
     {
-        $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class);
     }
 }

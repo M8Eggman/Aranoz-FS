@@ -1,6 +1,7 @@
 .dropdown {
     position: relative;
 }
+
 .trigger {
     cursor: pointer;
     border-radius: 6px;
@@ -9,6 +10,14 @@
     align-items: center;
     gap: var(--gap-xs);
     padding: var(--space-xs);
+    transition: 200ms ease;
+}
+
+.trigger:hover {
+    color: var(--dark-pink);
+}
+.trigger:active {
+    color: var(--dark-pink);
 }
 
 .image {

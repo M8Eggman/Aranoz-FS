@@ -27,32 +27,32 @@ class Product extends Model
 
     public function color()
     {
-        $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class);
     }
 
     public function promo()
     {
-        $this->belongsTo(Promotion::class);
+        return $this->belongsTo(Promotion::class);
     }
 
     public function category()
     {
-        $this->belongsTo(ProductCategorie::class);
+        return $this->belongsTo(ProductCategorie::class);
     }
 
     public function specification()
     {
-        $this->hasOne(Specification::class);
+        return $this->hasOne(Specification::class);
     }
 
     public function carts()
     {
-        $this->hasMany(Cart::class);
+        return $this->hasMany(Cart::class);
     }
 
     public function orderItems()
     {
-        $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class);
     }
 
 }

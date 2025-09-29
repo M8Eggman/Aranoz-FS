@@ -1,0 +1,48 @@
+.header {
+    background: var(--rose-pale);
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-2xl);
+}
+
+.info {
+    position: relative;
+    top: var(--space-3xl);
+}
+
+.info h1 {
+    margin: 0;
+    font-size: var(--font-h3);
+    font-weight: 700;
+}
+
+.info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.image {
+    width: min(35rem, 50vw);
+}
+
+.image img {
+    height: auto;
+    object-fit: cover;
+}
+@media screen and (max-width: 675px) {
+    .header {
+        padding: var(--space-xl);
+    }
+    .info {
+        position: relative;
+        top: initial;
+    }
+
+    .image {
+        display: none;
+    }
+}

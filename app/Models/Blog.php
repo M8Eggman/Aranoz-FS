@@ -20,21 +20,21 @@ class Blog extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function category()
     {
-        $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class);
     }
 
     public function tags()
     {
-        $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     public function comments()
     {
-        $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 }
