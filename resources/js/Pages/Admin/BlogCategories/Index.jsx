@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import styles from "../AdminPage.module.css";
 import TextInput from "@/Components/Form/TextInput/TextInput";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
+import Modal from "@/Components/Modals/Modal";
 
 export default function BlogCategories({
     categories: initialCategories,
@@ -17,6 +18,22 @@ export default function BlogCategories({
     const [lastId, setLastId] = useState(initialLastId || 0);
     const [editingId, setEditingId] = useState(null);
     const [editingName, setEditingName] = useState("");
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCat, setSelectedCat] = useState(null);
+
+    const openModal = (cat) => {
+        setSelectedCat(cat);
+        setShowModal(true);
+    };
+
+    const confirmDelete = () => {
+        if (selectedCat) {
+            handleDelete(selectedCat);
+            setSelectedCat(null);
+            setShowModal(false);
+        }
+    };
 
     function handleCreate(e) {
         e.preventDefault();
@@ -93,6 +110,32 @@ export default function BlogCategories({
 
     return (
         <>
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+                <>
+                    <h2 className="text-h3 font-semibold mb-md">
+                        Confirm Deletion
+                    </h2>
+                    <p className="text-sm mb-lg">
+                        Are you sure you want to delete this category?
+                    </p>
+                    <div className="flex gap-xs justify-end">
+                        <AdminButton
+                            onClick={confirmDelete}
+                            variant="delete"
+                            className="bg-dark-pink text-white px-lg py-sm rounded hover:bg-pink-700 transition"
+                        >
+                            Yes
+                        </AdminButton>
+                        <AdminButton
+                            onClick={() => setShowModal(false)}
+                            variant="cancel"
+                            className="bg-rose-pale text-charcoal px-lg py-sm rounded hover:bg-pink-200 transition"
+                        >
+                            Cancel
+                        </AdminButton>
+                    </div>
+                </>
+            </Modal>
             <AdminHeader title="Blog Categories Settings" />
             <section className={styles.container}>
                 <form onSubmit={handleCreate} className={styles.form}>
@@ -165,7 +208,7 @@ export default function BlogCategories({
                                 </td>
                                 <td>
                                     <AdminButton
-                                        onClick={() => handleDelete(cat)}
+                                        onClick={() => openModal(cat)}
                                         variant="delete"
                                     >
                                         Delete
