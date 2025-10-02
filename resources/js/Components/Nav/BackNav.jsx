@@ -10,19 +10,8 @@ export default function BackNav() {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
+    // Elements de la nav
     const navItems = [
-        {
-            type: "link",
-            label: "Contact Info",
-            route: "admin.home",
-            roles: ["admin", "webmaster"],
-        },
-        {
-            type: "link",
-            label: "Users",
-            route: "admin.home",
-            roles: ["admin"],
-        },
         {
             type: "dropdown",
             label: "Categories",
@@ -33,7 +22,15 @@ export default function BackNav() {
                     text: "Product Categories",
                 },
                 { type: "link", route: "admin.home", text: "Blog Categories" },
-                { type: "link", route: "admin.home", text: "Tags" },
+            ],
+            roles: ["admin", "community_manager"],
+        },
+        {
+            type: "dropdown",
+            label: "Tags",
+            options: [
+                { type: "link", route: "admin.home", text: "Create a Tag" },
+                { type: "link", route: "admin.home", text: "All Tags" },
             ],
             roles: ["admin", "community_manager"],
         },
@@ -74,6 +71,18 @@ export default function BackNav() {
                 { type: "link", route: "admin.home", text: "All Messages" },
             ],
             roles: ["admin", "agent"],
+        },
+        {
+            type: "link",
+            label: "Users",
+            route: "admin.home",
+            roles: ["admin"],
+        },
+        {
+            type: "link",
+            label: "Contact Info",
+            route: "admin.home",
+            roles: ["admin", "webmaster"],
         },
     ];
 
@@ -132,7 +141,7 @@ export default function BackNav() {
                         image={
                             auth.user?.image
                                 ? auth.user.image
-                                : "/storage/user/templateU.svg"
+                                : "/storage/user/templateU.png"
                         }
                         options={authOptions}
                     />

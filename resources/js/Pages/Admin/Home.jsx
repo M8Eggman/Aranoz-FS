@@ -10,27 +10,34 @@ export default function AdminHome({ auth }) {
     const quickAccessCards = [
         {
             title: "Categories",
-            description: "Manage your products, blogs, and tags quickly",
+            description: "Manage your product and blog categories",
             links: [
                 { text: "Product Categories", route: "admin.home" },
                 { text: "Blog Categories", route: "admin.home" },
-                { text: "Tags", route: "admin.home" },
+            ],
+            roles: ["admin", "community_manager"],
+        },
+        {
+            title: "Tags",
+            description: "Create and manage your tags",
+            links: [
+                { text: "Create a Tag", route: "admin.home" },
+                { text: "All Tags", route: "admin.home" },
             ],
             roles: ["admin", "community_manager"],
         },
         {
             title: "Orders",
-            description: "Track and manage pending or validated orders",
+            description: "Track and manage customer orders",
             links: [
-                { text: "Pending", route: "admin.home" },
-                { text: "Validated", route: "admin.home" },
+                { text: "Pending Orders", route: "admin.home" },
                 { text: "All Orders", route: "admin.home" },
             ],
             roles: ["admin", "agent"],
         },
         {
             title: "Products",
-            description: "Add new products or browse your catalog",
+            description: "Create and manage your product catalog",
             links: [
                 { text: "Create a Product", route: "admin.home" },
                 { text: "All Products", route: "admin.home" },
@@ -38,24 +45,23 @@ export default function AdminHome({ auth }) {
             roles: ["admin", "webmaster"],
         },
         {
-            title: "Mailbox",
-            description: "Check your messages and archives",
-            links: [
-                { text: "Archived", route: "admin.home" },
-                { text: "All Messages", route: "admin.home" },
-            ],
-            roles: ["admin", "agent"],
-        },
-        {
             title: "Blogs",
-            description: "Create or view your blog posts easily",
+            description: "Write and manage your blog posts",
             links: [
                 { text: "Create a Blog", route: "admin.home" },
                 { text: "All Blogs", route: "admin.home" },
             ],
             roles: ["admin", "community_manager"],
         },
-
+        {
+            title: "Mailbox",
+            description: "Check and organize your messages",
+            links: [
+                { text: "Archived Messages", route: "admin.home" },
+                { text: "All Messages", route: "admin.home" },
+            ],
+            roles: ["admin", "agent"],
+        },
         {
             title: "Users",
             description: "Manage users and their roles",

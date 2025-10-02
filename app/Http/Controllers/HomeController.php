@@ -18,9 +18,8 @@ class HomeController extends Controller
 
     public function admin_home()
     {
-        $canLogin = Route::has('login');
-        $canRegister = Route::has('register');
+        $this->authorize('access', ['role', 'admin', 'community_manager', 'webmaster', 'agent']);
 
-        return Inertia::render('Admin/Home', compact('canLogin', 'canRegister'));
+        return Inertia::render('Admin/Home');
     }
 }

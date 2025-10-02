@@ -12,8 +12,38 @@ use Inertia\Inertia;
 // 4 : Webmaster (CRUD produit, pin sur home, gérer stock, modifier contact)
 // 5 : Admin (tous droits)
 
+// Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
+// Routes pour les  clients
+Route::middleware(['auth', 'role:admin,client'])->group(function () {
+    // Route::get('/shop', [ClientController::class, 'shop'])->name('client.shop');
+    // Route::post('/blog/{id}/comment', [ClientController::class, 'comment'])->name('client.comment');
+    // Route::get('/orders', [ClientController::class, 'orders'])->name('client.orders');
+});
+
+// Routes pour les community manager
+Route::middleware(['auth', 'role:admin,community_manager'])->group(function () {
+    // Route::resource('/blog', CommunityManagerController::class);
+    // Route::post('/tags', [CommunityManagerController::class, 'storeTag'])->name('tags.store');
+});
+
+// Routes pour les agents
+Route::middleware(['auth', 'role:admin,agent'])->group(function () {
+    // Route::get('/dashboard/orders', [AgentController::class, 'index'])->name('agent.orders');
+    // Route::put('/orders/{id}/status', [AgentController::class, 'updateStatus'])->name('agent.orders.status');
+    // Route::post('/orders/{id}/mail', [AgentController::class, 'sendMail'])->name('agent.orders.mail');
+});
+
+// Routes pour les webmasters
+Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
+    // Route::resource('/products', WebmasterController::class);
+    // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
+    // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
+    // Route::put('/contact', [WebmasterController::class, 'updateContact'])->name('contact.update');
+});
+
+// Routes pour la home du backend 
 Route::middleware(['auth', 'role:admin,webmaster,agent, community_manager'])->group(function () {
     Route::get('/admin', [HomeController::class, 'admin_home'])->name('admin.home');
 });

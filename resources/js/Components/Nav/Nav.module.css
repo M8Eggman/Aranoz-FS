@@ -6,7 +6,7 @@
     background: var(--rose-pale);
     padding: var(--space-sm) var(--space-md);
     font-family: sans-serif;
-    gap: var(--space-md);
+    gap: var(--space-sm);
     z-index: 50;
 }
 
