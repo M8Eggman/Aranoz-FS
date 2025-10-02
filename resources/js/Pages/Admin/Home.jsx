@@ -12,8 +12,11 @@ export default function AdminHome({ auth }) {
             title: "Categories",
             description: "Manage your product and blog categories",
             links: [
-                { text: "Product Categories", route: "admin.home" },
-                { text: "Blog Categories", route: "admin.home" },
+                {
+                    text: "Product Categories",
+                    route: "admin.products-categories",
+                },
+                { text: "Blog Categories", route: "admin.blogs-categories" },
             ],
             roles: ["admin", "community_manager"],
         },
@@ -82,7 +85,7 @@ export default function AdminHome({ auth }) {
     return (
         <>
             <AdminHeader title="Admin Dashboard" />
-            <div className={styles.container}>
+            <section className={styles.container}>
                 <h3>Quick Access</h3>
                 <div className={styles.cardContainer}>
                     {quickAccessCards
@@ -96,7 +99,7 @@ export default function AdminHome({ auth }) {
                             />
                         ))}
                 </div>
-            </div>
+            </section>
         </>
     );
 }

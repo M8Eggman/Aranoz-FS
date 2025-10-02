@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,29 @@ Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
     // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
     // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
     // Route::put('/contact', [WebmasterController::class, 'updateContact'])->name('contact.update');
+});
+
+// Route pour les admins
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Blog Categories
+    Route::get('/admin/blogs/categories', [BlogCategoryController::class, 'index'])
+        ->name('admin.blogs-categories');
+    Route::post('/admin/blogs/categories/store', [BlogCategoryController::class, 'store'])
+        ->name('admin.blogs-categories.store');
+    Route::put('/admin/blogs/categories/{id}', [BlogCategoryController::class, 'update'])
+        ->name('admin.blogs-categories.update');
+    Route::delete('/admin/blogs/categories/{id}', [BlogCategoryController::class, 'destroy'])
+        ->name('admin.blogs-categories.destroy');
+
+    // Product Categories
+    Route::get('/admin/products/categories', [ProductCategorieController::class, 'index'])
+        ->name('admin.products-categories');
+    Route::post('/admin/products/categories/store', [ProductCategorieController::class, 'store'])
+        ->name('admin.products-categories.store');
+    Route::put('/admin/products/categories/{id}/update', [ProductCategorieController::class, 'update'])
+        ->name('admin.products-categories.update');
+    Route::delete('/admin/products/categories/{id}/destroy', [ProductCategorieController::class, 'destroy'])
+        ->name('admin.products-categories.destroy');
 });
 
 // Routes pour la home du backend 

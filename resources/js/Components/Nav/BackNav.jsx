@@ -18,10 +18,10 @@ export default function BackNav() {
             options: [
                 {
                     type: "link",
-                    route: "admin.home",
+                    route: "admin.products-categories",
                     text: "Product Categories",
                 },
-                { type: "link", route: "admin.home", text: "Blog Categories" },
+                { type: "link", route: "admin.blogs-categories", text: "Blog Categories" },
             ],
             roles: ["admin", "community_manager"],
         },
@@ -106,7 +106,7 @@ export default function BackNav() {
                 >
                     <VscThreeBars />
                 </button>
-                <Link className={styles.brand} href={route("home")}>
+                <Link className={styles.brand} href={route("admin.home")}>
                     Admin <span className={styles.label}>{role}</span>
                 </Link>
             </div>
