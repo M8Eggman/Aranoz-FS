@@ -3,7 +3,7 @@ import React from "react";
 import AdminTable from "../partials/AdminTable/AdminTable";
 import AdminHeader from "../partials/Header/AdminHeader";
 
-export default function BlogCategories({
+export default function ProductCategories({
     categories: initialCategories,
     lastId: initialLastId,
 }) {
@@ -26,4 +26,4 @@ export default function BlogCategories({
     );
 }
 
-BlogCategories.layout = (page) => <BackLayout>{page}</BackLayout>;
+ProductCategories.layout = (page) => <BackLayout>{page}</BackLayout>;

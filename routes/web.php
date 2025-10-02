@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,8 +27,13 @@ Route::middleware(['auth', 'role:admin,client'])->group(function () {
 
 // Routes pour les community manager
 Route::middleware(['auth', 'role:admin,community_manager'])->group(function () {
-    // Route::resource('/blog', CommunityManagerController::class);
-    // Route::post('/tags', [CommunityManagerController::class, 'storeTag'])->name('tags.store');
+    // Tags
+    Route::get('/admin/tags', [TagController::class, 'index'])
+        ->name('admin.tags');
+    Route::post('/admin/tags/store', [TagController::class, 'store'])
+        ->name('admin.tags.store');
+    Route::put('/admin/tags/{id}/update', [TagController::class, 'update'])
+        ->name('admin.tags.update');
 });
 
 // Routes pour les agents
@@ -66,10 +72,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('admin.products-categories.update');
     Route::delete('/admin/products/categories/{id}/destroy', [ProductCategorieController::class, 'destroy'])
         ->name('admin.products-categories.destroy');
+
+    // Tags
+    Route::delete('/admin/tags/{id}/destroy', [TagController::class, 'destroy'])
+        ->name('admin.tags.destroy');
 });
 
 // Routes pour la home du backend 
-Route::middleware(['auth', 'role:admin,webmaster,agent, community_manager'])->group(function () {
+Route::middleware(['auth', 'role:admin,webmaster,agent,community_manager'])->group(function () {
     Route::get('/admin', [HomeController::class, 'admin_home'])->name('admin.home');
 });
 

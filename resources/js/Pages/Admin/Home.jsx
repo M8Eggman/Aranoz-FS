@@ -21,15 +21,6 @@ export default function AdminHome({ auth }) {
             roles: ["admin", "community_manager"],
         },
         {
-            title: "Tags",
-            description: "Create and manage your tags",
-            links: [
-                { text: "Create a Tag", route: "admin.home" },
-                { text: "All Tags", route: "admin.home" },
-            ],
-            roles: ["admin", "community_manager"],
-        },
-        {
             title: "Orders",
             description: "Track and manage customer orders",
             links: [
@@ -53,6 +44,7 @@ export default function AdminHome({ auth }) {
             links: [
                 { text: "Create a Blog", route: "admin.home" },
                 { text: "All Blogs", route: "admin.home" },
+                { text: "Tags", route: "admin.tags" },
             ],
             roles: ["admin", "community_manager"],
         },

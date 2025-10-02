@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('image_left_side')->nullable();
             $table->string('image_right_side')->nullable();
             $table->foreignId('color_id')->constrained('colors');
-            $table->foreignId('category_id')->constrained('product_categories');
+            $table->foreignId('category_id')->nullable()->constrained('product_categories')->nullOnDelete();
             // Promotions sur le produits
             $table->unsignedTinyInteger('promotion')->nullable();
             $table->timestamps();

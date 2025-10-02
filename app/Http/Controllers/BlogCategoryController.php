@@ -37,11 +37,10 @@ class BlogCategoryController extends Controller
      */
     public function store(StoreBlogCategoryRequest $request)
     {
-        dump($request);
         $request->validate(['name' => 'required|string|max:255']);
-        $category = BlogCategory::create(['name' => $request->name]);
+        BlogCategory::create(['name' => $request->name]);
 
-        return redirect()->back()->with('success', 'Category created')->with('category', $category);
+        return redirect()->back()->with('success', 'Category created');
     }
 
     /**
@@ -65,9 +64,10 @@ class BlogCategoryController extends Controller
      */
     public function update(UpdateBlogCategoryRequest $request, $id)
     {
-        $blogCategory = BlogCategory::findOrFail($id);
+        $category = BlogCategory::findOrFail($id);
+
         $request->validate(['name' => 'required|string|max:255']);
-        $blogCategory->update(['name' => $request->name]);
+        $category->update(['name' => $request->name]);
 
         return redirect()->back()->with('success', 'Category updated');
     }
@@ -77,8 +77,8 @@ class BlogCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $blogCategory = BlogCategory::findOrFail($id);
-        $blogCategory->delete();
+        $category = BlogCategory::findOrFail($id);
+        $category->delete();
 
         return redirect()->back()->with('success', 'Category deleted');
     }

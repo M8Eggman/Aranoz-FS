@@ -21,18 +21,13 @@ export default function BackNav() {
                     route: "admin.products-categories",
                     text: "Product Categories",
                 },
-                { type: "link", route: "admin.blogs-categories", text: "Blog Categories" },
+                {
+                    type: "link",
+                    route: "admin.blogs-categories",
+                    text: "Blog Categories",
+                },
             ],
-            roles: ["admin", "community_manager"],
-        },
-        {
-            type: "dropdown",
-            label: "Tags",
-            options: [
-                { type: "link", route: "admin.home", text: "Create a Tag" },
-                { type: "link", route: "admin.home", text: "All Tags" },
-            ],
-            roles: ["admin", "community_manager"],
+            roles: ["admin"],
         },
         {
             type: "dropdown",
@@ -51,6 +46,7 @@ export default function BackNav() {
             options: [
                 { type: "link", route: "admin.home", text: "Create a Blog" },
                 { type: "link", route: "admin.home", text: "All Blogs" },
+                { type: "link", route: "admin.tags", text: "Tags" },
             ],
             roles: ["admin", "community_manager"],
         },

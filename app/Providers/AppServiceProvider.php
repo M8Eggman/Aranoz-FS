@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Role;
+use Illuminate\Container\Attributes\Tag;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;

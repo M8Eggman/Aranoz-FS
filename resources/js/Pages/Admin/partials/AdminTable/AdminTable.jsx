@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextInput from "@/Components/Form/TextInput/TextInput";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 import Modal from "@/Components/Modals/Modal";
-import { router, useForm } from "@inertiajs/react";
+import { router, useForm, usePage } from "@inertiajs/react";
 import styles from "./AdminTable.module.css";
 
 export default function AdminTable({
@@ -13,6 +13,8 @@ export default function AdminTable({
     updateRoute,
     deleteRoute,
 }) {
+    // Récupère les messages flash
+    const { flash, errors, can } = usePage().props;
     const { data, setData, post, reset } = useForm({ name: "" });
 
     const [items, setCategories] = useState(intialItems || []);
@@ -20,22 +22,22 @@ export default function AdminTable({
     const [editingId, setEditingId] = useState(null);
     const [editingName, setEditingName] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const [selectedCat, setSelectedCat] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const openModal = (item) => {
-        setSelectedCat(item);
+        setSelectedItem(item);
         setShowModal(true);
     };
 
     const onClose = () => {
-        setSelectedCat(null);
+        setSelectedItem(null);
         setShowModal(false);
     };
 
     const confirmDelete = () => {
-        if (selectedCat) {
-            handleDelete(selectedCat);
-            setSelectedCat(null);
+        if (selectedItem) {
+            handleDelete(selectedItem);
+            setSelectedItem(null);
             setShowModal(false);
         }
     };
@@ -51,8 +53,9 @@ export default function AdminTable({
 
         // Post via Inertia
         post(storeRoute, {
-            data: { name: data.name },
-            onSuccess: () => reset("name"), // reset input après succès
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => reset("name"),
             onError: () =>
                 setCategories((prev) => prev.filter((i) => i.id !== tempId)),
         });
@@ -68,6 +71,8 @@ export default function AdminTable({
             updateRoute(item.id),
             { name: newName },
             {
+                preserveScroll: true,
+                preserveState: true,
                 onError: () =>
                     setCategories((prev) =>
                         prev.map((i) =>
@@ -90,6 +95,12 @@ export default function AdminTable({
 
     return (
         <>
+            {flash?.success && (
+                <div className={styles.success}>{flash.success}</div>
+            )}
+            {flash?.error && <div className={styles.error}>{flash.error}</div>}
+            {errors?.name && <div className={styles.error}>{errors.name}</div>}
+
             {showModal && (
                 <Modal show={showModal} onClose={onClose}>
                     <>
@@ -129,7 +140,7 @@ export default function AdminTable({
                             <th>ID</th>
                             <th width="100%">Name</th>
                             <th>Modification</th>
-                            <th>Delete</th>
+                            {can.isAdmin && <th>Delete</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -188,14 +199,16 @@ export default function AdminTable({
                                         </AdminButton>
                                     )}
                                 </td>
-                                <td>
-                                    <AdminButton
-                                        onClick={() => openModal(item)}
-                                        variant="delete"
-                                    >
-                                        Delete
-                                    </AdminButton>
-                                </td>
+                                {can.isAdmin && (
+                                    <td>
+                                        <AdminButton
+                                            onClick={() => openModal(item)}
+                                            variant="delete"
+                                        >
+                                            Delete
+                                        </AdminButton>
+                                    </td>
+                                )}
                             </tr>
                         ))}
                     </tbody>
