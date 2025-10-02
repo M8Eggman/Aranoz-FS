@@ -18,3 +18,8 @@
     background: var(--rose-pale);
     color: var(--charcoal);
 }
+
+.buttonEdit {
+    background: var(--soft-mint);
+    color: var(--charcoal);
+}

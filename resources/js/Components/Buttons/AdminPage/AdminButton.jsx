@@ -13,6 +13,8 @@ export default function AdminButton({
             ? styles.buttonCancel
             : variant === "delete"
             ? styles.buttonDelete
+            : variant === "edit"
+            ? styles.buttonEdit
             : "";
 
     return (

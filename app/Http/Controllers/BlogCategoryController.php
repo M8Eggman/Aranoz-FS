@@ -37,6 +37,7 @@ class BlogCategoryController extends Controller
      */
     public function store(StoreBlogCategoryRequest $request)
     {
+        dump($request);
         $request->validate(['name' => 'required|string|max:255']);
         $category = BlogCategory::create(['name' => $request->name]);
 
