@@ -15,6 +15,14 @@ use Inertia\Inertia;
 // 4 : Webmaster (CRUD produit, pin sur home, gérer stock, modifier contact)
 // 5 : Admin (tous droits)
 
+// Route erreurs 
+Route::get('/403', function () {
+    Inertia::render('Errors/403');
+})->name('error.403');
+Route::get('/404', function () {
+    Inertia::render('Errors/404');
+})->name('error.404');
+
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
