@@ -22,13 +22,19 @@ class UserSeeder extends Seeder
       5 => 'Admin',
     ];
 
+    $imagePaths = [
+      'small' => '/storage/users/templateU.png',
+      'medium' => '/storage/users/templateU.png',
+      'large' => '/storage/users/templateU.png',
+    ];
+
     foreach ($roles as $id => $roleName) {
       $slug = strtolower(str_replace(' ', '_', $roleName));
 
       User::factory()->create([
         'name' => $roleName,
-        'email' => $slug . '@example.com',
-        'image' => null,
+        'email' => "$slug@example.com",
+        'images' => $imagePaths,
         'role_id' => $id,
         'password' => Hash::make('password')
       ]);

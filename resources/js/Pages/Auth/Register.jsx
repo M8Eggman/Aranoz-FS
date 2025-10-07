@@ -1,120 +1,151 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from "@inertiajs/react";
+import styles from "./Auth.module.css";
+import TextInput from "@/Components/Form/TextInput/TextInput";
+import Button from "@/Components/Form/Buttons/Button";
+import Checkbox from "@/Components/Form/Checkbox/Checbox";
+import FrontLayout from "@/Layouts/FrontLayout";
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+    const { data, setData, post, processing } = useForm({
+        name: "",
+        email: "",
+        image_file: null,
+        image_url: "",
+        password: "",
+        password_confirmation: "",
+        newsletter: false,
     });
 
-    const submit = (e) => {
+    function submit(e) {
         e.preventDefault();
+        post(route("register"));
+    }
 
-        post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
-        });
-    };
+    function getPreview() {
+        if (data.image_file) {
+            return URL.createObjectURL(data.image_file);
+        } else if (data.image_url?.trim() !== "") {
+            return data.image_url;
+        } else {
+            return "/storage/users/templateU.png";
+        }
+    }
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
+        <section className={styles.authSection}>
+            <div className={styles.container}>
+                <div className={styles.rightPanel}>
+                    <h2 className={styles.title}>Welcome !</h2>
+                    <p className={styles.subtitle}>Please register now</p>
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <form onSubmit={submit} className={styles.form}>
+                        <TextInput
+                            type="text"
+                            name="name"
+                            placeholder="Username"
+                            value={data.name}
+                            onChange={(e) => setData("name", e.target.value)}
+                        />
 
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
+                        <TextInput
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={data.email}
+                            onChange={(e) => setData("email", e.target.value)}
+                        />
 
-                    <InputError message={errors.name} className="mt-2" />
+                        <div className={styles.inputGroup}>
+                            <div className={styles.imageUpload}>
+                                <div className={styles.imagePreviewWrapper}>
+                                    <img
+                                        src={getPreview()}
+                                        alt=""
+                                        className={styles.imagePreview}
+                                    />
+                                </div>
+
+                                <input
+                                    type="file"
+                                    name="image_file"
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                        setData(
+                                            "image_file",
+                                            e.target.files[0]
+                                        );
+                                    }}
+                                    className={styles.fileInput}
+                                />
+                            </div>
+
+                            <p className={styles.disclaimer}>
+                                Disclaimer : Max 2mo size image !
+                            </p>
+                        </div>
+
+                        <TextInput
+                            type="url"
+                            name="image_url"
+                            placeholder="Or paste image URL here"
+                            value={data.image_url}
+                            onChange={(e) => {
+                                setData("image_file", null);
+                                setData("image_url", e.target.value);
+                            }}
+                        />
+
+                        <TextInput
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={data.password}
+                            onChange={(e) =>
+                                setData("password", e.target.value)
+                            }
+                        />
+
+                        <TextInput
+                            type="password"
+                            name="password_confirmation"
+                            placeholder="Confirm Password"
+                            value={data.password_confirmation}
+                            onChange={(e) =>
+                                setData("password_confirmation", e.target.value)
+                            }
+                        />
+
+                        <Checkbox
+                        name="newsletter"
+                            checked={data.newsletter}
+                            onChange={(e) =>
+                                setData("newsletter", e.target.checked)
+                            }
+                            label="Subscribe to newsletter"
+                        />
+
+                        <Button type="submit" disabled={processing}>
+                            Register
+                        </Button>
+                    </form>
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
-                        required
-                    />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Already registered?
+                <div className={styles.leftPanel}>
+                    <h2 className={styles.title}>
+                        You are new ? <br />
+                        Create new account here
+                    </h2>
+                    <p className={styles.subtitle}>
+                        There are advances being made in science and technology
+                        everyday, and a good example of this is the
+                    </p>
+                    <Link href={route("login")} className={styles.linkButton}>
+                        Go to Login
                     </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
                 </div>
-            </form>
-        </GuestLayout>
+            </div>
+        </section>
     );
 }
+
+Register.layout = (page) => <FrontLayout>{page}</FrontLayout>;

@@ -24,6 +24,11 @@ class User extends Authenticatable
         'role_id',
     ];
 
+    // Convertie l'array php en json
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -70,5 +75,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function newsletter()
+    {
+        return $this->hasOne(Newsletter::class);
     }
 }

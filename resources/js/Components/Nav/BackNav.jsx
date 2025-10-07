@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Nav.module.css";
 import { Link, router, usePage } from "@inertiajs/react";
 import DropdownNav from "../Dropdowns/DropdownNav";
@@ -92,6 +92,9 @@ export default function BackNav() {
         },
         { type: "link", route: "home", text: "Back Home" },
     ];
+    useEffect(() => {
+        console.log(auth.user.images);
+    }, []);
 
     return (
         <nav className={styles.nav}>
@@ -135,9 +138,8 @@ export default function BackNav() {
                         auth={true}
                         label={auth.user.name}
                         image={
-                            auth.user?.image
-                                ? auth.user.image
-                                : "/storage/user/templateU.png"
+                            auth.user?.images?.small ||
+                            "/storage/users/templateU.png"
                         }
                         options={authOptions}
                     />

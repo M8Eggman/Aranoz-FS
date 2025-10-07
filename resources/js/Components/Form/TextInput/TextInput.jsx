@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TextInput.module.css";
 
 export default function TextInput({
+    type = "text",
     name,
     value,
     onChange,
@@ -11,7 +12,7 @@ export default function TextInput({
 }) {
     return (
         <input
-            type="text"
+            type={type}
             name={name}
             value={value}
             onChange={onChange}
