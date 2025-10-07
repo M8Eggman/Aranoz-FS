@@ -16,6 +16,7 @@
 .trigger:hover {
     color: var(--dark-pink);
 }
+
 .trigger:active {
     color: var(--dark-pink);
 }
@@ -60,11 +61,14 @@
     white-space: nowrap;
     font-size: var(--font-sm);
     transition: 200ms ease;
+    padding: 0;
 }
 
 .content li a,
 .content li button {
     cursor: pointer;
+    width: 100%;
+    text-align: left;
     display: block;
     padding: var(--space-sm);
 }

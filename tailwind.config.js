@@ -33,7 +33,7 @@ export default {
             },
             spacing: {
                 xs: "clamp(0.25rem, 0.5vw, 0.5rem)",
-                sm: "clamp(0.5rem, 1vw, 1rem)",
+                sm: "clamp(0.5rem, 1vw, 0.8rem)",
                 md: "clamp(1rem, 2vw, 1.5rem)",
                 lg: "clamp(1.5rem, 3vw, 2rem)",
                 xl: "clamp(2rem, 4vw, 3rem)",
@@ -42,7 +42,7 @@ export default {
             },
             gap: {
                 xs: "clamp(0.25rem, 0.5vw, 0.5rem)",
-                sm: "clamp(0.5rem, 1vw, 1rem)",
+                sm: "clamp(0.5rem, 1vw, 0.8rem)",
                 md: "clamp(1rem, 2vw, 1.5rem)",
                 lg: "clamp(1.5rem, 3vw, 2rem)",
                 xl: "clamp(2rem, 4vw, 3rem)",

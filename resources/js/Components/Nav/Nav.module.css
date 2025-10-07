@@ -1,5 +1,6 @@
 .nav {
-    position: relative;
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -17,7 +18,7 @@
     background: var(--rose-pale);
 }
 
-.menuAuth {
+.navAuth {
     background-color: var(--white);
 }
 
@@ -106,7 +107,7 @@
     max-width: 150px;
     white-space: nowrap;
     display: inline-block;
-    padding: var(--space-sm) var(--space-lg);
+    padding: var(--gap-sm) var(--space-lg);
     border-radius: 50px;
     font-weight: 600;
     text-transform: uppercase;
@@ -178,6 +179,10 @@
 
     .menuBack {
         background-color: var(--rose-pale);
+    }
+
+    .menuAuth {
+        background-color: var(--white);
     }
 
     .menu.menuOpen {

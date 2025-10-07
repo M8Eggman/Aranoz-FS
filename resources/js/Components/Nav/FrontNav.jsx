@@ -64,7 +64,7 @@ export default function BackNav() {
 
     return (
         <nav
-            className={`${styles.nav} ${isAuthPage ? styles.menuAuth : ""} ${
+            className={`${styles.nav} ${isAuthPage ? styles.navAuth : ""} ${
                 styles.navFront
             }`}
         >
@@ -80,7 +80,7 @@ export default function BackNav() {
                 </Link>
             </div>
             <ul
-                className={`${styles.menu} ${styles.menuFront} ${
+                className={`${styles.menu} ${isAuthPage ? styles.menuAuth : ""} ${styles.menuFront} ${
                     menuOpen ? styles.menuOpen : ""
                 }`}
             >

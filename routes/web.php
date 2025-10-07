@@ -83,10 +83,6 @@ Route::middleware(['auth', 'role:admin,webmaster,agent,community_manager'])->gro
     Route::get('/admin', [HomeController::class, 'admin_home'])->name('admin.home');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
