@@ -6,7 +6,7 @@ import Checkbox from "@/Components/Form/Checkbox/Checbox";
 import FrontLayout from "@/Layouts/FrontLayout";
 
 export default function Register() {
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: "",
         email: "",
         image_file: null,
@@ -39,23 +39,37 @@ export default function Register() {
                     <p className={styles.subtitle}>Please register now</p>
 
                     <form onSubmit={submit} className={styles.form}>
-                        <TextInput
-                            type="text"
-                            name="name"
-                            placeholder="Username"
-                            value={data.name}
-                            onChange={(e) => setData("name", e.target.value)}
-                        />
-
-                        <TextInput
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            value={data.email}
-                            onChange={(e) => setData("email", e.target.value)}
-                        />
+                        <div className={styles.inputGroup}>
+                            <TextInput
+                                type="text"
+                                name="name"
+                                placeholder="Username"
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                            />
+                            {errors.name && (
+                                <p className={styles.error}>{errors.name}</p>
+                            )}
+                        </div>
 
                         <div className={styles.inputGroup}>
+                            <TextInput
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={data.email}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                            />
+                            {errors.email && (
+                                <p className={styles.error}>{errors.email}</p>
+                            )}
+                        </div>
+
+                        <div className={styles.inputImage}>
                             <div className={styles.imageUpload}>
                                 <div className={styles.imagePreviewWrapper}>
                                     <img
@@ -95,28 +109,45 @@ export default function Register() {
                             }}
                         />
 
-                        <TextInput
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={data.password}
-                            onChange={(e) =>
-                                setData("password", e.target.value)
-                            }
-                        />
+                        <div className={styles.inputGroup}>
+                            <TextInput
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                            />
+                            {errors.password && (
+                                <p className={styles.error}>
+                                    {errors.password}
+                                </p>
+                            )}
+                        </div>
 
-                        <TextInput
-                            type="password"
-                            name="password_confirmation"
-                            placeholder="Confirm Password"
-                            value={data.password_confirmation}
-                            onChange={(e) =>
-                                setData("password_confirmation", e.target.value)
-                            }
-                        />
+                        <div className={styles.inputGroup}>
+                            <TextInput
+                                type="password"
+                                name="password_confirmation"
+                                placeholder="Confirm Password"
+                                value={data.password_confirmation}
+                                onChange={(e) =>
+                                    setData(
+                                        "password_confirmation",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            {errors.password_confirmation && (
+                                <p className={styles.error}>
+                                    {errors.password_confirmation}
+                                </p>
+                            )}
+                        </div>
 
                         <Checkbox
-                        name="newsletter"
+                            name="newsletter"
                             checked={data.newsletter}
                             onChange={(e) =>
                                 setData("newsletter", e.target.checked)

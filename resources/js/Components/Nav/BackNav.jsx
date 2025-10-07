@@ -97,7 +97,7 @@ export default function BackNav() {
     }, []);
 
     return (
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${styles.navBack}`}>
             <div className={styles.brandContainer}>
                 <button
                     className={styles.burger}
@@ -110,7 +110,11 @@ export default function BackNav() {
                 </Link>
             </div>
 
-            <ul className={`${styles.menu} ${menuOpen ? styles.menuOpen : ""}`}>
+            <ul
+                className={`${styles.menu} ${styles.menuBack} ${
+                    menuOpen ? styles.menuOpen : ""
+                }`}
+            >
                 {navItems
                     .filter((item) => item.roles.includes(role))
                     .map((item, i) => (

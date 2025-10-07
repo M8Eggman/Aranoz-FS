@@ -8,6 +8,7 @@ export default function DropdownNav({
     image = null,
     options = [],
     auth = false,
+    role = "user",
 }) {
     return (
         <div className={styles.dropdown}>
@@ -20,20 +21,25 @@ export default function DropdownNav({
                 style={auth ? { left: "initial", right: 0 } : {}}
             >
                 <ul>
-                    {options.map((option, index) => (
-                        <li key={index}>
-                            {option.type === "link" && (
-                                <Link href={route(option.route)}>
-                                    {option.text}
-                                </Link>
-                            )}
-                            {option.type === "button" && (
-                                <button onClick={option.onClick}>
-                                    {option.text}
-                                </button>
-                            )}
-                        </li>
-                    ))}
+                    {options
+                        .filter(
+                            (option) =>
+                                !option.roles || option?.roles.includes(role)
+                        )
+                        .map((option, index) => (
+                            <li key={index}>
+                                {option.type === "link" && (
+                                    <Link href={route(option.route)}>
+                                        {option.text}
+                                    </Link>
+                                )}
+                                {option.type === "button" && (
+                                    <button onClick={option.onClick}>
+                                        {option.text}
+                                    </button>
+                                )}
+                            </li>
+                        ))}
                 </ul>
             </div>
         </div>

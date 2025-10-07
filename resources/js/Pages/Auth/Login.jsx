@@ -6,7 +6,7 @@ import Checkbox from "@/Components/Form/Checkbox/Checbox";
 import FrontLayout from "@/Layouts/FrontLayout";
 
 export default function Login() {
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         email: "",
         password: "",
         remember: false,
@@ -34,7 +34,10 @@ export default function Login() {
                     </Link>
                 </div>
                 <div className={styles.rightPanel}>
-                    <h2 className={styles.title}>Welcome Back !<br />Please sign in now</h2>
+                    <h2 className={styles.title}>
+                        Welcome Back !<br />
+                        Please sign in now
+                    </h2>
                     <p className={styles.subtitle}>Please Sign in now</p>
 
                     <form onSubmit={submit} className={styles.form}>
@@ -63,6 +66,12 @@ export default function Login() {
                             }
                             label="Remember me"
                         />
+
+                        {errors.email && (
+                            <small className={styles.error}>
+                                {errors.email}
+                            </small>
+                        )}
 
                         <Button type="submit" disabled={processing}>
                             Log in

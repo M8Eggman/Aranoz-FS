@@ -3,11 +3,22 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background: var(--rose-pale);
     padding: var(--space-sm) var(--space-md);
     font-family: sans-serif;
-    gap: var(--space-sm);
+    gap: var(--space-md);
     z-index: 50;
+}
+
+.navFront {
+    background: var(--blue);
+}
+
+.navBack {
+    background: var(--rose-pale);
+}
+
+.menuAuth {
+    background-color: var(--white);
 }
 
 .link {
@@ -30,6 +41,7 @@
 }
 
 .brand {
+    white-space: nowrap;
     font-weight: bold;
     font-size: var(--font-lg);
     display: flex;
@@ -57,8 +69,14 @@
 
 .actions {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: center;
-    gap: var(--gap-md);
+    gap: var(--gap-sm);
+}
+
+.actions > * {
+    flex: 1 1;
 }
 
 .logout {
@@ -83,7 +101,42 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1200px) {
+.login,
+.register {
+    max-width: 150px;
+    white-space: nowrap;
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: var(--font-sm);
+}
+
+.login {
+    background-color: transparent;
+    border: 1px solid var(--charcoal);
+    color: var(--charcoal);
+}
+
+.login:hover {
+    background-color: var(--white);
+}
+
+.register {
+    background-color: var(--pink-red);
+    color: var(--white);
+}
+
+.register:hover {
+    background-color: var(--dark-pink);
+}
+
+@media screen and (max-width: 1250px) {
     .nav {
         justify-content: space-between;
         padding: var(--space-md) var(--space-lg);
@@ -110,7 +163,6 @@
         top: 100%;
         right: 0;
         width: 100%;
-        background: var(--rose-pale);
         gap: var(--gap-sm);
         z-index: 100;
         box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
@@ -118,6 +170,14 @@
         transform-origin: top;
         transition: 200ms ease;
         padding-bottom: 10px;
+    }
+
+    .menuFront {
+        background-color: var(--blue);
+    }
+
+    .menuBack {
+        background-color: var(--rose-pale);
     }
 
     .menu.menuOpen {
