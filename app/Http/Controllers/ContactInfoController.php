@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactInfo;
 use App\Http\Requests\StoreContactInfoRequest;
 use App\Http\Requests\UpdateContactInfoRequest;
+use Inertia\Inertia;
 
 class ContactInfoController extends Controller
 {
@@ -13,7 +14,8 @@ class ContactInfoController extends Controller
      */
     public function index()
     {
-        //
+        $contactInfo = ContactInfo::first();
+        return Inertia::render('Admin/ContactInfo/Index', compact("contactInfo"));
     }
 
     /**
@@ -51,9 +53,24 @@ class ContactInfoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContactInfoRequest $request, ContactInfo $contactInfo)
+    public function update(UpdateContactInfoRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'street' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'country_code' => 'required|string|max:5',
+            'zip_code' => 'required|string|max:10',
+            'number' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
+        ]);
+
+        $contactInfo = ContactInfo::first();
+
+        $contactInfo->update($validated);
+
+        return redirect()->back()->with('success', 'Contact info updated successfully.');
     }
 
     /**

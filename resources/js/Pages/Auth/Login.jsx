@@ -74,7 +74,7 @@ export default function Login() {
                         )}
 
                         <Button type="submit" disabled={processing}>
-                            Log in
+                            {processing ? "Logging in..." : "LOG IN"}
                         </Button>
                     </form>
                 </div>

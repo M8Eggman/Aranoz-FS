@@ -156,7 +156,7 @@ export default function Register() {
                         />
 
                         <Button type="submit" disabled={processing}>
-                            Register
+                            {processing ? "Creating account..." : "SIGN UP"}
                         </Button>
                     </form>
                 </div>

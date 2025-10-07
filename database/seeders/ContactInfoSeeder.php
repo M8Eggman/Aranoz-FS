@@ -14,14 +14,14 @@ class ContactInfoSeeder extends Seeder
     public function run(): void
     {
         ContactInfo::create([
-            'street' => '12 rue de la Paix',
-            'state' => 'Île-de-France',
-            'city' => 'Paris',
-            'country_code' => 'FRA',
-            'zip_code' => '75002',
-            'number' => '01 23 45 67 89',
-            'email' => 'contact@aranoz.fr',
-            'phone_number' => '+33 1 23 45 67 89',
+            'street' => 'Place de la Minoterie',
+            'state' => 'Bruxelles-Capitale',
+            'city' => 'Molenbeek-Saint-Jean',
+            'country_code' => 'BEL',
+            'zip_code' => '1080',
+            'number' => '10',
+            'email' => 'info@aranoz.be',
+            'phone_number' => '+32 2 880 96 00',
         ]);
     }
 }

@@ -77,7 +77,7 @@ export default function BackNav() {
         {
             type: "link",
             label: "Contact Info",
-            route: "admin.home",
+            route: "contact.info.index",
             roles: ["admin", "webmaster"],
         },
     ];
@@ -92,9 +92,6 @@ export default function BackNav() {
         },
         { type: "link", route: "home", text: "Back Home" },
     ];
-    useEffect(() => {
-        console.log(auth.user.images);
-    }, []);
 
     return (
         <nav className={`${styles.nav} ${styles.navBack}`}>

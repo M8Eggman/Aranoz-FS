@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
@@ -14,14 +15,6 @@ use Inertia\Inertia;
 // 3 : Agent (gérer commandes, changer statut, envoyer mails dashboard)
 // 4 : Webmaster (CRUD produit, pin sur home, gérer stock, modifier contact)
 // 5 : Admin (tous droits)
-
-// Route erreurs 
-Route::get('/403', function () {
-    Inertia::render('Errors/403');
-})->name('error.403');
-Route::get('/404', function () {
-    Inertia::render('Errors/404');
-})->name('error.404');
 
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -56,7 +49,8 @@ Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
     // Route::resource('/products', WebmasterController::class);
     // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
     // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
-    // Route::put('/contact', [WebmasterController::class, 'updateContact'])->name('contact.update');
+    Route::get('/admin/contact', [ContactInfoController::class, 'index'])->name('contact.info.index');
+    Route::put('/admin/contact/update', [ContactInfoController::class, 'update'])->name('contact.info.update');
 });
 
 // Route pour les admins
@@ -66,9 +60,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('admin.blogs-categories');
     Route::post('/admin/blogs/categories/store', [BlogCategoryController::class, 'store'])
         ->name('admin.blogs-categories.store');
-    Route::put('/admin/blogs/categories/{id}', [BlogCategoryController::class, 'update'])
+    Route::put('/admin/blogs/categories/{id}/update', [BlogCategoryController::class, 'update'])
         ->name('admin.blogs-categories.update');
-    Route::delete('/admin/blogs/categories/{id}', [BlogCategoryController::class, 'destroy'])
+    Route::delete('/admin/blogs/categories/{id}/destroy', [BlogCategoryController::class, 'destroy'])
         ->name('admin.blogs-categories.destroy');
 
     // Product Categories

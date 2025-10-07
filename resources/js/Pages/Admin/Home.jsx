@@ -69,7 +69,9 @@ export default function AdminHome({ auth }) {
         {
             title: "Contact Info",
             description: "Edit your contact information",
-            links: [{ text: "Manage Contact Info", route: "admin.home" }],
+            links: [
+                { text: "Manage Contact Info", route: "contact.info.index" },
+            ],
             roles: ["admin", "webmaster"],
         },
     ];
