@@ -31,6 +31,11 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            // Envoi des messages flash pour tout les composants et pages
+            'flash' => [
+                'success' => fn() => $request->session()->get('success'),
+                'error' => fn() => $request->session()->get('error'),
+            ],
             'auth' => [
                 'user' => $request->user()?->load(['role', 'newsletter']),
             ],

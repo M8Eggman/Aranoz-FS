@@ -6,6 +6,7 @@ import BackLayout from "@/Layouts/BackLayout";
 import { useForm, usePage } from "@inertiajs/react";
 import AdminHeader from "../partials/Header/AdminHeader";
 import { useEffect } from "react";
+import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 
 export default function ContactInfo({ contactInfo }) {
     const { flash } = usePage().props;
@@ -57,15 +58,9 @@ export default function ContactInfo({ contactInfo }) {
 
                 <h2 className={styles.title}>Update your contact data</h2>
 
-                <div className={styles.formWrapper}>
-                    {flash?.success && (
-                        <div
-                            className={`${styles.flash} ${styles.flashSuccess}`}
-                        >
-                            {flash.success}
-                        </div>
-                    )}
+                <FlashMessage />
 
+                <div className={styles.formWrapper}>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.row}>
                             <div className={styles.inputGroup}>
@@ -79,7 +74,7 @@ export default function ContactInfo({ contactInfo }) {
                                         className={styles.input}
                                     />
                                     {errors.street && (
-                                        <p className={styles.errorText}>
+                                        <p className="errorText">
                                             {errors.street}
                                         </p>
                                     )}
@@ -95,9 +90,7 @@ export default function ContactInfo({ contactInfo }) {
                                     className={styles.input}
                                 />
                                 {errors.state && (
-                                    <p className={styles.errorText}>
-                                        {errors.state}
-                                    </p>
+                                    <p className="errorText">{errors.state}</p>
                                 )}
                             </div>
 
@@ -110,9 +103,7 @@ export default function ContactInfo({ contactInfo }) {
                                     className={styles.input}
                                 />
                                 {errors.city && (
-                                    <p className={styles.errorText}>
-                                        {errors.city}
-                                    </p>
+                                    <p className="errorText">{errors.city}</p>
                                 )}
                             </div>
                         </div>
@@ -129,7 +120,7 @@ export default function ContactInfo({ contactInfo }) {
                                         className={styles.input}
                                     />
                                     {errors.country_code && (
-                                        <p className={styles.errorText}>
+                                        <p className="errorText">
                                             {errors.country_code}
                                         </p>
                                     )}
@@ -145,7 +136,7 @@ export default function ContactInfo({ contactInfo }) {
                                     className={styles.input}
                                 />
                                 {errors.zip_code && (
-                                    <p className={styles.errorText}>
+                                    <p className="errorText">
                                         {errors.zip_code}
                                     </p>
                                 )}
@@ -160,9 +151,7 @@ export default function ContactInfo({ contactInfo }) {
                                     className={styles.input}
                                 />
                                 {errors.number && (
-                                    <p className={styles.errorText}>
-                                        {errors.number}
-                                    </p>
+                                    <p className="errorText">{errors.number}</p>
                                 )}
                             </div>
                         </div>
@@ -179,7 +168,7 @@ export default function ContactInfo({ contactInfo }) {
                                         className={styles.input}
                                     />
                                     {errors.email && (
-                                        <p className={styles.errorText}>
+                                        <p className="errorText">
                                             {errors.email}
                                         </p>
                                     )}
@@ -197,7 +186,7 @@ export default function ContactInfo({ contactInfo }) {
                                         className={styles.input}
                                     />
                                     {errors.phone_number && (
-                                        <p className={styles.errorText}>
+                                        <p className="errorText">
                                             {errors.phone_number}
                                         </p>
                                     )}

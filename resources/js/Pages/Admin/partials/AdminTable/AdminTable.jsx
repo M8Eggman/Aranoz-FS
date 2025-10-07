@@ -4,6 +4,7 @@ import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 import Modal from "@/Components/Modals/Modal";
 import { router, useForm, usePage } from "@inertiajs/react";
 import styles from "./AdminTable.module.css";
+import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 
 export default function AdminTable({
     title,
@@ -95,12 +96,6 @@ export default function AdminTable({
 
     return (
         <>
-            {flash?.success && (
-                <div className={styles.success}>{flash.success}</div>
-            )}
-            {flash?.error && <div className={styles.error}>{flash.error}</div>}
-            {errors?.name && <div className={styles.error}>{errors.name}</div>}
-
             {showModal && (
                 <Modal show={showModal} onClose={onClose}>
                     <>
@@ -124,6 +119,12 @@ export default function AdminTable({
             )}
 
             <section className={styles.container}>
+                <FlashMessage />
+
+                {errors?.name && (
+                    <div className="flashError">{errors.name}</div>
+                )}
+
                 <form className={styles.form} onSubmit={handleCreate}>
                     <TextInput
                         name="name"

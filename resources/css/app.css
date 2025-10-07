@@ -57,3 +57,10 @@
     --gap-2xl: clamp(3rem, 6vw, 4rem);
     --gap-3xl: clamp(4rem, 8vw, 6rem);
 }
+
+.errorText {
+    color: var(--dark-pink);
+    font-size: var(--font-sm);
+    margin-top: -0.25rem;
+    margin-bottom: 0.75rem;
+}
