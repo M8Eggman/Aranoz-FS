@@ -1,0 +1,47 @@
+.container {
+    padding: var(--space-lg);
+    background-color: var(--white);
+    border-radius: 0.5rem;
+    max-width: 800px;
+    margin: var(--space-2xl) auto;
+    font-size: var(--font-md);
+    color: var(--charcoal);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-sm);
+    margin-bottom: var(--space-md);
+}
+
+.title {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+}
+
+.info {
+    margin-bottom: var(--space-sm);
+}
+
+.buttons {
+    margin-top: var(--space-md);
+    display: flex;
+    gap: var(--gap-sm);
+}
+
+.items {
+    margin-top: var(--space-lg);
+}
+
+.item {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--soft-gray);
+}
+
+.deletedUser {
+    color: var(--muted-blue);
+    font-style: italic;
+}

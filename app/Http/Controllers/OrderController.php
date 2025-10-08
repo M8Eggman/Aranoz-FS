@@ -52,9 +52,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::findOrFail($id)->load(['user', 'orderItems']);
+        return Inertia::render('Admin/Orders/Show', compact('order'));
     }
 
     /**

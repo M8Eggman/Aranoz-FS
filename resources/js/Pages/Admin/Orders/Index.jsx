@@ -1,5 +1,5 @@
 import React from "react";
-import { router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import BackLayout from "@/Layouts/BackLayout";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
@@ -7,6 +7,8 @@ import AdminHeader from "../partials/Header/AdminHeader";
 import styles from "../partials/AdminTable/AdminTable.module.css";
 
 export default function Orders({ orders, status }) {
+    const statuses = ["pending", "confirmed", "archived", "all"];
+
     const handleConfirm = (id) => {
         router.put(route("admin.orders.confirm", id), {
             preserveState: true,
@@ -21,14 +23,33 @@ export default function Orders({ orders, status }) {
         });
     };
 
+    const changeStatus = (newStatus) => {
+        router.get(route("admin.orders", newStatus));
+    };
+
     return (
         <>
             <AdminHeader title="Orders" />
+
             <section className={styles.container}>
                 <FlashMessage />
+                {/* Filtre par status */}
+                <div className={styles.statusFilter}>
+                    {statuses.map((s) => (
+                        <AdminButton
+                            key={s}
+                            variant={status === s ? "edit" : "default"}
+                            onClick={() => changeStatus(s)}
+                        >
+                            {s.charAt(0).toUpperCase() + s.slice(1)}
+                        </AdminButton>
+                    ))}
+                </div>
 
                 {orders.length === 0 ? (
-                    <p>No orders {status || ""} found.</p>
+                    <p className={styles.noOrders}>
+                        No orders {status || ""} found.
+                    </p>
                 ) : (
                     <table className={styles.table}>
                         <thead>
@@ -39,6 +60,7 @@ export default function Orders({ orders, status }) {
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Archived</th>
+                                <th>Show</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -49,9 +71,7 @@ export default function Orders({ orders, status }) {
                                     <td>{order.order_number}</td>
                                     <td
                                         className={
-                                            order.user
-                                                ? ""
-                                                : "text-gray-400 italic"
+                                            order.user ? "" : styles.deletedUser
                                         }
                                     >
                                         {order.user?.name || "Deleted User"}
@@ -62,6 +82,16 @@ export default function Orders({ orders, status }) {
                                     </td>
                                     <td>{order.status}</td>
                                     <td>{order.isArchived ? "Yes" : "No"}</td>
+                                    <td>
+                                        <Link
+                                            href={route(
+                                                "admin.orders.show",
+                                                order.id
+                                            )}
+                                        >
+                                            <AdminButton>Show More</AdminButton>
+                                        </Link>
+                                    </td>
                                     <td className={styles.actions}>
                                         {order.status === "pending" &&
                                             !order.isArchived && (

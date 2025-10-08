@@ -48,8 +48,11 @@ Route::middleware(['auth', 'role:admin,agent'])->group(function () {
     // Route::put('/orders/{id}/status', [AgentController::class, 'updateStatus'])->name('agent.orders.status');
     // Route::post('/orders/{id}/mail', [AgentController::class, 'sendMail'])->name('agent.orders.mail');
 
+    // Orders
     Route::get('/admin/orders/{status?}', [OrderController::class, 'index'])
         ->name('admin.orders');
+    Route::get('/admin/orders/{id}/show', [OrderController::class, 'show'])
+        ->name('admin.orders.show');
     Route::put('/admin/orders/{id}/confirm', [OrderController::class, 'confirm'])
         ->name('admin.orders.confirm');
     Route::put('/admin/orders/{id}/archive', [OrderController::class, 'archive'])

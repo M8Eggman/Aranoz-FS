@@ -104,6 +104,25 @@
     object-fit: cover;
 }
 
+.statusFilter {
+    display: flex;
+    gap: var(--gap-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+}
+
+.noOrders {
+    font-size: var(--font-md);
+    color: var(--charcoal);
+    margin-top: var(--space-md);
+    text-align: center;
+}
+
+.deletedUser {
+    color: var(--muted-blue);
+    font-style: italic;
+}
+
 @media screen and (max-width: 576px) {
     .form {
         flex-direction: column;
