@@ -22,10 +22,6 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 10, 2000),
             'stock' => $this->faker->numberBetween(0, 100),
             'isPinned' => $this->faker->boolean(10),
-            'image_main' => $this->faker->imageUrl(640, 480, 'furniture', true),
-            'image_rear' => $this->faker->imageUrl(640, 480, 'furniture', true),
-            'image_left_side' => $this->faker->imageUrl(640, 480, 'furniture', true),
-            'image_right_side' => $this->faker->imageUrl(640, 480, 'furniture', true),
             // Les fk seront assignées dans le seeder
             'color_id' => null,
             'category_id' => null,

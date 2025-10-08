@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: var(--space-2xl);
+    padding-block: var(--space-lg);
 }
 
 .container {
@@ -27,7 +27,7 @@
 }
 
 .rightPanel {
-    padding: var(--space-2xl);
+    padding: var(--space-xl);
 }
 
 .title {

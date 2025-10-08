@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Product;
 use App\Models\ProductCategorie;
 use App\Models\Color;
@@ -20,25 +19,40 @@ class ProductSeeder extends Seeder
         $categories = ProductCategorie::all();
         $colors = Color::all();
 
-        // Crée une liste de path de toutes les images dans storage/products
+        // Récupère toutes les images originales
         $images = Storage::disk('public')->allFiles('products');
 
-        // Crée 20 produits
-        Product::factory(20)->make()->each(function ($product) use ($categories, $colors, $images) {
-            // Récupère une images au hasard
-            $image = basename($images[array_rand($images)]);
+        // Fonction pour générer un set d’images selon les dossiers
+        function makeImageSet($baseImage, $folders)
+        {
+            $set = [];
+            foreach ($folders as $folder) {
+                $set[$folder] = "/products/{$folder}/{$baseImage}";
+            }
+            return json_encode($set);
+        }
+        ;
 
-            // L'assigne a toute les images
-            $product->image_main = $image;
-            $product->image_rear = $image;
-            $product->image_left_side = $image;
-            $product->image_right_side = $image;
-            
+        Product::factory(20)->make()->each(function ($product) use ($categories, $colors, $images) {
+
+            // Liste des dossiers de tailles / variantes
+            $folders = ['banner', 'feature_small', 'feature_large', 'offer', 'product'];
+
+            // Image de base aléatoire
+            $baseImage = basename($images[array_rand($images)]);
+
+            $product->images_main = makeImageSet($baseImage, $folders);
+            $product->images_rear = makeImageSet($baseImage, $folders);
+            $product->images_left_side = makeImageSet($baseImage, $folders);
+            $product->images_right_side = makeImageSet($baseImage, $folders);
+
+            // FK aléatoires
             $product->category_id = $categories->random()->id;
             $product->color_id = $colors->random()->id;
+
             $product->save();
 
-            // Crée une spécification liée à ce produit
+            // Crée une spécification liée
             Specification::factory()->create([
                 'product_id' => $product->id,
             ]);

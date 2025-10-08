@@ -25,6 +25,14 @@ class Product extends Model
         'promo_id',
     ];
 
+    protected $casts = [
+        'images_main' => 'array',
+        'images_rear' => 'array',
+        'images_left_side' => 'array',
+        'images_right_side' => 'array',
+    ];
+
+
     public function color()
     {
         return $this->belongsTo(Color::class);
