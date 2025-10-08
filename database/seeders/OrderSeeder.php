@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Product;
@@ -22,12 +20,11 @@ class OrderSeeder extends Seeder
         $products = Product::all();
         $promotions = Promotion::all();
 
-        // Chaque user auront une commande
         foreach ($users as $user) {
-            // 20% des commandes ont une promotion
+            // 30% des commandes ont une promotion
             $promo = fake()->boolean(30) && $promotions->count() > 0 ? $promotions->random() : null;
 
-            // Crée la commande sans order_number pour récupérer l'id plus tard
+            // Crée la commande sans order_number (pour avoir l'id)
             $order = Order::create([
                 'order_number' => '',
                 'sub_total_price' => 0,
@@ -37,32 +34,39 @@ class OrderSeeder extends Seeder
                 'user_id' => $user->id,
             ]);
 
-            // Génère entre 1 et 4 order items pour cette commande
-            $orderItem = $products->random(fake()->numberBetween(1, 4));
+            // Génère entre 1 et 4 order items
+            $orderItems = $products->random(fake()->numberBetween(1, 4));
             $subTotal = 0;
-            foreach ($orderItem as $o) {
+
+            foreach ($orderItems as $product) {
                 $quantity = fake()->numberBetween(1, 3);
-                $subTotal += $o->price * $quantity;
+                $subTotal += $product->price * $quantity;
+
                 OrderItem::create([
-                    'product_name' => $o->name,
-                    'product_price' => $o->price,
+                    'product_name' => $product->name,
+                    'product_price' => $product->price,
                     'quantity' => $quantity,
                     'order_id' => $order->id,
-                    'product_id' => $o->id,
+                    'product_id' => $product->id,
                 ]);
             }
 
-            // Applique la promotion si besoin
-            $final = $subTotal;
-            if ($promo) {
-                $final = round($subTotal * (1 - $promo->percentage / 100), 2);
-            }
+            // Calcul final avec promo
+            $final = $promo
+                ? round($subTotal * (1 - $promo->percentage / 100), 2)
+                : $subTotal;
 
-            // Met à jour le numéro de commande et les prix
-            $order->order_number = 'ORD-' . str_pad($order->id, 5, '0', STR_PAD_LEFT);
-            $order->sub_total_price = $subTotal;
-            $order->total_price = $final;
-            $order->save();
+            // Génère la partie date et unique sécurisée
+            $datePart = now()->format('ymd'); // YYMMDD
+            $uniquePart = strtoupper(bin2hex(random_bytes(5))); // 10 chars uniques
+            $orderNumber = "ORD-{$datePart}-{$uniquePart}";
+
+            // Mise à jour de la commande
+            $order->update([
+                'order_number' => $orderNumber,
+                'sub_total_price' => $subTotal,
+                'total_price' => $final,
+            ]);
         }
     }
 }

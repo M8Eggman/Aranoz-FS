@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -63,21 +64,21 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $request->validate([
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
         // Ne pas modifier le rôle des admins
         if ($user->role?->name === 'admin') {
             return back()->with('error', 'Cannot change role of an admin.');
         }
-
-        $request->validate([
-            'role_id' => 'required|exists:roles,id',
-        ]);
 
         $user->role_id = $request->role_id;
         $user->save();
 
         return back()->with('success', 'Role updated successfully.');
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
@@ -96,6 +97,17 @@ class UserController extends Controller
         // Ne pas supprimer les admins
         if ($user->role?->name === 'admin') {
             return back()->with('error', 'Cannot delete an admin.');
+        }
+
+        // Supprime les fichiers d’images si ce n’est pas celle par défaut
+        if (!empty($user->images) && is_array($user->images)) {
+            foreach ($user->images as $size => $path) {
+                // Supprime que si ce n'est pas l'image de base
+                if ($path && !str_contains($path, 'templateU.png')) {
+                    // Convertit "/storage/users/..." en "users/..." puis supprime l'image
+                    Storage::disk('public')->delete(str_replace('/storage/', '', $path));
+                }
+            }
         }
 
         $user->delete();

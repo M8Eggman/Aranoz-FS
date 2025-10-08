@@ -34,6 +34,7 @@ export default function Users({ users: initialUsers, roles }) {
 
         router.delete(route("admin.users.destroy", selectedUser.id), {
             preserveState: true,
+            preserveScroll: true,
             onError: () => setUsers((prev) => [...prev, selectedUser]),
         });
 
@@ -58,10 +59,8 @@ export default function Users({ users: initialUsers, roles }) {
 
         router.put(
             route("admin.users.role.update", user.id),
-            {
-                role_id: roleEditValue,
-            },
-            { preserveState: true }
+            { role_id: roleEditValue },
+            { preserveState: true, preserveScroll: true }
         );
     };
 
