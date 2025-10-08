@@ -88,8 +88,13 @@ export default function BackNav() {
             type: "dropdown",
             label: "Mailbox",
             options: [
-                { type: "link", route: "admin.home", text: "Archived" },
-                { type: "link", route: "admin.home", text: "All Messages" },
+                {
+                    type: "link",
+                    route: "admin.mailings",
+                    params: { status: "archived" },
+                    text: "Archived Messages",
+                },
+                { type: "link", route: "admin.mailings", text: "All Messages" },
             ],
             roles: ["admin", "agent"],
         },

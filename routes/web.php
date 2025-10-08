@@ -5,6 +5,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,8 @@ use Inertia\Inertia;
 
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::post('/mailings', [MailingController::class, 'store'])
+    ->name('mailings.store');
 
 // Routes pour les  clients
 Route::middleware(['auth', 'role:admin,client'])->group(function () {
@@ -47,6 +50,16 @@ Route::middleware(['auth', 'role:admin,agent'])->group(function () {
     // Route::get('/dashboard/orders', [AgentController::class, 'index'])->name('agent.orders');
     // Route::put('/orders/{id}/status', [AgentController::class, 'updateStatus'])->name('agent.orders.status');
     // Route::post('/orders/{id}/mail', [AgentController::class, 'sendMail'])->name('agent.orders.mail');
+
+    // Mailing
+    Route::get('/admin/mailings/{status?}', [MailingController::class, 'index'])
+        ->name('admin.mailings');
+    Route::delete('/admin/mailings/{id}/destroy', [MailingController::class, 'destroy'])
+        ->name('admin.mailings.destroy');
+    Route::put('/admin/mailings/{id}/read', [MailingController::class, 'read'])
+        ->name('admin.mailings.read');
+    Route::put('/admin/mailings/{id}/archive', [MailingController::class, 'archive'])
+        ->name('admin.mailings.archive');
 
     // Orders
     Route::get('/admin/orders/{status?}', [OrderController::class, 'index'])

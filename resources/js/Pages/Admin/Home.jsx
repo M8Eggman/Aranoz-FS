@@ -67,8 +67,12 @@ export default function AdminHome({ auth }) {
             title: "Mailbox",
             description: "Check and organize your messages",
             links: [
-                { text: "Archived Messages", route: "admin.home" },
-                { text: "All Messages", route: "admin.home" },
+                {
+                    text: "Archived Messages",
+                    route: "admin.mailings",
+                    params: { status: "archived" },
+                },
+                { text: "All Messages", route: "admin.mailings" },
             ],
             roles: ["admin", "agent"],
         },

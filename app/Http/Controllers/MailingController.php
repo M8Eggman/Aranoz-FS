@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Mailing;
 use App\Http\Requests\StoreMailingRequest;
 use App\Http\Requests\UpdateMailingRequest;
+use Inertia\Inertia;
 
 class MailingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($status = null)
     {
-        //
+        $mailings = Mailing::query()
+            ->when($status === 'archived', fn($q) => $q->where('isArchived', true))
+            ->when($status !== 'archived', fn($q) => $q->where('isArchived', false))
+            ->latest()
+            ->get();
+
+        return Inertia::render('Admin/Mailings/Index', [
+            'mailings' => $mailings,
+            'status' => $status,
+        ]);
     }
 
     /**
@@ -35,9 +45,9 @@ class MailingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mailing $mailing)
+    public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -59,8 +69,32 @@ class MailingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mailing $mailing)
+    public function destroy($id)
     {
-        //
+        $mail = Mailing::findOrFail($id);
+        $mail->delete();
+
+        return back()->with('success', 'Mail deleted successfully.');
+    }
+
+    public function read($id)
+    {
+        $mail = Mailing::findOrFail($id);
+        $mail->update(['status' => true]);
+
+        return back();
+    }
+
+    public function archive($id)
+    {
+        $mail = Mailing::findOrFail($id);
+
+        if (!$mail->status) {
+            return back()->with('error', 'You must read the mail before archiving.');
+        }
+
+        $mail->update(['isArchived' => true]);
+
+        return back()->with('success', 'Mail archived successfully.');
     }
 }

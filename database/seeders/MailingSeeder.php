@@ -26,14 +26,14 @@ class MailingSeeder extends Seeder
                 'subject' => 'Problème de livraison',
                 'message' => "Ma commande n’est pas arrivée, pouvez-vous m’aider ?",
                 'status' => true,
-                'isArchived' => false,
+                'isArchived' => true,
             ],
             [
                 'email' => 'client3@example.com',
                 'subject' => 'Suggestion',
                 'message' => "Je propose d’ajouter plus de couleurs au catalogue.",
-                'status' => false,
-                'isArchived' => true,
+                'status' => true,
+                'isArchived' => false,
             ],
         ];
 
