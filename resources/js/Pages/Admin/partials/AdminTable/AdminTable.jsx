@@ -13,17 +13,30 @@ export default function AdminTable({
     storeRoute,
     updateRoute,
     deleteRoute,
+    secondInput = "",
 }) {
-    // Récupère les messages flash
     const { flash, errors, can } = usePage().props;
-    const { data, setData, post, reset } = useForm({ name: "" });
 
-    const [items, setCategories] = useState(intialItems || []);
+    // Initialise le formulaire avec un input secondaire si second input existe
+    const initialForm = { name: "" };
+    if (secondInput.trim().length > 0) {
+        initialForm[secondInput] = "";
+    }
+    const { data, setData, post, reset } = useForm(initialForm);
+
+    const [items, setItems] = useState(intialItems || []);
     const [lastId, setLastId] = useState(initialLastId || 0);
     const [editingId, setEditingId] = useState(null);
     const [editingName, setEditingName] = useState("");
+    const [editingSecond, setEditingSecond] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+
+    function singularize(word) {
+        if (word.endsWith("ies")) return word.slice(0, -3) + "y";
+        if (word.endsWith("s")) return word.slice(0, -1);
+        return word;
+    }
 
     const openModal = (item) => {
         setSelectedItem(item);
@@ -47,50 +60,59 @@ export default function AdminTable({
         e.preventDefault();
         if (!data.name.trim()) return;
 
-        // Création côté front
         const tempId = lastId + 1;
         setLastId(tempId);
-        setCategories([...items, { id: tempId, name: data.name }]);
 
-        // Post via Inertia
+        const newItem = { id: tempId, name: data.name };
+        if (secondInput) newItem[secondInput] = data[secondInput];
+
+        setItems([...items, newItem]);
+
         post(storeRoute, {
             preserveScroll: true,
             preserveState: true,
-            onSuccess: () => reset("name"),
+            onSuccess: () => reset(),
             onError: () =>
-                setCategories((prev) => prev.filter((i) => i.id !== tempId)),
+                setItems((prev) => prev.filter((i) => i.id !== tempId)),
         });
     };
 
-    const handleUpdate = (item, newName) => {
+    const handleUpdate = (item, newName, newSecond) => {
         if (!newName.trim()) return;
-        setCategories((prev) =>
-            prev.map((i) => (i.id === item.id ? { ...i, name: newName } : i))
+
+        const updatedItem = { ...item, name: newName };
+        if (secondInput) updatedItem[secondInput] = newSecond;
+
+        setItems((prev) =>
+            prev.map((i) => (i.id === item.id ? updatedItem : i))
         );
+
         setEditingId(null);
+
         router.put(
             updateRoute(item.id),
-            { name: newName },
+            {
+                name: newName,
+                ...(secondInput ? { [secondInput]: newSecond } : {}),
+            },
             {
                 preserveScroll: true,
                 preserveState: true,
                 onError: () =>
-                    setCategories((prev) =>
-                        prev.map((i) =>
-                            i.id === item.id ? { ...i, name: item.name } : i
-                        )
+                    setItems((prev) =>
+                        prev.map((i) => (i.id === item.id ? item : i))
                     ),
             }
         );
     };
 
     const handleDelete = (item) => {
-        setCategories((prev) => prev.filter((i) => i.id !== item.id));
+        setItems((prev) => prev.filter((i) => i.id !== item.id));
         setEditingId(null);
         router.delete(deleteRoute(item.id), {
             preserveState: true,
             preserveScroll: true,
-            onError: () => setCategories((prev) => [...prev, item]),
+            onError: () => setItems((prev) => [...prev, item]),
         });
     };
 
@@ -130,8 +152,20 @@ export default function AdminTable({
                         name="name"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
-                        placeholder={`New ${title.slice(0, -1)}`}
+                        placeholder={`New ${singularize(title.toLowerCase())}`}
                     />
+                    {secondInput.trim().length > 0 && (
+                        <TextInput
+                            name={secondInput}
+                            value={data[secondInput]}
+                            onChange={(e) =>
+                                setData(secondInput, e.target.value)
+                            }
+                            placeholder={`New ${singularize(
+                                secondInput.toLowerCase()
+                            )}`}
+                        />
+                    )}
                     <AdminButton type="submit">Create</AdminButton>
                 </form>
 
@@ -139,7 +173,16 @@ export default function AdminTable({
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th width="100%">Name</th>
+                            <th
+                                width={
+                                    secondInput.trim().length <= 0
+                                        ? "100%"
+                                        : "50%"
+                                }
+                            >
+                                Name
+                            </th>
+                            {secondInput && <th width="50%">{secondInput}</th>}
                             <th>Modification</th>
                             {can.isAdmin && <th>Delete</th>}
                         </tr>
@@ -159,13 +202,45 @@ export default function AdminTable({
                                             }
                                             onKeyDown={(e) =>
                                                 e.key === "Enter" &&
-                                                handleUpdate(item, editingName)
+                                                handleUpdate(
+                                                    item,
+                                                    editingName,
+                                                    editingSecond
+                                                )
                                             }
                                         />
                                     ) : (
                                         item.name
                                     )}
                                 </td>
+
+                                {secondInput && (
+                                    <td>
+                                        {editingId === item.id ? (
+                                            <TextInput
+                                                name={secondInput}
+                                                value={editingSecond}
+                                                style={{ width: "100%" }}
+                                                onChange={(e) =>
+                                                    setEditingSecond(
+                                                        e.target.value
+                                                    )
+                                                }
+                                                onKeyDown={(e) =>
+                                                    e.key === "Enter" &&
+                                                    handleUpdate(
+                                                        item,
+                                                        editingName,
+                                                        editingSecond
+                                                    )
+                                                }
+                                            />
+                                        ) : (
+                                            item[secondInput]
+                                        )}
+                                    </td>
+                                )}
+
                                 <td>
                                     {editingId === item.id ? (
                                         <div className={styles.buttonGroup}>
@@ -173,7 +248,8 @@ export default function AdminTable({
                                                 onClick={() =>
                                                     handleUpdate(
                                                         item,
-                                                        editingName
+                                                        editingName,
+                                                        editingSecond
                                                     )
                                                 }
                                             >
@@ -193,6 +269,10 @@ export default function AdminTable({
                                             onClick={() => {
                                                 setEditingId(item.id);
                                                 setEditingName(item.name);
+                                                if (secondInput)
+                                                    setEditingSecond(
+                                                        item[secondInput]
+                                                    );
                                             }}
                                             variant="edit"
                                         >
@@ -200,6 +280,7 @@ export default function AdminTable({
                                         </AdminButton>
                                     )}
                                 </td>
+
                                 {can.isAdmin && (
                                     <td>
                                         <AdminButton

@@ -21,6 +21,16 @@ export default function AdminHome({ auth }) {
             roles: ["admin", "community_manager"],
         },
         {
+            title: "Data Management",
+            description:
+                "Manage colors and countries used throughout the system",
+            links: [
+                { text: "Manage Colors", route: "admin.colors" },
+                { text: "Manage Countries", route: "admin.countries" },
+            ],
+            roles: ["admin"],
+        },
+        {
             title: "Orders",
             description: "Track and manage customer orders",
             links: [
@@ -73,16 +83,6 @@ export default function AdminHome({ auth }) {
                 { text: "Manage Contact Info", route: "contact.info.index" },
             ],
             roles: ["admin", "webmaster"],
-        },
-        {
-            title: "Data Management",
-            description:
-                "Manage colors and countries used throughout the system",
-            links: [
-                { text: "Manage Colors", route: "admin.home" },
-                { text: "Manage Countries", route: "admin.home" },
-            ],
-            roles: ["admin"],
         },
     ];
 

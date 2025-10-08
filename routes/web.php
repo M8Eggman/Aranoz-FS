@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ContactInfoController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
@@ -74,6 +76,26 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('admin.products-categories.update');
     Route::delete('/admin/products/categories/{id}/destroy', [ProductCategorieController::class, 'destroy'])
         ->name('admin.products-categories.destroy');
+
+    // Colors 
+    Route::get('/admin/colors', [ColorController::class, 'index'])
+        ->name('admin.colors');
+    Route::post('/admin/colors/store', [ColorController::class, 'store'])
+        ->name('admin.colors.store');
+    Route::put('/admin/colors/{id}/update', [ColorController::class, 'update'])
+        ->name('admin.colors.update');
+    Route::delete('/admin/colors/{id}/destroy', [ColorController::class, 'destroy'])
+        ->name('admin.colors.destroy');
+
+    // Countries
+    Route::get('/admin/countries', [CountryController::class, 'index'])
+        ->name('admin.countries');
+    Route::post('/admin/countries/store', [CountryController::class, 'store'])
+        ->name('admin.countries.store');
+    Route::put('/admin/countries/{id}/update', [CountryController::class, 'update'])
+        ->name('admin.countries.update');
+    Route::delete('/admin/countries/{id}/destroy', [CountryController::class, 'destroy'])
+        ->name('admin.countries.destroy');
 
     // Tags
     Route::delete('/admin/tags/{id}/destroy', [TagController::class, 'destroy'])

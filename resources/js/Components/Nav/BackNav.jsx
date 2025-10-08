@@ -33,8 +33,8 @@ export default function BackNav() {
             type: "dropdown",
             label: "Data Managment",
             options: [
-                { type: "link", route: "admin.home", text: "Colors" },
-                { type: "link", route: "admin.home", text: "Countries" },
+                { type: "link", route: "admin.colors", text: "Colors" },
+                { type: "link", route: "admin.countries", text: "Countries" },
             ],
             roles: ["admin"],
         },

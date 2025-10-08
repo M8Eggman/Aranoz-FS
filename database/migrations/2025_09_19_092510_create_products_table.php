@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->json('images_rear')->nullable();
             $table->json('images_left_side')->nullable();
             $table->json('images_right_side')->nullable();
-            $table->foreignId('color_id')->constrained('colors');
+            $table->foreignId('color_id')->nullable()->constrained('colors')->nullOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('product_categories')->nullOnDelete();
             // Promotions sur le produits
             $table->unsignedTinyInteger('promotion')->nullable();
