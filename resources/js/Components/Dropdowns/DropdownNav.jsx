@@ -29,7 +29,16 @@ export default function DropdownNav({
                         .map((option, index) => (
                             <li key={index}>
                                 {option.type === "link" && (
-                                    <Link href={route(option.route)}>
+                                    <Link
+                                        href={
+                                            option.params
+                                                ? route(
+                                                      option.route,
+                                                      option.params
+                                                  )
+                                                : route(option.route)
+                                        }
+                                    >
                                         {option.text}
                                     </Link>
                                 )}

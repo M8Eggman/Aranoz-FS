@@ -5,6 +5,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
@@ -46,6 +47,13 @@ Route::middleware(['auth', 'role:admin,agent'])->group(function () {
     // Route::get('/dashboard/orders', [AgentController::class, 'index'])->name('agent.orders');
     // Route::put('/orders/{id}/status', [AgentController::class, 'updateStatus'])->name('agent.orders.status');
     // Route::post('/orders/{id}/mail', [AgentController::class, 'sendMail'])->name('agent.orders.mail');
+
+    Route::get('/admin/orders/{status?}', [OrderController::class, 'index'])
+        ->name('admin.orders');
+    Route::put('/admin/orders/{id}/confirm', [OrderController::class, 'confirm'])
+        ->name('admin.orders.confirm');
+    Route::put('/admin/orders/{id}/archive', [OrderController::class, 'archive'])
+        ->name('admin.orders.archive');
 });
 
 // Routes pour les webmasters
@@ -53,7 +61,7 @@ Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
     // Route::resource('/products', WebmasterController::class);
     // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
     // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
-     
+
     // Coupons
     Route::get('/admin/coupons', [PromotionController::class, 'index'])
         ->name('admin.coupons');

@@ -12,7 +12,15 @@ export default function QuickAccessCard({ title, description, links }) {
             <ul className={styles.linkList}>
                 {links.map((link, i) => (
                     <li key={i}>
-                        <Link href={route(link.route)}>{link.text}</Link>
+                        <Link
+                            href={
+                                link.params
+                                    ? route(link.route, link.params)
+                                    : route(link.route)
+                            }
+                        >
+                            {link.text}
+                        </Link>
                     </li>
                 ))}
             </ul>

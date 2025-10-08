@@ -34,8 +34,12 @@ export default function AdminHome({ auth }) {
             title: "Orders",
             description: "Track and manage customer orders",
             links: [
-                { text: "Pending Orders", route: "admin.home" },
-                { text: "All Orders", route: "admin.home" },
+                {
+                    text: "Pending Orders",
+                    route: "admin.orders",
+                    params: { status: "pending" },
+                },
+                { text: "All Orders", route: "admin.orders" },
             ],
             roles: ["admin", "agent"],
         },
@@ -71,9 +75,7 @@ export default function AdminHome({ auth }) {
         {
             title: "Users",
             description: "Manage users and their roles",
-            links: [
-                { text: "All Users", route: "admin.users" },
-            ],
+            links: [{ text: "All Users", route: "admin.users" }],
             roles: ["admin"],
         },
         {
