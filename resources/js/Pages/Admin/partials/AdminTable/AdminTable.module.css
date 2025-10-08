@@ -12,6 +12,13 @@
     gap: var(--gap-sm);
 }
 
+.inputGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -88,7 +95,6 @@
     justify-content: flex-end;
     gap: var(--gap-xs);
 }
-
 
 @media screen and (max-width: 576px) {
     .form {

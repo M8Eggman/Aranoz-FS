@@ -7,7 +7,9 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +53,17 @@ Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
     // Route::resource('/products', WebmasterController::class);
     // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
     // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
+    // Coupons
+    Route::get('/admin/coupons', [PromotionController::class, 'index'])
+        ->name('admin.coupons');
+    Route::post('/admin/coupons/store', [PromotionController::class, 'store'])
+        ->name('admin.coupons.store');
+    Route::put('/admin/coupons/{id}/update', [PromotionController::class, 'update'])
+        ->name('admin.coupons.update');
+    Route::delete('/admin/coupons/{id}/destroy', [PromotionController::class, 'destroy'])
+        ->name('admin.coupons.destroy');
+
+    // Contact
     Route::get('/admin/contact', [ContactInfoController::class, 'index'])->name('contact.info.index');
     Route::put('/admin/contact/update', [ContactInfoController::class, 'update'])->name('contact.info.update');
 });
@@ -100,6 +113,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Tags
     Route::delete('/admin/tags/{id}/destroy', [TagController::class, 'destroy'])
         ->name('admin.tags.destroy');
+
+    // Users
+    Route::get('/admin/users', [UserController::class, 'index'])
+        ->name('admin.users');
+    Route::put('/admin/users/{id}/role/update', [UserController::class, 'role_update'])
+        ->name('admin.users.role.update');
+    Route::delete('/admin/users/{id}/destroy', [UserController::class, 'destroy'])
+        ->name('admin.users.destroy');
 });
 
 // Routes pour la home du backend 

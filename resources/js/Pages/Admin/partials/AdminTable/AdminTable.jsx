@@ -15,7 +15,7 @@ export default function AdminTable({
     deleteRoute,
     secondInput = "",
 }) {
-    const { flash, errors, can } = usePage().props;
+    const { errors, can } = usePage().props;
 
     // Initialise le formulaire avec un input secondaire si second input existe
     const initialForm = { name: "" };
@@ -148,23 +148,37 @@ export default function AdminTable({
                 )}
 
                 <form className={styles.form} onSubmit={handleCreate}>
-                    <TextInput
-                        name="name"
-                        value={data.name}
-                        onChange={(e) => setData("name", e.target.value)}
-                        placeholder={`New ${singularize(title.toLowerCase())}`}
-                    />
-                    {secondInput.trim().length > 0 && (
+                    <div className={styles.inputGroup}>
                         <TextInput
-                            name={secondInput}
-                            value={data[secondInput]}
-                            onChange={(e) =>
-                                setData(secondInput, e.target.value)
-                            }
+                            name="name"
+                            value={data.name}
+                            onChange={(e) => setData("name", e.target.value)}
                             placeholder={`New ${singularize(
-                                secondInput.toLowerCase()
+                                title.toLowerCase()
                             )}`}
                         />
+                        {errors?.name && (
+                            <small className="errorText">{errors.name}</small>
+                        )}
+                    </div>
+                    {secondInput.trim().length > 0 && (
+                        <div className={styles.inputGroup}>
+                            <TextInput
+                                name={secondInput}
+                                value={data[secondInput]}
+                                onChange={(e) =>
+                                    setData(secondInput, e.target.value)
+                                }
+                                placeholder={`New ${singularize(
+                                    secondInput.toLowerCase()
+                                )}`}
+                            />
+                            {errors?.[secondInput] && (
+                                <small className="errorText">
+                                    {errors[secondInput]}
+                                </small>
+                            )}
+                        </div>
                     )}
                     <AdminButton type="submit">Create</AdminButton>
                 </form>

@@ -65,6 +65,7 @@ export default function BackNav() {
             options: [
                 { type: "link", route: "admin.home", text: "Create a Product" },
                 { type: "link", route: "admin.home", text: "All Products" },
+                { type: "link", route: "admin.coupons", text: "Coupons" },
             ],
             roles: ["admin", "webmaster"],
         },
@@ -80,7 +81,7 @@ export default function BackNav() {
         {
             type: "link",
             label: "Users",
-            route: "admin.home",
+            route: "admin.users",
             roles: ["admin"],
         },
         {

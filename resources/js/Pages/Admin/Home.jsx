@@ -45,6 +45,7 @@ export default function AdminHome({ auth }) {
             links: [
                 { text: "Create a Product", route: "admin.home" },
                 { text: "All Products", route: "admin.home" },
+                { text: "Coupons", route: "admin.coupons" },
             ],
             roles: ["admin", "webmaster"],
         },
@@ -71,8 +72,7 @@ export default function AdminHome({ auth }) {
             title: "Users",
             description: "Manage users and their roles",
             links: [
-                { text: "All Users", route: "admin.home" },
-                { text: "Roles & Permissions", route: "admin.home" },
+                { text: "All Users", route: "admin.users" },
             ],
             roles: ["admin"],
         },
