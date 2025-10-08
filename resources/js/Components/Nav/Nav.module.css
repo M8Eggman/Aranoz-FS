@@ -3,8 +3,8 @@
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: var(--space-sm) var(--space-3xl);
+    justify-content: center;
+    padding: var(--space-sm) var(--space-xs);
     font-family: sans-serif;
     gap: var(--space-md);
     z-index: 50;
@@ -18,11 +18,13 @@
     background: var(--rose-pale);
 }
 
+/* couleur de la nav quand on est dans les pages auth (register/login) */
 .navAuth {
     background-color: var(--white);
 }
 
 .link {
+    white-space: nowrap;
     cursor: pointer;
     border-radius: 6px;
     font-size: var(--font-md);
@@ -62,7 +64,7 @@
 .menu {
     display: flex;
     align-items: center;
-    gap: var(--gap-lg);
+    gap: var(--gap-md);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -137,7 +139,7 @@
     background-color: var(--dark-pink);
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1400px) {
     .nav {
         justify-content: space-between;
         padding: var(--space-md) var(--space-lg);

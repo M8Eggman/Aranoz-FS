@@ -31,6 +31,15 @@ export default function BackNav() {
         },
         {
             type: "dropdown",
+            label: "Data Managment",
+            options: [
+                { type: "link", route: "admin.home", text: "Colors" },
+                { type: "link", route: "admin.home", text: "Countries" },
+            ],
+            roles: ["admin"],
+        },
+        {
+            type: "dropdown",
             label: "Orders",
             options: [
                 { type: "link", route: "admin.home", text: "Pending" },

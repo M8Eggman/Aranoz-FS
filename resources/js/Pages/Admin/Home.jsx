@@ -74,6 +74,16 @@ export default function AdminHome({ auth }) {
             ],
             roles: ["admin", "webmaster"],
         },
+        {
+            title: "Data Management",
+            description:
+                "Manage colors and countries used throughout the system",
+            links: [
+                { text: "Manage Colors", route: "admin.home" },
+                { text: "Manage Countries", route: "admin.home" },
+            ],
+            roles: ["admin"],
+        },
     ];
 
     return (
