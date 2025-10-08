@@ -53,6 +53,7 @@ Route::middleware(['auth', 'role:admin,webmaster'])->group(function () {
     // Route::resource('/products', WebmasterController::class);
     // Route::post('/products/{id}/pin', [WebmasterController::class, 'pin'])->name('products.pin');
     // Route::put('/products/{id}/stock', [WebmasterController::class, 'updateStock'])->name('products.stock');
+     
     // Coupons
     Route::get('/admin/coupons', [PromotionController::class, 'index'])
         ->name('admin.coupons');

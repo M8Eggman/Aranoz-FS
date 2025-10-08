@@ -68,7 +68,7 @@ export default function Login() {
                         />
 
                         {errors.email && (
-                            <small className={styles.error}>
+                            <small className="errorText">
                                 {errors.email}
                             </small>
                         )}

@@ -5,6 +5,7 @@ import Modal from "@/Components/Modals/Modal";
 import { router, useForm, usePage } from "@inertiajs/react";
 import styles from "./AdminTable.module.css";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
+import { capitalize, singularize } from "@/utils/StringHelper";
 
 export default function AdminTable({
     title,
@@ -31,12 +32,6 @@ export default function AdminTable({
     const [editingSecond, setEditingSecond] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
-
-    function singularize(word) {
-        if (word.endsWith("ies")) return word.slice(0, -3) + "y";
-        if (word.endsWith("s")) return word.slice(0, -1);
-        return word;
-    }
 
     const openModal = (item) => {
         setSelectedItem(item);
@@ -196,7 +191,9 @@ export default function AdminTable({
                             >
                                 Name
                             </th>
-                            {secondInput && <th width="50%">{secondInput}</th>}
+                            {secondInput && (
+                                <th width="50%">{capitalize(secondInput)}</th>
+                            )}
                             <th>Modification</th>
                             {can.isAdmin && <th>Delete</th>}
                         </tr>

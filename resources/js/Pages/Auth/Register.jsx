@@ -50,7 +50,7 @@ export default function Register() {
                                 }
                             />
                             {errors.name && (
-                                <p className={styles.error}>{errors.name}</p>
+                                <p className="errorText">{errors.name}</p>
                             )}
                         </div>
 
@@ -65,7 +65,7 @@ export default function Register() {
                                 }
                             />
                             {errors.email && (
-                                <p className={styles.error}>{errors.email}</p>
+                                <p className="errorText">{errors.email}</p>
                             )}
                         </div>
 
@@ -120,9 +120,7 @@ export default function Register() {
                                 }
                             />
                             {errors.password && (
-                                <p className={styles.error}>
-                                    {errors.password}
-                                </p>
+                                <p className="errorText">{errors.password}</p>
                             )}
                         </div>
 
@@ -140,7 +138,7 @@ export default function Register() {
                                 }
                             />
                             {errors.password_confirmation && (
-                                <p className={styles.error}>
+                                <p className="errorText">
                                     {errors.password_confirmation}
                                 </p>
                             )}

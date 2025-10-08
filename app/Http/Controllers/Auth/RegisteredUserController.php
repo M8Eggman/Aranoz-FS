@@ -37,8 +37,8 @@ class RegisteredUserController extends Controller
     {
         // Validation
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'name' => ['required','string','min:3','max:20','unique:users,name',],
+            'email' => 'required|string|lowercase|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'image_url' => 'nullable|url|max:255',
@@ -90,8 +90,9 @@ class RegisteredUserController extends Controller
                 'medium' => $request->image_url,
                 'large' => $request->image_url,
             ];
-        } else {
-            // Image par défaut
+        }
+        // Image par défaut
+        else {
             $imagePaths = [
                 'small' => '/storage/users/templateU.png',
                 'medium' => '/storage/users/templateU.png',

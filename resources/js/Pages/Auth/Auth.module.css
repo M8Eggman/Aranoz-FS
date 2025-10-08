@@ -79,12 +79,6 @@
     gap: var(--gap-xs);
 }
 
-.error {
-    color: var(--dark-pink);
-    font-size: var(--font-sm);
-    text-align: start;
-}
-
 .inputImage {
     display: flex;
     align-items: center;

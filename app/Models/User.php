@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'images',
     ];
 
     // Convertie l'array php en json
