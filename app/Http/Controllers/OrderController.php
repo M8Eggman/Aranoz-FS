@@ -77,6 +77,12 @@ class OrderController extends Controller
     public function confirm($id)
     {
         $order = Order::findOrFail($id);
+
+        // Vérifie que la commande est pas déjà confirmée
+        if ($order->status === 'confirmed') {
+            return back()->with('error', 'Order is already confirmed.');
+        }
+
         $order->status = 'confirmed';
         $order->save();
 
@@ -86,6 +92,17 @@ class OrderController extends Controller
     public function archive($id)
     {
         $order = Order::findOrFail($id);
+
+        // Vérifie que la commande est confirmée
+        if ($order->status !== 'confirmed') {
+            return back()->with('error', 'Only confirmed orders can be archived.');
+        }
+
+        // Vérifie qu’elle n’est pas déjà archivée
+        if ($order->isArchived) {
+            return back()->with('error', 'Order is already archived.');
+        }
+
         $order->isArchived = true;
         $order->save();
 

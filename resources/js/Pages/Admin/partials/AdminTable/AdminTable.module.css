@@ -108,7 +108,6 @@
     display: flex;
     gap: var(--gap-sm);
     flex-wrap: wrap;
-    margin-bottom: var(--space-md);
 }
 
 .noOrders {

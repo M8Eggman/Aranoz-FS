@@ -103,7 +103,7 @@ export default function Orders({ orders, status }) {
                                                     Confirm
                                                 </AdminButton>
                                             )}
-                                        {!order.isArchived && (
+                                        {!order.isArchived && order.status === "confirmed" && (
                                             <AdminButton
                                                 onClick={() =>
                                                     handleArchive(order.id)
