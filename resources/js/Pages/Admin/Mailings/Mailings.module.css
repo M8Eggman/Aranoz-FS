@@ -1,8 +1,8 @@
 .container {
-    padding: var(--space-lg);
+    margin: var(--space-md) auto;
+    width: min(1400px, 95vw);
     background: var(--white);
     border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .filters {
@@ -13,22 +13,20 @@
 }
 
 .mailLayout {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
     gap: var(--gap-lg);
     height: 70vh;
-    border-radius: 1rem;
     overflow: hidden;
 }
 
 .mailList {
     background: var(--white);
     border-right: 1px solid var(--soft-gray);
-    overflow-y: auto;
     padding-inline: var(--space-sm);
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
+    min-width: min(20rem, 100%);
 }
 
 .mailItem {
@@ -57,12 +55,14 @@
 .mailHeader {
     display: flex;
     justify-content: space-between;
+    gap: var(--gap-md);
     align-items: center;
 }
 
 .subject {
     font-weight: 600;
     font-size: var(--font-md);
+    word-break: break-all;
 }
 
 .preview {
@@ -85,12 +85,12 @@
 
 .mailContent {
     background: var(--white);
-    padding: var(--space-md);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-radius: 0 1rem 1rem 0;
     overflow-y: auto;
+    flex-grow: 1;
 }
 
 .mailContent h2 {
@@ -115,7 +115,7 @@
     border-radius: 0.5rem;
     flex-grow: 1;
     white-space: pre-line;
-    overflow-wrap: break-word;
+    overflow-wrap: break-word; 
 }
 
 .actions {
@@ -149,4 +149,21 @@
 .mailContent::-webkit-scrollbar-thumb {
     background-color: var(--soft-gray);
     border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .mailLayout {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .mailList {
+        max-height: 30vh;
+        border: none;
+        padding-inline: 0;
+    }
+
+    .mailItem:hover {
+        transform: none;
+    }
 }

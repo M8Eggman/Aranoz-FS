@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "@inertiajs/react";
 import { IoMdMail, IoMdMailOpen } from "react-icons/io"; // icônes
 import BackLayout from "@/Layouts/BackLayout";
@@ -8,8 +8,13 @@ import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 import styles from "./Mailings.module.css";
 
 export default function Mailings({ mailings, status }) {
-    const [selectedMail, setSelectedMail] = useState(mailings[0] || null);
+    const [selectedMail, setSelectedMail] = useState(null);
     const statuses = ["all", "archived"];
+
+    // Réinitialise le selectedMail quand on change de page
+    useEffect(() => {
+        setSelectedMail(null);
+    }, [status]);
 
     const changeStatus = (s) => {
         router.get(
@@ -64,42 +69,43 @@ export default function Mailings({ mailings, status }) {
                         </AdminButton>
                     ))}
                 </div>
-
                 <div className={styles.mailLayout}>
                     <div className={styles.mailList}>
                         {mailings.length === 0 ? (
                             <p className={styles.empty}>No mails found.</p>
                         ) : (
-                            mailings.map((mail) => (
-                                <div
-                                    key={mail.id}
-                                    className={`${styles.mailItem} ${
-                                        selectedMail?.id === mail.id
-                                            ? styles.active
-                                            : ""
-                                    } ${mail.status ? styles.read : ""}`}
-                                    onClick={() => handleSelect(mail)}
-                                >
-                                    <div className={styles.mailHeader}>
-                                        <span className={styles.subject}>
-                                            {mail.subject}
-                                        </span>
-                                        <span className={styles.statusIcon}>
-                                            {mail.status ? (
-                                                <IoMdMailOpen color="#86a5c2" />
-                                            ) : (
-                                                <IoMdMail color="#ff3368" />
-                                            )}
+                            <>
+                                {mailings.map((mail) => (
+                                    <div
+                                        key={mail.id}
+                                        className={`${styles.mailItem} ${
+                                            selectedMail?.id === mail.id
+                                                ? styles.active
+                                                : ""
+                                        } ${mail.status ? styles.read : ""}`}
+                                        onClick={() => handleSelect(mail)}
+                                    >
+                                        <div className={styles.mailHeader}>
+                                            <span className={styles.subject}>
+                                                {mail.subject}
+                                            </span>
+                                            <span className={styles.statusIcon}>
+                                                {mail.status ? (
+                                                    <IoMdMailOpen color="#86a5c2" />
+                                                ) : (
+                                                    <IoMdMail color="#ff3368" />
+                                                )}
+                                            </span>
+                                        </div>
+                                        <p className={styles.preview}>
+                                            {mail.message.slice(0, 30)}...
+                                        </p>
+                                        <span className={styles.email}>
+                                            {mail.email}
                                         </span>
                                     </div>
-                                    <p className={styles.preview}>
-                                        {mail.message.slice(0, 16)}...
-                                    </p>
-                                    <span className={styles.email}>
-                                        {mail.email}
-                                    </span>
-                                </div>
-                            ))
+                                ))}
+                            </>
                         )}
                     </div>
 
