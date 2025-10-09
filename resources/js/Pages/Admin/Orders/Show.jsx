@@ -65,15 +65,70 @@ export default function OrderShow({ order }) {
             </div>
 
             <div className={styles.items}>
-                <h3 className="text-lg font-semibold">Items</h3>
-                <ul>
-                    {order.order_items.map((item) => (
-                        <li key={item.id} className={styles.item}>
-                            {item.product_name} — {item.quantity} ×{" "}
-                            {item.product_price} €
-                        </li>
-                    ))}
+                <h3 className={styles.itemsTitle}>Items</h3>
+
+                <ul className={styles.itemList}>
+                    {order.order_items.map((item) => {
+                        // Retourne un booléen si l'objet existe ou non
+                        const productExists = !!item.product;
+                        // Chemin de l'image si elle existe
+                        const imageSrc = productExists
+                            ? item?.product?.images_main?.offer
+                            : "/storage/products/banner/TemplateB.png";
+
+                        return (
+                            <li
+                                key={item.id}
+                                className={`${styles.item} ${
+                                    !productExists ? styles.deleted : ""
+                                }`}
+                            >
+                                <img
+                                    src={imageSrc}
+                                    alt={
+                                        productExists
+                                            ? item.product.name
+                                            : "Deleted Product"
+                                    }
+                                    className={styles.itemImage}
+                                />
+                                <div className={styles.itemInfo}>
+                                    <div>
+                                        <span className={styles.itemName}>
+                                            {productExists
+                                                ? item.product.name
+                                                : `${item.product_name} (Deleted Product)`}
+                                        </span>
+                                        <span className={styles.itemQuantity}>
+                                            × {item.quantity}
+                                        </span>
+                                    </div>
+                                    <div className={styles.itemPrices}>
+                                        <span className={styles.itemUnitPrice}>
+                                            {parseFloat(
+                                                item.product_price
+                                            ).toFixed(2)}{" "}
+                                            €
+                                        </span>
+                                        <span className={styles.itemTotalPrice}>
+                                            {parseFloat(
+                                                item.total_price
+                                            ).toFixed(2)}{" "}
+                                            €
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    })}
                 </ul>
+
+                <div className={styles.totalContainer}>
+                    <span className={styles.totalLabel}>Final Total:</span>
+                    <span className={styles.totalPrice}>
+                        {parseFloat(order.total_price).toFixed(2)} €
+                    </span>
+                </div>
             </div>
         </div>
     );

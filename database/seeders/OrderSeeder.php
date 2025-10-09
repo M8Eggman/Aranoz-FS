@@ -40,12 +40,14 @@ class OrderSeeder extends Seeder
 
             foreach ($orderItems as $product) {
                 $quantity = fake()->numberBetween(1, 3);
-                $subTotal += $product->price * $quantity;
+                $itemTotal = $product->price * $quantity;
+                $subTotal += $itemTotal;
 
                 OrderItem::create([
                     'product_name' => $product->name,
                     'product_price' => $product->price,
                     'quantity' => $quantity,
+                    'total_price' => $itemTotal,
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                 ]);

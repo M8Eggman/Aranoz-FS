@@ -41,12 +41,10 @@ export default function Mailings({ mailings, status }) {
     };
 
     const handleDelete = (id) => {
-        if (confirm("Delete this mail?")) {
-            router.delete(route("admin.mailings.destroy", id), {
-                preserveScroll: true,
-                preserveState: true,
-            });
-        }
+        router.delete(route("admin.mailings.destroy", id), {
+            preserveScroll: true,
+            preserveState: true,
+        });
     };
 
     const handleSelect = (mail) => {

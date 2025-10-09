@@ -47,7 +47,7 @@ Route::middleware(['auth', 'role:admin,community_manager'])->group(function () {
 
 // Routes pour les agents
 Route::middleware(['auth', 'role:admin,agent'])->group(function () {
-    // Route::get('/dashboard/orders', [AgentController::class, 'index'])->name('agent.orders');
+    // Route::get('/orders', [AgentController::class, 'index'])->name('agent.orders');
     // Route::put('/orders/{id}/status', [AgentController::class, 'updateStatus'])->name('agent.orders.status');
     // Route::post('/orders/{id}/mail', [AgentController::class, 'sendMail'])->name('agent.orders.mail');
 

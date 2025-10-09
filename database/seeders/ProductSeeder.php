@@ -27,11 +27,10 @@ class ProductSeeder extends Seeder
         {
             $set = [];
             foreach ($folders as $folder) {
-                $set[$folder] = "/products/{$folder}/{$baseImage}";
+                $set[$folder] = "/storage/products/{$folder}/{$baseImage}";
             }
-            return json_encode($set);
+            return $set; // retourne un tableau, pas un JSON
         }
-        ;
 
         Product::factory(20)->make()->each(function ($product) use ($categories, $colors, $images) {
 
@@ -41,6 +40,7 @@ class ProductSeeder extends Seeder
             // Image de base aléatoire
             $baseImage = basename($images[array_rand($images)]);
 
+            // Remplissage des images
             $product->images_main = makeImageSet($baseImage, $folders);
             $product->images_rear = makeImageSet($baseImage, $folders);
             $product->images_left_side = makeImageSet($baseImage, $folders);

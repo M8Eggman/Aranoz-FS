@@ -54,7 +54,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::findOrFail($id)->load(['user', 'orderItems']);
+        $order = Order::findOrFail($id)->load(['user', 'orderItems.product']);
         return Inertia::render('Admin/Orders/Show', compact('order'));
     }
 
