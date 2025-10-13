@@ -14,17 +14,17 @@ class ProductCategorieSeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Chaises'],
-            ['name' => 'Buffets'],
-            ['name' => 'Vaisseliers'],
-            ['name' => 'Étagères'],
-            ['name' => 'Bibliothèques'],
-            ['name' => 'Canapés'],
-            ['name' => 'Fauteuils'],
-            ['name' => 'Méridiennes'],
-            ['name' => 'Bureaux'],
-            ['name' => 'Lits'],
-            ['name' => 'Armoires'],
+            ['name' => 'chairs'],
+            ['name' => 'sideboards'],
+            ['name' => 'china cabinets'],
+            ['name' => 'shelves'],
+            ['name' => 'bookcases'],
+            ['name' => 'sofas'],
+            ['name' => 'armchairs'],
+            ['name' => 'chaise lounges'],
+            ['name' => 'desks'],
+            ['name' => 'beds'],
+            ['name' => 'wardrobes'],
         ];
 
         foreach ($categories as $c) {

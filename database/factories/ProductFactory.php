@@ -17,15 +17,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(3, true),
-            'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomFloat(2, 10, 2000),
-            'stock' => $this->faker->numberBetween(0, 100),
-            'isPinned' => $this->faker->boolean(10),
-            // Les fk seront assignées dans le seeder
-            'color_id' => null,
-            'category_id' => null,
-            'promotion' => $this->faker->optional(0.2)->numberBetween(5, 50),
+            //  
         ];
     }
 }
