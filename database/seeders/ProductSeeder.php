@@ -16,8 +16,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // Récupère toutes les images du dossier 'products/product'
-        $productImages = Storage::disk('public')->files('products/product');
         $folders = ['banner', 'feature_small', 'feature_large', 'offer', 'product'];
 
         // Fonction pour générer un set d’images selon les dossiers

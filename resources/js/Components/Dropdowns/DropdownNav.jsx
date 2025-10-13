@@ -7,6 +7,7 @@ export default function DropdownNav({
     label = "",
     image = null,
     options = [],
+    // variable to adjust the position of the dropdown menu
     auth = false,
     role = "user",
 }) {

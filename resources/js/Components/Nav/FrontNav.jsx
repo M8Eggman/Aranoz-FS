@@ -62,6 +62,19 @@ export default function BackNav() {
         },
     ];
 
+    const guestOptions = [
+        {
+            type: "link",
+            route: "login",
+            text: "Log In",
+        },
+        {
+            type: "link",
+            route: "register",
+            text: "Register",
+        },
+    ];
+
     return (
         <nav
             className={`${styles.nav} ${isAuthPage ? styles.navAuth : ""} ${
@@ -76,13 +89,13 @@ export default function BackNav() {
                     <VscThreeBars />
                 </button>
                 <Link className={styles.brand} href={route("home")}>
-                    Aranoz .
+                    Aranoz.
                 </Link>
             </div>
             <ul
-                className={`${styles.menu} ${isAuthPage ? styles.menuAuth : ""} ${styles.menuFront} ${
-                    menuOpen ? styles.menuOpen : ""
-                }`}
+                className={`${styles.menu} ${
+                    isAuthPage ? styles.menuAuth : ""
+                } ${styles.menuFront} ${menuOpen ? styles.menuOpen : ""}`}
             >
                 {navItems
                     .filter((item) => !item.roles || item.roles?.includes(role))
@@ -118,17 +131,11 @@ export default function BackNav() {
                         options={authOptions}
                     />
                 ) : (
-                    <>
-                        <Link href={route("login")} className={styles.login}>
-                            Log in
-                        </Link>
-                        <Link
-                            href={route("register")}
-                            className={styles.register}
-                        >
-                            Register
-                        </Link>
-                    </>
+                    <DropdownNav
+                        label="Account"
+                        auth={true}
+                        options={guestOptions}
+                    />
                 )}
             </div>
         </nav>

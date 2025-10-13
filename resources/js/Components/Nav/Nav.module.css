@@ -3,17 +3,17 @@
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: var(--space-sm) var(--space-xs);
+    justify-content: space-between;
+    padding: var(--space-sm);
     font-family: sans-serif;
     gap: var(--space-md);
     z-index: 50;
 }
 
+/* couleur de la nav selon si on est dans une page publique ou privée */
 .navFront {
     background: var(--blue);
 }
-
 .navBack {
     background: var(--rose-pale);
 }
@@ -46,10 +46,11 @@
 .brand {
     white-space: nowrap;
     font-weight: bold;
-    font-size: var(--font-lg);
+    font-size: var(--font-2xl);
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+    font-weight: 900;
 }
 
 .label {
@@ -78,10 +79,6 @@
     gap: var(--gap-sm);
 }
 
-.actions > * {
-    flex: 1 1;
-}
-
 .logout {
     background: var(--pink-red);
     color: white;
@@ -104,47 +101,7 @@
     cursor: pointer;
 }
 
-.login,
-.register {
-    max-width: 150px;
-    white-space: nowrap;
-    display: inline-block;
-    padding: var(--gap-sm) var(--space-lg);
-    border-radius: 50px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.3s ease;
-    font-size: var(--font-sm);
-}
-
-.login {
-    background-color: transparent;
-    border: 1px solid var(--charcoal);
-    color: var(--charcoal);
-}
-
-.login:hover {
-    background-color: var(--white);
-}
-
-.register {
-    background-color: var(--pink-red);
-    color: var(--white);
-}
-
-.register:hover {
-    background-color: var(--dark-pink);
-}
-
 @media screen and (max-width: 1400px) {
-    .nav {
-        justify-content: space-between;
-        padding: var(--space-md) var(--space-lg);
-    }
-
     .brandContainer {
         position: relative;
         display: flex;

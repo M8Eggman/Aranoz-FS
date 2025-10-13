@@ -1,6 +1,9 @@
 .dropdown {
     position: relative;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xs);
 }
 
 .trigger {
@@ -10,7 +13,6 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-xs);
-    padding: var(--space-xs);
     transition: 200ms ease;
 }
 
@@ -82,7 +84,7 @@
     backdrop-filter: brightness(90%);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
     .content {
         left: 0;
     }

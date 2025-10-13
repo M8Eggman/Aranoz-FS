@@ -2,10 +2,9 @@
     display: flex;
     align-items: center;
     background: var(--white);
-    border-radius: var(--space-md);
+    border-radius: var(--space-sm);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     padding: var(--space-md) var(--space-lg);
-    margin: var(--space-sm);
     min-width: 180px;
     transition: box-shadow 0.2s;
 }

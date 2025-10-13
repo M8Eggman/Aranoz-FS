@@ -100,35 +100,45 @@ export default function AdminHome({
         },
     ];
 
+    const statCards = [
+        { icon: FaUsers, title: "Users", value: usersCount },
+        { icon: FaShoppingCart, title: "Orders", value: ordersCount },
+        { icon: FaTags, title: "Products", value: productsCount },
+        {
+            icon: FaEnvelope,
+            title: "Unread Mails",
+            value: unreadMailsCount,
+            roles: ["admin", "agent"],
+        },
+    ];
+
     return (
         <>
             <AdminHeader title="Admin Dashboard" />
             <section className={styles.container}>
                 <h3>Statistics</h3>
                 <div className={styles.cardContainer}>
-                    <StatCard icon={FaUsers} title="Users" value={usersCount} />
-                    <StatCard
-                        icon={FaShoppingCart}
-                        title="Orders"
-                        value={ordersCount}
-                    />
-                    <StatCard
-                        icon={FaTags}
-                        title="Products"
-                        value={productsCount}
-                    />
-                    <StatCard
-                        icon={FaEnvelope}
-                        title="Unread Mails"
-                        value={unreadMailsCount}
-                    />
+                    {statCards
+                        .filter(
+                            (card) => !card.roles || card.roles.includes(role)
+                        )
+                        .map((card, i) => (
+                            <StatCard
+                                key={i}
+                                icon={card.icon}
+                                title={card.title}
+                                value={card.value}
+                            />
+                        ))}
                 </div>
             </section>
             <section className={styles.container}>
                 <h3>Quick Access</h3>
                 <div className={styles.cardContainer}>
                     {quickAccessCards
-                        .filter((card) => card.roles.includes(role))
+                        .filter(
+                            (card) => !card.roles || card.roles.includes(role)
+                        )
                         .map((card, i) => (
                             <QuickAccessCard
                                 key={i}
