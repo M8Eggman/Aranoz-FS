@@ -3,8 +3,16 @@ import BackLayout from "@/Layouts/BackLayout";
 import AdminHeader from "@/Pages/Admin/partials/Header/AdminHeader";
 import QuickAccessCard from "@/Components/Cards/QuickAccessCard";
 import styles from "./Home.module.css";
+import StatCard from "@/Components/Cards/StatCard";
+import { FaUsers, FaShoppingCart, FaTags, FaEnvelope } from "react-icons/fa";
 
-export default function AdminHome({ auth }) {
+export default function AdminHome({
+    auth,
+    usersCount,
+    ordersCount,
+    productsCount,
+    unreadMailsCount,
+}) {
     const role = auth.user?.role?.name;
 
     const quickAccessCards = [
@@ -95,6 +103,27 @@ export default function AdminHome({ auth }) {
     return (
         <>
             <AdminHeader title="Admin Dashboard" />
+            <section className={styles.container}>
+                <h3>Statistics</h3>
+                <div className={styles.cardContainer}>
+                    <StatCard icon={FaUsers} title="Users" value={usersCount} />
+                    <StatCard
+                        icon={FaShoppingCart}
+                        title="Orders"
+                        value={ordersCount}
+                    />
+                    <StatCard
+                        icon={FaTags}
+                        title="Products"
+                        value={productsCount}
+                    />
+                    <StatCard
+                        icon={FaEnvelope}
+                        title="Unread Mails"
+                        value={unreadMailsCount}
+                    />
+                </div>
+            </section>
             <section className={styles.container}>
                 <h3>Quick Access</h3>
                 <div className={styles.cardContainer}>
