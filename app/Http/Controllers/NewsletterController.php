@@ -7,6 +7,7 @@ use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class NewsletterController extends Controller
 {
@@ -68,19 +69,30 @@ class NewsletterController extends Controller
 
     public function subscribe(Request $request)
     {
-        // Validation des champs
-        $request->validate([
-            'email' => 'required|email|max:255|unique:newsletters,email',
-        ], [
-            'email.unique' => 'This email is already subscribed.',
-        ]);
+        $email = $request->user()?->email ?? $request->email;
+
+        // Si pas connecté → validation standard
+        if (!$request->user()) {
+            $request->validate([
+                'email' => 'required|email|max:255|unique:newsletters,email',
+            ], [
+                'email.unique' => 'This email is already subscribed.',
+            ]);
+        } else {
+            // Si connecté, vérifier doublon manuellement
+            if (Newsletter::where('email', $email)->exists()) {
+                throw ValidationException::withMessages([
+                    'email' => 'You are already subscribed to the newsletter.',
+                ]);
+            }
+        }
 
         // Récupère l'utilisateur connecté (s'il existe)
         $user = Auth::user();
 
         // Crée l'abonnement avec ou sans user_id
         Newsletter::create([
-            'email' => $request->email,
+            'email' => $email,
             'user_id' => $user?->id,
         ]);
 

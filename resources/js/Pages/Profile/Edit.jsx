@@ -10,6 +10,8 @@ import DangerButton from "@/Components/DangerButton";
 import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
+import { Input } from "postcss";
+import InputSuccess from "@/Components/InputSuccess";
 
 export default function Edit({ status, subscribed }) {
     console.log(subscribed);
@@ -48,6 +50,8 @@ export default function Edit({ status, subscribed }) {
     const handleProfileSubmit = (e) => {
         e.preventDefault();
         router.patch(route("profile.update"), profile, {
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 setProfileStatus("Profile updated!");
                 setProfileError({});
@@ -65,6 +69,8 @@ export default function Edit({ status, subscribed }) {
     const handlePasswordSubmit = (e) => {
         e.preventDefault();
         router.put(route("password.update"), passwords, {
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 setPasswordStatus("Password updated!");
                 setPasswordError({});
@@ -83,6 +89,8 @@ export default function Edit({ status, subscribed }) {
         e.preventDefault();
         router.delete(route("profile.destroy"), {
             data: { password: deletePassword },
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 setDeleteStatus("Account deleted!");
                 setDeleteError("");
@@ -102,6 +110,8 @@ export default function Edit({ status, subscribed }) {
             route("newsletter.subscribe"),
             { email: user.email },
             {
+                preserveScroll: true,
+                preserveState: true,
                 onSuccess: () =>
                     setNewsletterStatus(
                         "Inscription à la newsletter réussie !"
@@ -122,6 +132,8 @@ export default function Edit({ status, subscribed }) {
             route("newsletter.unsubscribe"),
             { email: user.email },
             {
+                preserveScroll: true,
+                preserveState: true,
                 onSuccess: () =>
                     setNewsletterStatus(
                         "Désinscription de la newsletter réussie !"
@@ -183,9 +195,38 @@ export default function Edit({ status, subscribed }) {
                             Update Profile
                         </AdminButton>
                         {(status || profileStatus) && (
-                            <div className={styles.status}>
-                                {status || profileStatus}
-                            </div>
+                            <InputSuccess message={status || profileStatus} />
+                        )}
+                    </form>
+
+                    <form className={styles.card}>
+                        <h2 className={styles.cardTitle}>Newsletter</h2>
+                        <p>Gérez votre abonnement à la newsletter :</p>
+                        <div className={styles.inputGroup}>
+                            {subscribed ? (
+                                <AdminButton
+                                    type="button"
+                                    variant="delete"
+                                    className={`${styles.button} ${styles.buttonDanger}`}
+                                    onClick={handleUnsubscribe}
+                                >
+                                    Se désinscrire
+                                </AdminButton>
+                            ) : (
+                                <AdminButton
+                                    type="button"
+                                    className={styles.button}
+                                    onClick={handleSubscribe}
+                                >
+                                    S'inscrire
+                                </AdminButton>
+                            )}
+                        </div>
+                        {newsletterError && (
+                            <InputError message={newsletterError} />
+                        )}
+                        {newsletterStatus && (
+                            <InputSuccess message={newsletterStatus} />
                         )}
                     </form>
 
@@ -256,9 +297,7 @@ export default function Edit({ status, subscribed }) {
                             Update Password
                         </AdminButton>
                         {passwordStatus && (
-                            <div className={styles.status}>
-                                {passwordStatus}
-                            </div>
+                            <InputSuccess message={passwordStatus} />
                         )}
                     </form>
 
@@ -292,40 +331,7 @@ export default function Edit({ status, subscribed }) {
                             Delete Account
                         </AdminButton>
                         {deleteStatus && (
-                            <div className={styles.status}>{deleteStatus}</div>
-                        )}
-                    </form>
-
-                    <form className={styles.card}>
-                        <h2 className={styles.cardTitle}>Newsletter</h2>
-                        <p>Gérez votre abonnement à la newsletter :</p>
-                        <div className={styles.inputGroup}>
-                            {subscribed ? (
-                                <AdminButton
-                                    type="button"
-                                    variant="delete"
-                                    className={`${styles.button} ${styles.buttonDanger}`}
-                                    onClick={handleUnsubscribe}
-                                >
-                                    Se désinscrire
-                                </AdminButton>
-                            ) : (
-                                <AdminButton
-                                    type="button"
-                                    className={styles.button}
-                                    onClick={handleSubscribe}
-                                >
-                                    S'inscrire
-                                </AdminButton>
-                            )}
-                            {newsletterError && (
-                                <InputError message={newsletterError} />
-                            )}
-                        </div>
-                        {newsletterStatus && (
-                            <div className={styles.status}>
-                                {newsletterStatus}
-                            </div>
+                            <InputSuccess message={deleteStatus} />
                         )}
                     </form>
                 </div>

@@ -7,6 +7,11 @@
     cursor: pointer;
     white-space: nowrap;
     font-size: var(--font-sm);
+    transition: 300ms;
+}
+
+.button:hover {
+    filter: brightness(90%);
 }
 
 .buttonDelete {

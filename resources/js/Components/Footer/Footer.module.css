@@ -67,6 +67,10 @@
     border-radius: 8px;
     padding: 0.5rem 1.25rem;
 }
+.newsForm .newsButton.connected {
+    position: relative;
+    left: 0;
+}
 
 .newsForm .newsInput {
     width: 80%;

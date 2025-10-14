@@ -1,22 +1,33 @@
 import React from "react";
 import styles from "./Footer.module.css";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import Button from "../Form/Buttons/Button";
 import TextInput from "../Form/TextInput/TextInput";
 import { FaFacebookF, FaTwitter, FaBehance, FaHeart } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa6";
+import InputError from "../InputError";
+import InputSuccess from "../InputSuccess";
 
 export default function Footer() {
+    const { auth } = usePage().props;
+
     const { data, setData, post, processing, errors, reset, wasSuccessful } =
         useForm({
-            email: "",
+            email: auth?.user?.email || "",
         });
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Si l'utilisateur est connecté, on n'envoie pas de champ email (le backend le récupère via auth)
+        const payload = auth?.user ? {} : { email: data.email };
+
         post(route("newsletter.subscribe"), {
+            data: payload,
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
-                reset();
+                reset("email");
             },
         });
     };
@@ -64,37 +75,52 @@ export default function Footer() {
                     <div className={styles.colNewsletter}>
                         <h4 className={styles.title}>Newsletter</h4>
                         <p className={styles.newsText}>
-                            Abonnez-vous à notre newsletter pour recevoir les
-                            dernières actualités, offres spéciales et conseils
-                            directement dans votre boîte mail.
+                            Subscribe to our newsletter to receive the latest
+                            news, special offers and tips directly in your
+                            inbox.
                         </p>
+
                         <form
                             className={styles.newsForm}
                             onSubmit={handleSubmit}
                         >
-                            <TextInput
-                                type="email"
-                                className={styles.newsInput}
-                                placeholder="Email Address"
-                                value={data.email}
-                                onChange={(e) =>
-                                    setData("email", e.target.value)
-                                }
-                                required
-                            />
+                            {/* Si l'utilisateur n'est pas connecté, affiche le champ email */}
+                            {!auth?.user && (
+                                <TextInput
+                                    type="email"
+                                    className={styles.newsInput}
+                                    placeholder="Email Address"
+                                    value={data.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
+                                    required
+                                />
+                            )}
+
                             <Button
                                 type="submit"
-                                className={styles.newsButton}
+                                className={`${styles.newsButton} ${
+                                    auth?.user ? styles.connected : ""
+                                }`}
                                 disabled={processing}
                             >
-                                subscribe
+                                Subscribe
                             </Button>
                         </form>
+
                         {wasSuccessful && (
-                            <div className={styles.success}>Subscribed!</div>
+                            <InputSuccess
+                                message={"Successfully subscribed!"}
+                                className="mt-2"
+                            />
                         )}
+
                         {errors.email && (
-                            <div className={styles.error}>{errors.email}</div>
+                            <InputError
+                                message={errors.email}
+                                className="mt-2"
+                            />
                         )}
                     </div>
                 </div>
