@@ -51,6 +51,11 @@ export default function BackNav() {
         },
         {
             type: "link",
+            route: "profile.edit",
+            text: "Profile",
+        },
+        {
+            type: "link",
             route: "home",
             text: "View your last Order",
         },
@@ -81,62 +86,66 @@ export default function BackNav() {
                 styles.navFront
             }`}
         >
-            <div className={styles.brandContainer}>
-                <button
-                    className={styles.burger}
-                    onClick={() => setMenuOpen(!menuOpen)}
+            <div className={styles.container}>
+                <div className={styles.brandContainer}>
+                    <button
+                        className={styles.burger}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        <VscThreeBars />
+                    </button>
+                    <Link className={styles.brand} href={route("home")}>
+                        Aranoz.
+                    </Link>
+                </div>
+                <ul
+                    className={`${styles.menu} ${
+                        isAuthPage ? styles.menuAuth : ""
+                    } ${styles.menuFront} ${menuOpen ? styles.menuOpen : ""}`}
                 >
-                    <VscThreeBars />
-                </button>
-                <Link className={styles.brand} href={route("home")}>
-                    Aranoz.
-                </Link>
-            </div>
-            <ul
-                className={`${styles.menu} ${
-                    isAuthPage ? styles.menuAuth : ""
-                } ${styles.menuFront} ${menuOpen ? styles.menuOpen : ""}`}
-            >
-                {navItems
-                    .filter((item) => !item.roles || item.roles?.includes(role))
-                    .map((item, i) => (
-                        <li key={i}>
-                            {item.type === "link" ? (
-                                <Link
-                                    className={styles.link}
-                                    href={route(item.route)}
-                                    onClick={() => setMenuOpen(false)}
-                                >
-                                    {item.label}
-                                </Link>
-                            ) : (
-                                <DropdownNav
-                                    label={item.label}
-                                    options={item.options}
-                                />
-                            )}
-                        </li>
-                    ))}
-            </ul>
-            <div className={styles.actions}>
-                {auth?.user ? (
-                    <DropdownNav
-                        auth={true}
-                        label={auth.user.name}
-                        image={
-                            auth.user?.images?.small ||
-                            "/storage/users/templateU.png"
-                        }
-                        role={role}
-                        options={authOptions}
-                    />
-                ) : (
-                    <DropdownNav
-                        label="Account"
-                        auth={true}
-                        options={guestOptions}
-                    />
-                )}
+                    {navItems
+                        .filter(
+                            (item) => !item.roles || item.roles?.includes(role)
+                        )
+                        .map((item, i) => (
+                            <li key={i}>
+                                {item.type === "link" ? (
+                                    <Link
+                                        className={styles.link}
+                                        href={route(item.route)}
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ) : (
+                                    <DropdownNav
+                                        label={item.label}
+                                        options={item.options}
+                                    />
+                                )}
+                            </li>
+                        ))}
+                </ul>
+                <div className={styles.actions}>
+                    {auth?.user ? (
+                        <DropdownNav
+                            auth={true}
+                            label={auth.user.name}
+                            image={
+                                auth.user?.images?.small ||
+                                "/storage/users/templateU.png"
+                            }
+                            role={role}
+                            options={authOptions}
+                        />
+                    ) : (
+                        <DropdownNav
+                            label="Account"
+                            auth={true}
+                            options={guestOptions}
+                        />
+                    )}
+                </div>
             </div>
         </nav>
     );

@@ -125,56 +125,58 @@ export default function BackNav() {
 
     return (
         <nav className={`${styles.nav} ${styles.navBack}`}>
-            <div className={styles.brandContainer}>
-                <button
-                    className={styles.burger}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                >
-                    <VscThreeBars />
-                </button>
-                <Link className={styles.brand} href={route("admin.home")}>
-                    Admin <span className={styles.label}>{role}</span>
-                </Link>
-            </div>
+            <div className={styles.container}>
+                <div className={styles.brandContainer}>
+                    <button
+                        className={styles.burger}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        <VscThreeBars />
+                    </button>
+                    <Link className={styles.brand} href={route("admin.home")}>
+                        Admin <span className={styles.label}>{role}</span>
+                    </Link>
+                </div>
 
-            <ul
-                className={`${styles.menu} ${styles.menuBack} ${
-                    menuOpen ? styles.menuOpen : ""
-                }`}
-            >
-                {navItems
-                    .filter((item) => item.roles.includes(role))
-                    .map((item, i) => (
-                        <li key={i}>
-                            {item.type === "link" ? (
-                                <Link
-                                    className={styles.link}
-                                    href={route(item.route)}
-                                    onClick={() => setMenuOpen(false)}
-                                >
-                                    {item.label}
-                                </Link>
-                            ) : (
-                                <DropdownNav
-                                    label={item.label}
-                                    options={item.options}
-                                />
-                            )}
-                        </li>
-                    ))}
-            </ul>
-            <div className={styles.actions}>
-                {auth?.user && (
-                    <DropdownNav
-                        auth={true}
-                        label={auth.user.name}
-                        image={
-                            auth.user?.images?.small ||
-                            "/storage/users/templateU.png"
-                        }
-                        options={authOptions}
-                    />
-                )}
+                <ul
+                    className={`${styles.menu} ${styles.menuBack} ${
+                        menuOpen ? styles.menuOpen : ""
+                    }`}
+                >
+                    {navItems
+                        .filter((item) => item.roles.includes(role))
+                        .map((item, i) => (
+                            <li key={i}>
+                                {item.type === "link" ? (
+                                    <Link
+                                        className={styles.link}
+                                        href={route(item.route)}
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ) : (
+                                    <DropdownNav
+                                        label={item.label}
+                                        options={item.options}
+                                    />
+                                )}
+                            </li>
+                        ))}
+                </ul>
+                <div className={styles.actions}>
+                    {auth?.user && (
+                        <DropdownNav
+                            auth={true}
+                            label={auth.user.name}
+                            image={
+                                auth.user?.images?.small ||
+                                "/storage/users/templateU.png"
+                            }
+                            options={authOptions}
+                        />
+                    )}
+                </div>
             </div>
         </nav>
     );

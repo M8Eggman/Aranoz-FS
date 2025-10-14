@@ -51,6 +51,16 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        // Vérifie si c'est le dernier admin
+        if ($user->role && $user->role->name === 'admin') {
+            $adminCount = $user->whereHas('role', function ($q) {
+                $q->where('name', 'admin');
+            })->count();
+            if ($adminCount <= 1) {
+                return Redirect::back()->withErrors(['password' => "You can't delete your account because you are the last admin."]);
+            }
+        }
+
         Auth::logout();
 
         $user->delete();
