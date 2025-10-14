@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Newsletter;
 use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsletterController extends Controller
 {
@@ -62,5 +64,44 @@ class NewsletterController extends Controller
     public function destroy(Newsletter $newsletter)
     {
         //
+    }
+
+    public function subscribe(Request $request)
+    {
+        // Validation des champs
+        $request->validate([
+            'email' => 'required|email|max:255|unique:newsletters,email',
+        ], [
+            'email.unique' => 'This email is already subscribed.',
+        ]);
+
+        // Récupère l'utilisateur connecté (s'il existe)
+        $user = Auth::user();
+
+        // Crée l'abonnement avec ou sans user_id
+        Newsletter::create([
+            'email' => $request->email,
+            'user_id' => $user?->id,
+        ]);
+
+        // Redirige avec un message de succès
+        return back()->with('success', 'Successfully subscribed to the newsletter!');
+    }
+
+    public function unsubscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:255',
+        ]);
+
+        $newsletter = Newsletter::where('email', $request->email)->first();
+
+        if (!$newsletter) {
+            return back()->with('error', 'No subscription found for this email.');
+        }
+
+        $newsletter->delete();
+
+        return back()->with('success', 'Successfully unsubscribed from the newsletter.');
     }
 }

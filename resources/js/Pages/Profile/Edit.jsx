@@ -11,7 +11,9 @@ import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 
-export default function Edit({ status }) {
+export default function Edit({ status, subscribed }) {
+    console.log(subscribed);
+
     const user = usePage().props.auth?.user || {};
 
     // Profile form state
@@ -35,6 +37,10 @@ export default function Edit({ status }) {
     const [deletePassword, setDeletePassword] = useState("");
     const [deleteStatus, setDeleteStatus] = useState("");
     const [deleteError, setDeleteError] = useState("");
+
+    // Newsletter state
+    const [newsletterStatus, setNewsletterStatus] = useState("");
+    const [newsletterError, setNewsletterError] = useState("");
 
     const handleProfileChange = (e) => {
         setProfile({ ...profile, [e.target.name]: e.target.value });
@@ -86,6 +92,46 @@ export default function Edit({ status }) {
                 setDeleteError(errors.password);
             },
         });
+    };
+
+    const handleSubscribe = (e) => {
+        e.preventDefault();
+        setNewsletterStatus("");
+        setNewsletterError("");
+        router.post(
+            route("newsletter.subscribe"),
+            { email: user.email },
+            {
+                onSuccess: () =>
+                    setNewsletterStatus(
+                        "Inscription à la newsletter réussie !"
+                    ),
+                onError: (errors) =>
+                    setNewsletterError(
+                        errors.email || "Erreur lors de l'inscription."
+                    ),
+            }
+        );
+    };
+
+    const handleUnsubscribe = (e) => {
+        e.preventDefault();
+        setNewsletterStatus("");
+        setNewsletterError("");
+        router.post(
+            route("newsletter.unsubscribe"),
+            { email: user.email },
+            {
+                onSuccess: () =>
+                    setNewsletterStatus(
+                        "Désinscription de la newsletter réussie !"
+                    ),
+                onError: (errors) =>
+                    setNewsletterError(
+                        errors.email || "Erreur lors de la désinscription."
+                    ),
+            }
+        );
     };
 
     return (
@@ -247,6 +293,39 @@ export default function Edit({ status }) {
                         </AdminButton>
                         {deleteStatus && (
                             <div className={styles.status}>{deleteStatus}</div>
+                        )}
+                    </form>
+
+                    <form className={styles.card}>
+                        <h2 className={styles.cardTitle}>Newsletter</h2>
+                        <p>Gérez votre abonnement à la newsletter :</p>
+                        <div className={styles.inputGroup}>
+                            {subscribed ? (
+                                <AdminButton
+                                    type="button"
+                                    variant="delete"
+                                    className={`${styles.button} ${styles.buttonDanger}`}
+                                    onClick={handleUnsubscribe}
+                                >
+                                    Se désinscrire
+                                </AdminButton>
+                            ) : (
+                                <AdminButton
+                                    type="button"
+                                    className={styles.button}
+                                    onClick={handleSubscribe}
+                                >
+                                    S'inscrire
+                                </AdminButton>
+                            )}
+                            {newsletterError && (
+                                <InputError message={newsletterError} />
+                            )}
+                        </div>
+                        {newsletterStatus && (
+                            <div className={styles.status}>
+                                {newsletterStatus}
+                            </div>
                         )}
                     </form>
                 </div>

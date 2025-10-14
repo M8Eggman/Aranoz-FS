@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailingController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategorieController;
 use App\Http\Controllers\ProfileController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // 1 : Client (acheter, commenter blog, suivre commandes)
 // 2 : Community Manager (CRUD blog, créer tags)
@@ -28,9 +28,11 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::post('/mailings/store', [MailingController::class, 'store'])
     ->name('mailings.store');
 
-// Route pour s'inscrire a la newsletter
-Route::post('/newsletter/subscribe', [MailingController::class, 'subscribe'])
+// Route pour s'inscrire se désinscrire de la newsletter
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
     ->name('newsletter.subscribe');
+Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
+    ->name('newsletter.unsubscribe');
 
 // Routes pour les  clients
 Route::middleware(['auth', 'role:admin,client'])->group(function () {
