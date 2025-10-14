@@ -38,7 +38,6 @@ export default function Login() {
                         Welcome Back !<br />
                         Please sign in now
                     </h2>
-                    <p className={styles.subtitle}>Please Sign in now</p>
 
                     <form onSubmit={submit} className={styles.form}>
                         <TextInput

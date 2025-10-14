@@ -35,8 +35,10 @@ export default function Register() {
         <section className={styles.authSection}>
             <div className={styles.container}>
                 <div className={styles.rightPanel}>
-                    <h2 className={styles.title}>Welcome !</h2>
-                    <p className={styles.subtitle}>Please register now</p>
+                    <h2 className={styles.title}>
+                        Welcome !<br />
+                        Please register now
+                    </h2>
 
                     <form onSubmit={submit} className={styles.form}>
                         <div className={styles.inputGroup}>

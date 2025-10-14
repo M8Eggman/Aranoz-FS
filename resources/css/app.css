@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+    /* Basic colors */
     --white: #ffffff;
     --black: #000000;
 
@@ -12,6 +13,7 @@
 
     /* Complementary palette */
     --steel-blue: #5888b7;
+    --orange: #ff9966;
     --soft-mint: #ecf8f8;
     --dark-pink: #e24175;
     --muted-blue: #86a5c2;
@@ -19,6 +21,7 @@
     --golden-brown: #ac9758;
     --aqua-gray: #bcd9d4;
     --mauve-gray: #bba9b5;
+    --gray: #7e7e7e;
     --soft-gray: #d2cfd6;
     --sage: #c3c3a1;
     --rose-pale: #fdd4d4;

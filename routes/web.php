@@ -24,8 +24,13 @@ use Inertia\Inertia;
 
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::post('/mailings', [MailingController::class, 'store'])
+// Route pour envoyer un mail (contact form)
+Route::post('/mailings/store', [MailingController::class, 'store'])
     ->name('mailings.store');
+
+// Route pour s'inscrire a la newsletter
+Route::post('/newsletter/subscribe', [MailingController::class, 'subscribe'])
+    ->name('newsletter.subscribe');
 
 // Routes pour les  clients
 Route::middleware(['auth', 'role:admin,client'])->group(function () {

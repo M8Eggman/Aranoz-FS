@@ -8,7 +8,7 @@ export default function TextInput({
     onChange,
     onKeyDown,
     placeholder,
-    className,
+    className = "",
 }) {
     return (
         <input
@@ -18,7 +18,7 @@ export default function TextInput({
             onChange={onChange}
             onKeyDown={onKeyDown}
             placeholder={placeholder}
-            className={`${styles.input} ${className || ""}`}
+            className={`${styles.input} ${className}`}
         />
     );
 }

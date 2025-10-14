@@ -1,3 +1,125 @@
 .footer {
+    width: 100%;
+    background: var(--white);
+    padding: var(--space-lg) var(--space-sm);
+    font-family: inherit;
     margin-top: auto;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-md);
+}
+
+.col {
+    flex: 1;
+    min-width: 10rem;
+}
+
+.colNewsletter {
+    flex: 2;
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title {
+    font-size: var(--font-h6);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    color: var(--charcoal);
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--gray);
+    font-size: var(--font-md);
+    line-height: 2;
+}
+
+.newsText {
+    font-size: var(--font-md);
+    margin-bottom: var(--space-sm);
+}
+
+.newsForm {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    margin-bottom: var(--space-xs);
+    position: relative;
+    width: 100%;
+}
+
+.newsForm .newsButton {
+    position: absolute;
+    left: 70%;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+}
+
+.newsForm .newsInput {
+    width: 80%;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.success {
+    color: var(--auth-pink);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+.error {
+    color: var(--dark-pink);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.copyright {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    margin-top: var(--space-lg);
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+}
+
+.heart {
+    display: inline-block;
+    color: var(--pink-red);
+    position: relative;
+    top: 2px;
+}
+
+.aranoz {
+    color: var(--pink-red);
+    font-weight: 500;
+}
+
+.socials {
+    font-size: var(--font-md);
+    color: var(--gray);
+    display: flex;
+    gap: var(--gap-md);
+}
+
+.socials svg {
+    transition: color 0.3s ease;
+}
+
+.socials svg:hover {
+    color: var(--pink-red);
+    cursor: pointer;
 }

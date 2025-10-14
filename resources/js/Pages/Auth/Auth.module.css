@@ -21,7 +21,7 @@
 }
 
 .leftPanel {
-    background: linear-gradient(135deg, var(--dark-pink), var(--pink-red));
+    background: linear-gradient(to right, var(--pink-red), var(--orange));
     color: var(--white);
     padding: var(--space-xl);
 }
@@ -33,14 +33,13 @@
 .title {
     font-size: var(--font-h4);
     font-weight: 700;
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-md);
 }
 
 .subtitle {
     font-size: var(--font-md);
-    color: var(--white);
     margin-bottom: var(--space-md);
-}
+}   
 
 .form {
     width: 100%;
