@@ -3,18 +3,19 @@
 @tailwind utilities;
 
 :root {
-    /* Basic colors */
+    /* Couleurs Basic */
     --white: #ffffff;
     --black: #000000;
 
-    /* Brand colors */
+    /* Coleurs de la marques */
     --blue: #ecfdff;
     --pink-red: #ff3368;
 
-    /* Complementary palette */
+    /* Couleurs complémentaire */
     --steel-blue: #5888b7;
     --orange: #ff9966;
     --soft-mint: #ecf8f8;
+    --ice-white: #f7f9fd;
     --dark-pink: #e24175;
     --muted-blue: #86a5c2;
     --charcoal: #1b1b1d;

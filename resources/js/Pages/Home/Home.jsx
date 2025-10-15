@@ -1,8 +1,13 @@
 import FrontLayout from "@/Layouts/FrontLayout";
 import React from "react";
 import Carousel from "./Partials/Carousel";
+import FeaturedCategories from "./Partials/FeaturedCategories";
 
-export default function Home({ randomProducts = [], pinnedProducts = [] }) {
+export default function Home({
+    randomProducts = [],
+    pinnedProducts = [],
+    categories = [],
+}) {
     const source = [...pinnedProducts, ...randomProducts];
     const slides = source.map((p, i) => ({
         title: p.name,
@@ -14,6 +19,7 @@ export default function Home({ randomProducts = [], pinnedProducts = [] }) {
     return (
         <>
             <Carousel slides={slides} />
+            <FeaturedCategories categories={categories} />
         </>
     );
 }

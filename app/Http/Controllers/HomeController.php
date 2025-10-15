@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mailing;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductCategorie;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,19 @@ class HomeController extends Controller
         $randomProducts = Product::inRandomOrder()->take(4)->get();
         $pinnedProducts = Product::where('isPinned', true)->get();
 
-        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts'));
+        // Récupère les 4 premières catégories qui ont un produit
+        $categories = ProductCategorie::has('products')->take(4)->get();
+
+        // Ajoute la première image du premier produit de la catégorie
+        $categories->map(function ($category) {
+            $product = $category->products->first();
+            $category->image = $product && !empty($product->images_main['product'])
+                ? $product->images_main['product']
+                : '/storage/products/product/templateP.png';
+            return $category;
+        });
+
+        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories'));
     }
 
     public function admin_home()
