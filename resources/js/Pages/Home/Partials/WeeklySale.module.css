@@ -4,9 +4,11 @@
 }
 
 .container {
+    display: flex;
+    gap: var(--gap-2xl);
+    align-items: center;
     max-width: min(1200px, 95vw);
     margin: 0 auto;
-    text-align: center;
 }
 
 .title {
@@ -18,7 +20,6 @@
 
 .countdown {
     display: flex;
-    justify-content: center;
     gap: var(--gap-2xl);
     margin-bottom: var(--space-xl);
 }
@@ -41,7 +42,6 @@
 .form {
     display: flex;
     max-width: 40rem;
-    margin: 0 auto;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -65,8 +65,17 @@
 }
 
 @media (max-width: 576px) {
+    .image {
+        display: none;
+    }
+
+    .rightSide {
+        text-align: center;
+    }
+    
     .countdown {
-        gap: var(--gap-md);
+        justify-content: space-around;
+        gap: 0;
     }
 
     .unit > strong {

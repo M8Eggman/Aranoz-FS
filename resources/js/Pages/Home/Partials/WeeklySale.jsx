@@ -47,66 +47,76 @@ export default function WeeklySale({ until }) {
     return (
         <section className={styles.wrapper}>
             <div className={styles.container}>
-                <h3 className={styles.title}>
-                    Weekly Sale on 60% Off All Products
-                </h3>
-
-                {/* Compte à rebours */}
-                <div className={styles.countdown}>
-                    <div className={styles.unit}>
-                        <span>DAYS</span>
-                        <strong>{String(days).padStart(2, "0")}</strong>
-                    </div>
-                    <div className={styles.unit}>
-                        <span>HOURS</span>
-                        <strong>{String(hours).padStart(2, "0")}</strong>
-                    </div>
-                    <div className={styles.unit}>
-                        <span>MINUTES</span>
-                        <strong>{String(minutes).padStart(2, "0")}</strong>
-                    </div>
-                    <div className={styles.unit}>
-                        <span>SECONDS</span>
-                        <strong>{String(seconds).padStart(2, "0")}</strong>
-                    </div>
+                <div className={styles.image}>
+                    <img
+                        src="/storage/products/offer/product_12.png"
+                        alt=""
+                    />
                 </div>
+                <div className={styles.rightSide}>
+                    <h3 className={styles.title}>
+                        Weekly Sale on 60% Off All Products
+                    </h3>
 
-                <form onSubmit={submit} className={styles.form}>
-                    {!auth?.user && (
-                        <input
-                            type="email"
-                            placeholder="Enter Email Address"
-                            value={data.email}
-                            onChange={(e) => setData("email", e.target.value)}
-                            required
-                            className={styles.input}
+                    {/* Compte à rebours */}
+                    <div className={styles.countdown}>
+                        <div className={styles.unit}>
+                            <span>DAYS</span>
+                            <strong>{String(days).padStart(2, "0")}</strong>
+                        </div>
+                        <div className={styles.unit}>
+                            <span>HOURS</span>
+                            <strong>{String(hours).padStart(2, "0")}</strong>
+                        </div>
+                        <div className={styles.unit}>
+                            <span>MINUTES</span>
+                            <strong>{String(minutes).padStart(2, "0")}</strong>
+                        </div>
+                        <div className={styles.unit}>
+                            <span>SECONDS</span>
+                            <strong>{String(seconds).padStart(2, "0")}</strong>
+                        </div>
+                    </div>
+
+                    <form onSubmit={submit} className={styles.form}>
+                        {!auth?.user && (
+                            <input
+                                type="email"
+                                placeholder="Enter Email Address"
+                                value={data.email}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                                required
+                                className={styles.input}
+                            />
+                        )}
+
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${
+                                auth?.user ? styles.connected : ""
+                            }`}
+                        >
+                            {processing ? (
+                                <>
+                                    <Loader size="16px" /> Inscription...
+                                </>
+                            ) : (
+                                "BOOK NOW"
+                            )}
+                        </button>
+                    </form>
+                    {recentlySuccessful && (
+                        <InputSuccess
+                            message="Successfully subscribed!"
+                            className="mt-3"
                         />
                     )}
-
-                    <button
-                        type="submit"
-                        className={`${styles.button} ${
-                            auth?.user ? styles.connected : ""
-                        }`}
-                    >
-                        {processing ? (
-                            <>
-                                <Loader size="16px" /> Inscription...
-                            </>
-                        ) : (
-                            "BOOK NOW"
-                        )}
-                    </button>
-                </form>
-                {recentlySuccessful && (
-                    <InputSuccess
-                        message="Successfully subscribed!"
-                        className="mt-3"
-                    />
-                )}
-                {errors.email && (
-                    <InputError message={errors.email} className="mt-3" />
-                )}
+                    {errors.email && (
+                        <InputError message={errors.email} className="mt-3" />
+                    )}
+                </div>
             </div>
         </section>
     );

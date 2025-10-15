@@ -12,8 +12,7 @@ export default function Home({
     products = [],
     weeklySaleEndsAt,
 }) {
-    const source = [...pinnedProducts, ...randomProducts];
-    const slides = source.map((p, i) => ({
+    const slides = [...pinnedProducts, ...randomProducts].map((p, i) => ({
         title: p.name,
         description: p.description,
         number: String(i + 1).padStart(2, "0"),
