@@ -49,21 +49,20 @@
 
 .newsText {
     font-size: var(--font-md);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
 }
 
 .newsForm {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-    margin-bottom: var(--space-xs);
     position: relative;
     width: 100%;
 }
 
 .newsForm .newsButton {
     position: absolute;
-    left: 70%;
+    right: 0;
     border-radius: 8px;
     padding: 0.5rem 1.25rem;
 }
@@ -73,7 +72,7 @@
 }
 
 .newsForm .newsInput {
-    width: 80%;
+    width: calc(100% - 60px);
     border-radius: 8px;
     padding: 1rem;
 }
@@ -126,4 +125,39 @@
 .socials svg:hover {
     color: var(--pink-red);
     cursor: pointer;
+}
+
+@media screen and (max-width: 375px) {
+    .grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--gap-md);
+    }
+
+    .col {
+        min-width: initial;
+    }
+
+    .colNewsletter {
+        min-width: initial;
+    }
+
+    .newsForm {
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .newsForm .newsButton {
+        position: relative;
+        left: initial;
+        right: initial;
+        width: 100%;
+        height: 2.5rem;
+    }
+
+    .newsForm .newsInput {
+        width: 100%;
+        height: 2.5rem;
+    }
 }

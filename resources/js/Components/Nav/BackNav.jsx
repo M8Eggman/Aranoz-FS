@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Nav.module.css";
 import { Link, router, usePage } from "@inertiajs/react";
 import DropdownNav from "../Dropdowns/DropdownNav";

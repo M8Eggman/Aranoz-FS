@@ -5,16 +5,18 @@ import { Link } from "@inertiajs/react";
 
 export default function DropdownNav({
     label = "",
+    icon = null,
     image = null,
     options = [],
+    role = "user",
     // variable to adjust the position of the dropdown menu
     auth = false,
-    role = "user",
 }) {
     return (
         <div className={styles.dropdown}>
             <div className={styles.trigger}>
                 {image && <img className={styles.image} src={image} alt="" />}
+                {icon && icon}
                 {label} <IoMdArrowDropdown className="inline-block" />
             </div>
             <div

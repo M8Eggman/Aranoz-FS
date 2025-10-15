@@ -283,25 +283,6 @@ class ProductSeeder extends Seeder
             ],
             [
                 'filename' => 'product_14.png',
-                'name' => 'Blue Eames Armchair',
-                'description' => "Classic blue armchair with molded seat and light wooden legs. Perfect for modern interiors, dining rooms, or creative spaces.",
-                'category' => $categories['armchairs']->id ?? $categories->first()->id,
-                'color' => $colors['blue']->id ?? $colors->first()->id,
-                'specs' => [
-                    'width' => 62,
-                    'height' => 80,
-                    'depth' => 60,
-                    'weight' => 6,
-                    'quality_checking' => true,
-                    'freshness_duration' => null,
-                    'packaging' => 'Box',
-                    'content' => 1,
-                ],
-                'price' => 139,
-                'stock' => 14,
-            ],
-            [
-                'filename' => 'product_15.png',
                 'name' => 'Curved Orange Lounge Chair',
                 'description' => "Unique orange lounge chair with a curved, modern design and metal base. Adds a designer touch to any living room or lounge area.",
                 'category' => $categories['chaise lounges']->id ?? $categories->first()->id,
@@ -330,6 +311,9 @@ class ProductSeeder extends Seeder
                 $promotion = 5 * rand(1, 50 / 5) :
                 $promotion = null;
 
+            // 30% de chance d'être pinned
+            $isPinned = rand(1, 100) <= 10;
+
             $product = new Product();
             $product->name = $data['name'];
             $product->description = $data['description'];
@@ -342,6 +326,7 @@ class ProductSeeder extends Seeder
             $product->category_id = $data['category'];
             $product->color_id = $data['color'];
             $product->promotion = $promotion;
+            $product->isPinned = $isPinned;
             $product->save();
 
             Specification::create([

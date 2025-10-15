@@ -1,0 +1,144 @@
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.wrapper {
+    width: 100%;
+    position: relative;
+    padding-block: var(--space-3xl) var(--space-5xl);
+    background-color: var(--blue);
+}
+
+.slide {
+    max-width: min(1400px, 95vw);
+    margin: 0 auto;
+    display: flex;
+    gap: var(--gap-5xl);
+    animation: slideIn 600ms ease both;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: var(--font-h1);
+    font-weight: 800;
+    color: var(--charcoal);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-md) 0;
+}
+
+.description {
+    font-size: var(--font-md);
+    color: var(--gray);
+    max-width: 42ch;
+}
+
+.visual {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.image {
+    max-width: 20rem;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.12));
+}
+
+.index {
+    position: absolute;
+    right: var(--space-2xl);
+    font-weight: 800;
+    font-size: clamp(4rem, 12vw, 8rem);
+    color: rgba(27, 27, 29, 0.06);
+}
+
+.controls {
+    position: absolute;
+    right: var(--space-2xl);
+    bottom: 0;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+}
+
+.navBtn {
+    padding: var(--space-lg) var(--space-3xl);
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    transition: color 300ms ease, background-color 300ms ease;
+    &:first-of-type {
+        padding-right: var(--space-lg);
+    }
+    &:last-of-type {
+        padding-left: var(--space-lg);
+    }
+}
+
+.sep {
+    color: var(--soft-gray);
+}
+
+@media (max-width: 900px) {
+    .wrapper {
+        width: 100%;
+        position: relative;
+        padding-bottom: 0;
+        background-color: var(--blue);
+    }
+
+    .content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .slide {
+        flex-direction: column;
+        gap: var(--gap-xl);
+    }
+
+    .image {
+        width: 100%;
+    }
+
+    .visual {
+        justify-content: center;
+    }
+
+    .controls {
+        position: relative;
+        inset: initial;
+        justify-content: center;
+        margin-top: var(--space-2xl);
+    }
+
+    .navBtn {
+        padding: var(--space-lg) 0;
+        flex: 1;
+        &:first-of-type {
+            padding-right: 0;
+        }
+        &:last-of-type {
+            padding-left: 0;
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .index {
+        display: none;
+    }
+}

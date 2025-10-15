@@ -15,10 +15,10 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $canLogin = Route::has('login');
-        $canRegister = Route::has('register');
+        $randomProducts = Product::inRandomOrder()->take(4)->get();
+        $pinnedProducts = Product::where('isPinned', true)->get();
 
-        return Inertia::render('Home', compact('canLogin', 'canRegister'));
+        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts'));
     }
 
     public function admin_home()

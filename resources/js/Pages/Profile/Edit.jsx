@@ -7,11 +7,11 @@ import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import NewsletterForm from "./Partials/NewsletterForm";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 
-export default function Edit({ status, subscribed }) {
+export default function EditProfile({ status, subscribed }) {
     const user = usePage().props.auth?.user || {};
 
     return (
-        <FrontLayout>
+        <>
             <Head title="Profile" />
             <div className={styles.container}>
                 <div className={styles.center}>
@@ -21,6 +21,8 @@ export default function Edit({ status, subscribed }) {
                     <DeleteUserForm />
                 </div>
             </div>
-        </FrontLayout>
+        </>
     );
 }
+
+EditProfile.layout = (page) => <FrontLayout>{page}</FrontLayout>;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import styles from "./Nav.module.css";
 import { Link, router, usePage } from "@inertiajs/react";
 import DropdownNav from "../Dropdowns/DropdownNav";
 import { VscThreeBars } from "react-icons/vsc";
+import { CiUser } from "react-icons/ci";
 
 export default function BackNav() {
     const { url } = usePage();
@@ -140,7 +141,7 @@ export default function BackNav() {
                         />
                     ) : (
                         <DropdownNav
-                            label="Account"
+                            icon={<CiUser size={24} className="font-bold"/>}
                             auth={true}
                             options={guestOptions}
                         />
