@@ -1,6 +1,6 @@
 .wrapper {
     background: var(--white);
-    padding-block: var(--space-5xl);
+    padding-top: var(--space-5xl);
 }
 
 .container {

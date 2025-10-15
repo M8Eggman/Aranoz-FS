@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
         $randomProducts = Product::inRandomOrder()->take(4)->get();
         $pinnedProducts = Product::where('isPinned', true)->get();
+        $products = Product::all();
 
         // Récupère les 4 premières catégories qui ont un produit
         $categories = ProductCategorie::has('products')->take(4)->get();
@@ -31,7 +32,7 @@ class HomeController extends Controller
             return $category;
         });
 
-        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories'));
+        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories', 'products'));
     }
 
     public function admin_home()

@@ -93,10 +93,10 @@ class ProductSeeder extends Seeder
             ],
             [
                 'filename' => 'product_4.png',
-                'name' => 'Red Design Chair',
-                'description' => "A modern red chair with a sleek molded seat and light wooden legs. Adds a bold touch to any dining or office space. Durable and comfortable for everyday use.",
+                'name' => 'Green Metal Chair',
+                'description' => "Contemporary green chair with a molded seat and sturdy metal legs. Ideal for modern kitchens, dining rooms, or creative spaces.",
                 'category' => $categories['chairs']->id ?? $categories->first()->id,
-                'color' => $colors['red']->id ?? $colors->first()->id,
+                'color' => $colors['green']->id ?? $colors->first()->id,
                 'specs' => [
                     'width' => 47,
                     'height' => 83,
@@ -131,10 +131,10 @@ class ProductSeeder extends Seeder
             ],
             [
                 'filename' => 'product_6.png',
-                'name' => 'Green Metal Chair',
-                'description' => "Contemporary green chair with a molded seat and sturdy metal legs. Ideal for modern kitchens, dining rooms, or creative spaces.",
+                'name' => 'Red Design Chair',
+                'description' => "A modern red chair with a sleek molded seat and light wooden legs. Adds a bold touch to any dining or office space. Durable and comfortable for everyday use.",
                 'category' => $categories['chairs']->id ?? $categories->first()->id,
-                'color' => $colors['green']->id ?? $colors->first()->id,
+                'color' => $colors['red']->id ?? $colors->first()->id,
                 'specs' => [
                     'width' => 47,
                     'height' => 83,
@@ -207,22 +207,22 @@ class ProductSeeder extends Seeder
             ],
             [
                 'filename' => 'product_10.png',
-                'name' => 'Round Turquoise Ottoman',
-                'description' => "Plush round ottoman in turquoise fabric with button tufting. Ideal as a footrest or extra seating in living rooms and bedrooms.",
-                'category' => $categories['armchairs']->id ?? $categories->first()->id,
-                'color' => $colors['turquoise']->id ?? $colors->first()->id,
+                'name' => 'Wicker Lounge Chair',
+                'description' => "Natural wicker lounge chair with a round shape and white cushion. Perfect for relaxing in sunrooms, patios, or cozy corners.",
+                'category' => $categories['chaise lounges']->id ?? $categories->first()->id,
+                'color' => $colors['brown']->id ?? $colors->first()->id,
                 'specs' => [
-                    'width' => 50,
-                    'height' => 45,
-                    'depth' => 50,
-                    'weight' => 7,
+                    'width' => 80,
+                    'height' => 75,
+                    'depth' => 80,
+                    'weight' => 10,
                     'quality_checking' => true,
                     'freshness_duration' => null,
                     'packaging' => 'Box',
                     'content' => 1,
                 ],
-                'price' => 89,
-                'stock' => 18,
+                'price' => 179,
+                'stock' => 8,
             ],
             [
                 'filename' => 'product_11.png',
@@ -245,22 +245,22 @@ class ProductSeeder extends Seeder
             ],
             [
                 'filename' => 'product_12.png',
-                'name' => 'Wicker Lounge Chair',
-                'description' => "Natural wicker lounge chair with a round shape and white cushion. Perfect for relaxing in sunrooms, patios, or cozy corners.",
-                'category' => $categories['chaise lounges']->id ?? $categories->first()->id,
-                'color' => $colors['brown']->id ?? $colors->first()->id,
+                'name' => 'Round Turquoise Ottoman',
+                'description' => "Plush round ottoman in turquoise fabric with button tufting. Ideal as a footrest or extra seating in living rooms and bedrooms.",
+                'category' => $categories['armchairs']->id ?? $categories->first()->id,
+                'color' => $colors['turquoise']->id ?? $colors->first()->id,
                 'specs' => [
-                    'width' => 80,
-                    'height' => 75,
-                    'depth' => 80,
-                    'weight' => 10,
+                    'width' => 50,
+                    'height' => 45,
+                    'depth' => 50,
+                    'weight' => 7,
                     'quality_checking' => true,
                     'freshness_duration' => null,
                     'packaging' => 'Box',
                     'content' => 1,
                 ],
-                'price' => 179,
-                'stock' => 8,
+                'price' => 89,
+                'stock' => 18,
             ],
             [
                 'filename' => 'product_13.png',
@@ -306,13 +306,10 @@ class ProductSeeder extends Seeder
             $baseImage = $data['filename'];
 
             // 30% de chance d'avoir une promotion, sinon null
-            rand(1, 100) <= 30 ?
-                // Promotion par palier de 5 entre 5 et 50
-                $promotion = 5 * rand(1, 50 / 5) :
-                $promotion = null;
+            $promotion = rand(1, 100) <= 30 ? 5 * rand(1, 10) : null; 
 
             // 30% de chance d'être pinned
-            $isPinned = rand(1, 100) <= 10;
+            $isPinned = rand(1, 100) <= 20;
 
             $product = new Product();
             $product->name = $data['name'];
@@ -322,6 +319,7 @@ class ProductSeeder extends Seeder
             $product->images_left_side = makeImageSet($baseImage, $folders);
             $product->images_right_side = makeImageSet($baseImage, $folders);
             $product->price = $data['price'];
+            $product->final_price = (float) $data['price'] * (1 - (int) $promotion / 100);
             $product->stock = $data['stock'];
             $product->category_id = $data['category'];
             $product->color_id = $data['color'];

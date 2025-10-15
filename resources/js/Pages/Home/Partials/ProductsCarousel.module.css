@@ -1,0 +1,131 @@
+.wrapper {
+    background: var(--white);
+    padding-block: var(--space-5xl);
+}
+
+.headerRow {
+    max-width: min(1400px, 95vw);
+    margin: 0 auto var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heading {
+    font-size: var(--font-h3);
+    font-weight: 800;
+    color: var(--charcoal);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.navBtn {
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+    font-weight: 600;
+}
+
+.sep {
+    color: var(--soft-gray);
+}
+
+.viewport {
+    max-width: min(1400px, 95vw);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.track {
+    display: flex;
+    transition: transform 600ms ease;
+    will-change: transform;
+}
+
+.slide {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-md);
+    padding: var(--space-xs);
+}
+
+.card {
+    display: grid;
+    gap: var(--gap-sm);
+    transition: box-shadow 300ms ease;
+}
+
+.card:hover {
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cardImageWrap {
+    aspect-ratio: 1/1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.cardImageWrap img {
+    object-fit: contain;
+    object-position: center;
+}
+
+.cardFooter {
+    transition: transform 300ms ease;
+}
+
+.card:hover .cardFooter {
+    transform: translateX(1rem);
+}
+
+.cardTitle {
+    font-weight: 700;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-sm);
+    color: var(--charcoal);
+}
+
+.cardPrice {
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+}
+
+.priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: var(--gap-sm);
+}
+
+.oldPrice {
+    color: var(--gray);
+    text-decoration: line-through;
+    font-size: var(--font-sm);
+}
+
+.percent {
+    color: var(--gray);
+    font-size: var(--font-xs);
+}
+
+.newPrice {
+    color: var(--dark-pink);
+    font-weight: 700;
+    font-size: var(--font-sm);
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+    .slide {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 900px) {
+    .slide {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
