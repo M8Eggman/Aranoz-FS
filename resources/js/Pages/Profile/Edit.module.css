@@ -28,22 +28,8 @@
     margin-bottom: var(--space-sm);
 }
 
-.danger {
-    color: var(--dark-pink);
-}
-
 .inputGroup {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xs);
-}
-
-.label {
-    font-weight: 500;
-}
-
-.status {
-    color: #16a34a;
-    font-size: var(--font-sm);
-    margin-top: var(--space-xs);
 }
