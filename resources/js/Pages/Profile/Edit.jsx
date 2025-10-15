@@ -6,8 +6,14 @@ import UpdateProfileForm from "./Partials/UpdateProfileForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import NewsletterForm from "./Partials/NewsletterForm";
 import DeleteUserForm from "./Partials/DeleteUserForm";
+import WeeklySale from "../Home/Partials/WeeklySale";
+import WeeklySaleForm from "./Partials/WeeklySaleForm";
 
-export default function EditProfile({ status, subscribed }) {
+export default function EditProfile({
+    status,
+    subscribedNewsletter,
+    subscribedWeeklySale,
+}) {
     const user = usePage().props.auth?.user || {};
 
     return (
@@ -16,7 +22,11 @@ export default function EditProfile({ status, subscribed }) {
             <div className={styles.container}>
                 <div className={styles.center}>
                     <UpdateProfileForm status={status} user={user} />
-                    <NewsletterForm user={user} subscribed={subscribed} />
+                    <NewsletterForm
+                        user={user}
+                        subscribed={subscribedNewsletter}
+                    />
+                    <WeeklySaleForm user={user} subscribed={subscribedWeeklySale} />
                     <UpdatePasswordForm />
                     <DeleteUserForm />
                 </div>

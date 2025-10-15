@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeeklySaleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,12 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
     ->name('newsletter.subscribe');
 Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
     ->name('newsletter.unsubscribe');
+
+// Route pour s'inscrire se désinscrire de la weekly sale
+Route::post('/weekly-sales/subscribe', [WeeklySaleController::class, 'subscribe'])
+    ->name('weekly-sales.subscribe');
+Route::post('/weekly-sales/unsubscribe', [WeeklySaleController::class, 'unsubscribe'])
+    ->name('weekly-sales.unsubscribe');
 
 // Routes pour les  clients
 Route::middleware(['auth', 'role:admin,client'])->group(function () {

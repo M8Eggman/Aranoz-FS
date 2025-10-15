@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategorie;
 use App\Models\Tag;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,7 +33,11 @@ class HomeController extends Controller
             return $category;
         });
 
-        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories', 'products'));
+        // Compute end of the current week (upcoming Sunday 23:59:59) and pass ISO string
+        $now = Carbon::now();
+        $weeklySaleEndsAt = $now->copy()->next(Carbon::SUNDAY)->endOfDay()->toIso8601String();
+
+        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories', 'products', 'weeklySaleEndsAt'));
     }
 
     public function admin_home()

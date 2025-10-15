@@ -5,20 +5,20 @@ import InputSuccess from "@/Components/InputSuccess";
 import Loader from "@/Components/Loader/Loader";
 import styles from "../Edit.module.css";
 
-export default function NewsletterForm({ user, subscribed }) {
+export default function WeeklySaleForm({ user, subscribed }) {
     const { post, processing, errors, recentlySuccessful } = useForm({
         email: user.email || "",
     });
 
     const handleSubscribe = () => {
-        post(route("newsletter.subscribe"), {
+        post(route("weekly-sales.subscribe"), {
             preserveScroll: true,
             preserveState: true,
         });
     };
 
     const handleUnsubscribe = () => {
-        post(route("newsletter.unsubscribe"), {
+        post(route("weekly-sales.unsubscribe"), {
             preserveScroll: true,
             preserveState: true,
         });
@@ -26,8 +26,8 @@ export default function NewsletterForm({ user, subscribed }) {
 
     return (
         <form className={styles.card} onSubmit={(e) => e.preventDefault()}>
-            <h2 className={styles.cardTitle}>Newsletter</h2>
-            <p>Manage your newsletter subscription:</p>
+            <h2 className={styles.cardTitle}>Weekly Sale</h2>
+            <p>Manage your Weekly Sale subscription:</p>
 
             <div className={styles.inputGroup}>
                 {subscribed ? (
@@ -55,8 +55,7 @@ export default function NewsletterForm({ user, subscribed }) {
                     >
                         {processing ? (
                             <>
-                                <Loader size="16px" color="black" />{" "}
-                                Subscribing...
+                                <Loader size="16px" color="black" /> Subscribing...
                             </>
                         ) : (
                             "Subscribe"

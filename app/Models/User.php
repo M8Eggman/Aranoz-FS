@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Newsletter::class);
     }
+
+    public function weeklySale()
+    {
+        return $this->hasOne(WeeklySale::class);
+    }
 }

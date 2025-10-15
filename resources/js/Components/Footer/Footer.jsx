@@ -11,10 +11,17 @@ import InputSuccess from "../InputSuccess";
 export default function Footer() {
     const { auth } = usePage().props;
 
-    const { data, setData, post, processing, errors, reset, wasSuccessful } =
-        useForm({
-            email: auth?.user?.email || "",
-        });
+    const {
+        data,
+        setData,
+        post,
+        processing,
+        errors,
+        reset,
+        recentlySuccessful,
+    } = useForm({
+        email: auth?.user?.email || "",
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -109,7 +116,7 @@ export default function Footer() {
                             </Button>
                         </form>
 
-                        {wasSuccessful && (
+                        {recentlySuccessful && (
                             <InputSuccess
                                 message={"Successfully subscribed!"}
                                 className="mt-2"

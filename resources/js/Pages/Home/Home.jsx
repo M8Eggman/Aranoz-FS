@@ -3,12 +3,14 @@ import React from "react";
 import Carousel from "./Partials/Carousel";
 import FeaturedCategories from "./Partials/FeaturedCategories";
 import ProductsCarousel from "./Partials/ProductsCarousel";
+import WeeklySale from "./Partials/WeeklySale";
 
 export default function Home({
     randomProducts = [],
     pinnedProducts = [],
     categories = [],
     products = [],
+    weeklySaleEndsAt,
 }) {
     const source = [...pinnedProducts, ...randomProducts];
     const slides = source.map((p, i) => ({
@@ -23,6 +25,7 @@ export default function Home({
             <Carousel slides={slides} />
             <FeaturedCategories categories={categories} />
             <ProductsCarousel products={products} />
+            <WeeklySale until={weeklySaleEndsAt} />
         </>
     );
 }
