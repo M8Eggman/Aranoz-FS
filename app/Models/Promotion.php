@@ -15,8 +15,8 @@ class Promotion extends Model
         'percentage',
     ];
 
-    public function products()
+    public function orders()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Order::class);
     }
 }

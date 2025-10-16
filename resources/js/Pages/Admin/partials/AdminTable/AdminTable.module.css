@@ -29,13 +29,13 @@
 .table td {
     padding: var(--space-sm) var(--space-md);
     text-align: left;
-    white-space: nowrap;
 }
 
 .table th {
     background: var(--soft-mint);
     font-size: var(--font-md);
     font-weight: 600;
+    white-space: nowrap;
 }
 .table td {
     font-size: var(--font-sm);

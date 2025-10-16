@@ -24,10 +24,10 @@ class OrderSeeder extends Seeder
         $paymentMethods = ['check_payments', 'paypal'];
 
         foreach ($users as $user) {
-            $billingDetails = $user->billingDetail->load(['country','user'])->toArray();
+            $billingDetails = $user->billingDetail->load(['country', 'user'])->toArray();
 
             // 30% des commandes ont une promotion
-            $promo = fake()->boolean(30) && $promotions->count() > 0 ? $promotions->random() : null;
+            $promo = fake()->boolean(30) ? $promotions->random() : null;
 
             // Crée la commande sans order_number (pour avoir l'id)
             $order = Order::create([
@@ -39,6 +39,9 @@ class OrderSeeder extends Seeder
                 'user_id' => $user->id,
                 'billing_detail' => json_encode($billingDetails),
                 'payment_method' => $paymentMethods[fake()->numberBetween(0, 1)],
+                'promotion_percentage' => $promo ? $promo->percentage : null,
+                'promotion_name' => $promo ? $promo->name : null,
+                'promotion_id' => $promo ? $promo->id : null,
             ]);
 
             // Génère entre 1 et 4 order items

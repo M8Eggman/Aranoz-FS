@@ -12,7 +12,8 @@ export default function Show({ order }) {
     const orderInfo = order;
     const billingDetail = JSON.parse(orderInfo?.billing_detail);
     const orderItems = orderInfo?.order_items;
-        
+    const promotion = orderInfo?.promotion;
+
     return (
         <>
             <PublicHeader
@@ -245,16 +246,58 @@ export default function Show({ order }) {
                                         <tr key={index}>
                                             <td>{item.product_name}</td>
                                             <td>x {item.quantity}</td>
-                                            <td>{formatPrice(Number(item.product_price))}</td>
-                                            <td>{item.product_promotion ? "-" + item.product_promotion + "%" : "No promotion"}</td>
                                             <td>
                                                 {formatPrice(
-                                                    Number(item.product_final_price) *
-                                                        Number(item.quantity)
+                                                    Number(item.product_price)
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.product_promotion
+                                                    ? "-" +
+                                                      item.product_promotion +
+                                                      "%"
+                                                    : "No promotion"}
+                                            </td>
+                                            <td>
+                                                {formatPrice(
+                                                    Number(
+                                                        item.product_final_price
+                                                    ) * Number(item.quantity)
                                                 )}
                                             </td>
                                         </tr>
                                     ))}
+                                    {order.promotion_percentage &&
+                                        order.promotion_name && (
+                                            <tr className={styles.promoRow}>
+                                                <td colSpan="3"></td>
+                                                <td
+                                                    className={
+                                                        styles.promoLabel
+                                                    }
+                                                >
+                                                    Promotion
+                                                </td>
+                                                <td
+                                                    className={
+                                                        styles.promoValue
+                                                    }
+                                                >
+                                                    {order.promotion_name}{" "}
+                                                    {`-${order.promotion_percentage}%`}
+                                                </td>
+                                            </tr>
+                                        )}
+
+                                    <tr className={styles.totalRow}>
+                                        <td colSpan="3"></td>
+                                        <td className={styles.totalLabel}>
+                                            Total
+                                        </td>
+                                        <td className={styles.totalValue}>
+                                            {formatPrice(order.total_price)}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

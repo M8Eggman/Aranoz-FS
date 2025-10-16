@@ -20,6 +20,10 @@ return new class extends Migration {
             $table->enum('status', ['pending', 'confirmed'])->default('pending');
             $table->boolean('isArchived')->default(false);
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('promotion_id')->nullable()->constrained('promotions')->nullOnDelete();
+            // fallback si promotion est supprimée
+            $table->unsignedTinyInteger('promotion_percentage')->nullable();
+            $table->string('promotion_name')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,6 @@ export default function OrderShow({ order }) {
     const handleConfirm = () => {
         router.put(
             route("admin.orders.confirm", order.id),
-            {},
             {
                 preserveState: true,
                 preserveScroll: true,
@@ -19,7 +18,6 @@ export default function OrderShow({ order }) {
     const handleArchive = () => {
         router.put(
             route("admin.orders.archive", order.id),
-            {},
             {
                 preserveState: true,
                 preserveScroll: true,
@@ -44,10 +42,28 @@ export default function OrderShow({ order }) {
                     <strong>Status:</strong> {order.status}
                 </p>
                 <p className={styles.info}>
-                    <strong>Archived:</strong> {order.isArchived ? "Yes" : "No"}
+                    {/* affiche la promotion si elle existe, sinon affiche le fallback */}
+                    {order.promotion ? (
+                        <>
+                            <strong>Promotion:</strong> {order.promotion?.name}{" "}
+                            {order.promotion?.percentage
+                                ? "-" + order.promotion?.percentage + "%"
+                                : ""}
+                        </>
+                    ) : (
+                        <>
+                            <strong>Promotion:</strong>{" "}
+                            {order.promotion_name
+                                ? order.promotion_name
+                                : "No promotion"}{" "}
+                            {order.promotion_percentage
+                                ? "-" + order.promotion_percentage + "%"
+                                : ""}
+                        </>
+                    )}
                 </p>
                 <p className={styles.info}>
-                    <strong>Total:</strong> {order.total_price} €
+                    <strong>Archived:</strong> {order.isArchived ? "Yes" : "No"}
                 </p>
             </div>
 
@@ -57,7 +73,7 @@ export default function OrderShow({ order }) {
                         Confirm Order
                     </AdminButton>
                 )}
-                {!order.isArchived && (
+                {order.status === "confirmed" && !order.isArchived && (
                     <AdminButton onClick={handleArchive}>
                         Archive Order
                     </AdminButton>

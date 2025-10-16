@@ -78,14 +78,14 @@ class OrderController extends Controller
     {
         $this->authorize('access', ['role', 'admin', 'agent']);
 
-        $order = Order::findOrFail($id)->load(['user', 'orderItems.product']);
+        $order = Order::findOrFail($id)->load(['user', 'orderItems.product', 'promotion']);
         return Inertia::render('Admin/Orders/Show', compact('order'));
     }
 
     public function showTrackYourOrder($orderNumber)
     {
         $order = Order::where('order_number', $orderNumber)
-            ->with(['orderItems.product'])
+            ->with(['orderItems.product', 'promotion'])
             ->firstOrFail();
 
         return Inertia::render('Order/Show', compact('order'));
