@@ -3,33 +3,34 @@ import { router, useForm } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import TextInput from "@/Components/Form/TextInput/TextInput";
 import Button from "@/Components/Form/Buttons/Button";
-import styles from "./CommentsSection.module.css";
+import styles from "./BlogCommentsSection.module.css";
 import TextArea from "@/Components/Form/Textarea/Textarea";
 import { formatDate } from "@/utils/StringHelper";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 
-export default function CommentsSection({ productId, comments }) {
+export default function BlogCommentsSection({ blogId, comments }) {
     const { auth } = usePage().props;
 
     const { data, setData, post, processing, errors, reset } = useForm({
         message: "",
         website: "",
-        product_id: productId,
+        blog_id: blogId,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("comments.store"), {
+        post(route("blogs.comments.store"), {
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 reset();
-                setShowForm(false);
             },
         });
     };
 
     const handleDelete = (id) => {
-        router.delete(route("products.comments.destroy", id), {
+        router.delete(route("blogs.comments.destroy", id), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -42,7 +43,7 @@ export default function CommentsSection({ productId, comments }) {
         <div className={styles.commentsSection}>
             <div className={styles.commentsHeader}>
                 <h3 className={styles.commentsTitle}>
-                    Comments ({comments.length})
+                    {comments.length} Comments
                 </h3>
             </div>
 
@@ -57,7 +58,7 @@ export default function CommentsSection({ productId, comments }) {
                     </p>
                 </div>
             )}
-            
+
             {/* Add Comment Form */}
             {auth.user && (
                 <form onSubmit={handleSubmit} className={styles.commentForm}>
@@ -109,22 +110,14 @@ export default function CommentsSection({ productId, comments }) {
                             <div className={styles.commentHeader}>
                                 <div className={styles.userInfo}>
                                     <div className={styles.userAvatar}>
-                                        {comment.user.images?.medium ? (
-                                            <img
-                                                src={comment.user.images.medium}
-                                                alt=""
-                                            />
-                                        ) : (
-                                            <span
-                                                className={
-                                                    styles.avatarPlaceholder
-                                                }
-                                            >
-                                                {comment.user.name
-                                                    .charAt(0)
-                                                    .toUpperCase()}
-                                            </span>
-                                        )}
+                                        <img
+                                            src={
+                                                comment.user.images
+                                                    ?.medium ||
+                                                "/storage/users/templateU.png"
+                                            }
+                                            alt=""
+                                        />
                                     </div>
                                     <div className={styles.userDetails}>
                                         <span className={styles.userName}>
@@ -149,31 +142,22 @@ export default function CommentsSection({ productId, comments }) {
                                             {formatDate(comment.created_at)}
                                         </span>
                                     </div>
-                                    {auth.user &&
-                                        (auth.user.id === comment.user_id ||
-                                            auth.user.role.name ===
-                                                "admin") && (
-                                            <div
-                                                className={
-                                                    styles.commentActions
-                                                }
-                                            >
-                                                <AdminButton
-                                                    variant="delete"
-                                                    className={
-                                                        styles.deleteButton
-                                                    }
-                                                    onClick={() => {
-                                                        handleDelete(
-                                                            comment.id
-                                                        );
-                                                    }}
-                                                >
-                                                    Delete
-                                                </AdminButton>
-                                            </div>
-                                        )}
                                 </div>
+                                {auth.user &&
+                                    (auth.user.id === comment.user_id ||
+                                        auth.user.role.name === "admin") && (
+                                        <div className={styles.commentActions}>
+                                            <AdminButton
+                                                variant="delete"
+                                                className={styles.deleteButton}
+                                                onClick={() => {
+                                                    handleDelete(comment.id);
+                                                }}
+                                            >
+                                                Delete
+                                            </AdminButton>
+                                        </div>
+                                    )}
                             </div>
                             <div className={styles.commentContent}>
                                 <p>{comment.message}</p>

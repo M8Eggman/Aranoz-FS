@@ -1,9 +1,11 @@
+.commentsSection {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    border-top: 1px solid var(--soft-gray);
+}
+
 .commentsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-md);
 }
 
 .commentsTitle {
@@ -11,21 +13,6 @@
     font-weight: 600;
     color: var(--charcoal);
     margin: 0;
-}
-
-.addCommentBtn {
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--space-xs);
-    cursor: pointer;
-    font-size: var(--font-sm);
-    transition: background 0.3s ease;
-}
-
-.addCommentBtn:hover {
-    background: var(--primary-color-dark);
 }
 
 /* Comment Form */
@@ -52,6 +39,26 @@
     justify-content: flex-end;
 }
 
+.submitBtn {
+    background: var(--pink-red);
+    color: var(--white);
+    border: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--space-xs);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    transition: background 0.3s ease;
+}
+
+.submitBtn:hover {
+    background: var(--dark-pink);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* Comments List */
 .commentsList {
     display: flex;
@@ -67,6 +74,9 @@
 
 .commentHeader {
     margin-bottom: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .userInfo {
@@ -160,7 +170,7 @@
 }
 
 .loginLink {
-    color: var(--primary-color);
+    color: var(--pink-red);
     text-decoration: none;
     font-weight: 600;
 }
@@ -171,12 +181,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .commentsHeader {
-        flex-direction: column;
-        gap: var(--space-md);
-        align-items: flex-start;
-    }
-
     .commentForm {
         padding: var(--space-md);
     }
@@ -199,5 +203,4 @@
     .submitBtn {
         width: 100%;
     }
-
 }

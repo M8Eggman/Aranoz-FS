@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -13,7 +14,21 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with('product')
+            ->get();
+
+        $total = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+        return Inertia::render('Cart/Index', compact('cartItems', 'total'));
     }
 
     /**
@@ -29,7 +44,29 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
-        //
+        $user = $request->user();
+
+        // Vérifier si l'article existe déjà dans le panier
+        $existingCartItem = Cart::where('user_id', $user->id)
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if ($existingCartItem) {
+            // Mettre à jour la quantité
+            $existingCartItem->quantity += $request->quantity;
+            $existingCartItem->save();
+
+            return redirect()->back()->with('success', 'Item quantity updated in cart!');
+        } else {
+            // Créer un nouvel article dans le panier
+            Cart::create([
+                'user_id' => $user->id,
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+            ]);
+
+            return redirect()->back()->with('success', 'Item added to cart successfully!');
+        }
     }
 
     /**
@@ -51,16 +88,50 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCartRequest $request, Cart $cart)
+    public function update(UpdateCartRequest $request, $id)
     {
-        //
+        $user = $request->user();
+        $cartItem = Cart::where('id', $id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        if (!$cartItem) {
+            return redirect()->back()->with('error', 'Cart item not found');
+        }
+
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        return redirect()->back()->with('success', 'Cart updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        $user = auth()->user();
+        $cartItem = Cart::where('id', $id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        if (!$cartItem) {
+            return redirect()->back()->with('error', 'Cart item not found');
+        }
+
+        $cartItem->delete();
+
+        return redirect()->back()->with('success', 'Item removed from cart!');
+    }
+
+    /**
+     * Clear all items from the cart.
+     */
+    public function clear()
+    {
+        $user = auth()->user();
+        Cart::where('user_id', $user->id)->delete();
+
+        return redirect()->back()->with('success', 'Cart cleared successfully!');
     }
 }

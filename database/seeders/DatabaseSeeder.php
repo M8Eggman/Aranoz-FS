@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             ColorSeeder::class,
             BlogSeeder::class,
+            BlogTagSeeder::class,
             ProductSeeder::class,
             CommentSeeder::class,
             ContactInfoSeeder::class,

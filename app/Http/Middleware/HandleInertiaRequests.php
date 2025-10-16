@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use DB;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -37,7 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'error' => fn() => $request->session()->get('error'),
             ],
             'auth' => [
-                'user' => $request->user()?->load(['role', 'newsletter']),
+                'user' => $request->user()?->load(['role', 'newsletter', 'likedProducts', 'carts.product']),
             ],
             // Envoi les gates dans le front
             'can' => [

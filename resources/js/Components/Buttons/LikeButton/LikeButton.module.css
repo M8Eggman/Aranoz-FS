@@ -1,0 +1,104 @@
+.likeButton {
+    background: var(--white);
+    border: 2px solid var(--soft-gray);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--gray);
+}
+
+.likeButton:hover:not(:disabled) {
+    border-color: var(--pink-red);
+    color: var(--pink-red);
+    transform: scale(1.05);
+}
+
+.likeButton:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.likeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.heartIcon {
+    transition: all 0.3s ease;
+}
+
+.likeButton:hover .heartIcon {
+    color: var(--pink-red);
+}
+
+/* Sizes */
+.small {
+    width: 35px;
+    height: 35px;
+}
+
+.small .heartIcon {
+    font-size: 14px;
+}
+
+.medium {
+    width: 50px;
+    height: 50px;
+}
+
+.medium .heartIcon {
+    font-size: 18px;
+}
+
+.large {
+    width: 60px;
+    height: 60px;
+}
+
+.large .heartIcon {
+    font-size: 22px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .medium {
+        width: 45px;
+        height: 45px;
+    }
+
+    .medium .heartIcon {
+        font-size: 16px;
+    }
+
+    .large {
+        width: 50px;
+        height: 50px;
+    }
+
+    .large .heartIcon {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .small {
+        width: 30px;
+        height: 30px;
+    }
+
+    .small .heartIcon {
+        font-size: 12px;
+    }
+
+    .medium {
+        width: 40px;
+        height: 40px;
+    }
+
+    .medium .heartIcon {
+        font-size: 14px;
+    }
+}

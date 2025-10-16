@@ -182,6 +182,42 @@
     font-size: var(--font-sm);
 }
 
+/* Product Actions */
+.productActions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--soft-gray);
+}
+
+.quantitySection {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.quantityLabel {
+    font-weight: 600;
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+    min-width: 80px;
+}
+
+.actionButtons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.addToCartBtn {
+    flex: 1;
+}
+
+.likeBtn {
+    flex-shrink: 0;
+}
+
 /* Tabs Section */
 .tabsSection {
     margin-top: var(--space-xl);
@@ -360,5 +396,29 @@
     .tab.active {
         border-left-color: var(--pink-red);
         border-bottom-color: var(--soft-gray);
+    }
+
+    .productActions {
+        gap: var(--space-md);
+    }
+
+    .quantitySection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+
+    .quantityLabel {
+        min-width: auto;
+    }
+
+    .actionButtons {
+        flex-direction: column;
+        width: 100%;
+        gap: var(--space-sm);
+    }
+
+    .addToCartBtn {
+        width: 100%;
     }
 }

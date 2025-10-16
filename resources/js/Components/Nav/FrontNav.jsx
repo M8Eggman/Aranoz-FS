@@ -1,7 +1,8 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styles from "./Nav.module.css";
 import { Link, router, usePage } from "@inertiajs/react";
 import DropdownNav from "../Dropdowns/DropdownNav";
+import CartDropdown from "../Cart/CartDropdown";
 import { VscThreeBars } from "react-icons/vsc";
 import { CiUser } from "react-icons/ci";
 
@@ -27,13 +28,17 @@ export default function BackNav() {
             label: "Shop",
             options: [
                 { type: "link", route: "products", text: "Shop Category" },
-                { type: "link", route: "track-your-order", text: "Track Your Order" },
+                {
+                    type: "link",
+                    route: "track-your-order",
+                    text: "Track Your Order",
+                },
             ],
         },
         {
             type: "link",
             label: "Blogs",
-            route: "home",
+            route: "blog.index",
         },
         {
             type: "link",
@@ -55,6 +60,7 @@ export default function BackNav() {
             route: "profile.edit",
             text: "Profile",
         },
+        { type: "link", route: "cart.index", text: "View your cart" },
         {
             type: "link",
             route: "home",
@@ -128,6 +134,7 @@ export default function BackNav() {
                         ))}
                 </ul>
                 <div className={styles.actions}>
+                    {auth?.user && <CartDropdown />}
                     {auth?.user ? (
                         <DropdownNav
                             auth={true}
@@ -141,7 +148,7 @@ export default function BackNav() {
                         />
                     ) : (
                         <DropdownNav
-                            icon={<CiUser size={24} className="font-bold"/>}
+                            icon={<CiUser size={24} className="font-bold" />}
                             auth={true}
                             options={guestOptions}
                         />

@@ -27,13 +27,26 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request)
+    public function store_product_comment(StoreCommentRequest $request)
     {
         Comment::create([
             'message' => $request->message,
             'website' => $request->website,
             'blog_id' => null,
             'product_id' => $request->product_id,
+            'user_id' => $request->user()->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Comment added successfully!');
+    }
+
+    public function store_blog_comment(StoreCommentRequest $request)
+    {
+        Comment::create([
+            'message' => $request->message,
+            'website' => $request->website,
+            'blog_id' => $request->blog_id,
+            'product_id' => null,
             'user_id' => $request->user()->id,
         ]);
 
@@ -67,8 +80,32 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy_product_comment($id)
     {
-        //
+        $this->authorize('access', ['role', 'admin']);
+
+        $comment = Comment::find($id);
+        if (!$comment) {
+            return redirect()->back()->with('error', 'Comment not found');
+        }
+
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
     }
+
+    public function destroy_blog_comment($id)
+    {
+        $this->authorize('access', ['role', 'admin']);
+
+        $comment = Comment::find($id);
+        if (!$comment) {
+            return redirect()->back()->with('error', 'Comment not found');
+        }
+
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
+    }
+
 }

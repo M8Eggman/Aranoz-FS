@@ -1,0 +1,73 @@
+.quantitySelector {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--soft-gray);
+    border-radius: var(--space-sm);
+    overflow: hidden;
+    background: var(--white);
+    width: fit-content;
+}
+
+.quantityButton {
+    background: var(--white);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    font-size: var(--font-md);
+    font-weight: 600;
+    color: var(--charcoal);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+}
+
+.quantityButton:hover:not(:disabled) {
+    background: var(--soft-gray);
+    color: var(--primary-color);
+}
+
+.quantityButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quantityInput {
+    border: none;
+    outline: none;
+    padding: var(--space-sm);
+    text-align: center;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: var(--charcoal);
+    background: var(--white);
+    width: 60px;
+    height: 40px;
+    -moz-appearance: textfield;
+}
+
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantityInput:focus {
+    background: var(--soft-gray);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .quantityButton {
+        min-width: 35px;
+        height: 35px;
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .quantityInput {
+        width: 50px;
+        height: 35px;
+    }
+}

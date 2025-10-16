@@ -3,6 +3,9 @@ import { Link } from "@inertiajs/react";
 import FrontLayout from "@/Layouts/FrontLayout";
 import PublicHeader from "@/Components/Header/PublicHeader";
 import CommentsSection from "./Partials/CommentsSection";
+import QuantitySelector from "@/Components/Form/QuantitySelector/QuantitySelector";
+import AddToCartButton from "@/Components/Buttons/AddToCartButton/AddToCartButton";
+import LikeButton from "@/Components/Buttons/LikeButton/LikeButton";
 import styles from "./ShowProducts.module.css";
 import { capitalize, formatPrice } from "@/utils/StringHelper";
 
@@ -16,6 +19,7 @@ export default function Show({
 
     const [activeTab, setActiveTab] = useState("description");
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
     // Prépare les images du produit
     const images = [
@@ -156,7 +160,9 @@ export default function Show({
         <>
             <PublicHeader
                 title={product.name}
-                subtitle={`Home - ${capitalize(product.category?.name) || "Product"}`}
+                subtitle={`Home - ${
+                    capitalize(product.category?.name) || "Product"
+                }`}
             />
             <section className={styles.wrapper}>
                 <div className={styles.container}>
@@ -270,6 +276,35 @@ export default function Show({
 
                             <div className={styles.description}>
                                 <p>{product.description}</p>
+                            </div>
+
+                            {/* Product Actions */}
+                            <div className={styles.productActions}>
+                                <div className={styles.quantitySection}>
+                                    <span className={styles.quantityLabel}>
+                                        Quantity:
+                                    </span>
+                                    <QuantitySelector
+                                        value={quantity}
+                                        onChange={setQuantity}
+                                        min={1}
+                                        max={product.stock || 99}
+                                        disabled={product.stock === 0}
+                                    />
+                                </div>
+
+                                <div className={styles.actionButtons}>
+                                    <AddToCartButton
+                                        productId={product.id}
+                                        disabled={product.stock === 0}
+                                        className={styles.addToCartBtn}
+                                    />
+                                    <LikeButton
+                                        productId={product.id}
+                                        size="medium"
+                                        className={styles.likeBtn}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

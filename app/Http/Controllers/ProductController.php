@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductCategorie;
+use DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -134,5 +135,16 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    /**
+     * Like or unlike a product
+     */
+    public function like(Request $request)
+    {
+        $user = $request->user();
+        $productId = $request->product_id;
+
+        $user->likedProducts()->toggle($productId);
     }
 }

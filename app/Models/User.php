@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(WeeklySale::class);
     }
+
+    public function likedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_product');
+    }
 }

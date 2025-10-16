@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactInfoController;
@@ -40,9 +42,40 @@ Route::get('/products/{id}', [ProductController::class, 'show'])
     ->name('products.show');
 
 // Comments routes
-Route::post('/comments', [CommentController::class, 'store'])
-    ->name('comments.store')
+Route::post('/products/comments', [CommentController::class, 'store_product_comment'])
+    ->name('products.comments.store')
     ->middleware('auth');
+Route::post('/blogs/comments', [CommentController::class, 'store_blog_comment'])
+    ->name('blogs.comments.store')
+    ->middleware('auth');
+
+// Cart routes
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart.index')
+    ->middleware('auth');
+Route::post('/cart', [CartController::class, 'store'])
+    ->name('cart.store')
+    ->middleware('auth');
+Route::patch('/cart/{id}', [CartController::class, 'update'])
+    ->name('cart.update')
+    ->middleware('auth');
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])
+    ->name('cart.destroy')
+    ->middleware('auth');
+Route::delete('/cart', [CartController::class, 'clear'])
+    ->name('cart.clear')
+    ->middleware('auth');
+
+// Product likes routes
+Route::post('/products/like', [ProductController::class, 'like'])
+    ->name('products.like')
+    ->middleware('auth');
+
+// Blog routes
+Route::get('/blog', [BlogController::class, 'index'])
+    ->name('blog.index');
+Route::get('/blog/{id}', [BlogController::class, 'show'])
+    ->name('blog.show');
 
 // Route pour suivre votre commande
 Route::match(['get', 'post'], '/track-your-order', [OrderController::class, 'trackYourOrder'])
@@ -61,13 +94,6 @@ Route::post('/weekly-sales/subscribe', [WeeklySaleController::class, 'subscribe'
     ->name('weekly-sales.subscribe');
 Route::post('/weekly-sales/unsubscribe', [WeeklySaleController::class, 'unsubscribe'])
     ->name('weekly-sales.unsubscribe');
-
-// Routes pour les  clients
-Route::middleware(['auth', 'role:admin,client'])->group(function () {
-    // Route::get('/shop', [ClientController::class, 'shop'])->name('client.shop');
-    // Route::post('/blog/{id}/comment', [ClientController::class, 'comment'])->name('client.comment');
-    // Route::get('/orders', [ClientController::class, 'orders'])->name('client.orders');
-});
 
 // Routes pour les community manager
 Route::middleware(['auth', 'role:admin,community_manager'])->group(function () {
@@ -181,6 +207,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('admin.users.role.update');
     Route::delete('/admin/users/{id}/destroy', [UserController::class, 'destroy'])
         ->name('admin.users.destroy');
+
+    // Comments
+    Route::delete('/products/comments/{id}', [CommentController::class, 'destroy_product_comment'])
+        ->name('products.comments.destroy');
+    Route::delete('/blogs/comments/{id}', [CommentController::class, 'destroy_blog_comment'])
+        ->name('blogs.comments.destroy');
 });
 
 // Routes pour la home du backend 
