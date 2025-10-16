@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./ProductsCarousel.module.css";
-import { Link } from "@inertiajs/react";
+import ProductCards from "@/Components/Cards/ProductCards";
 
 export default function ProductsCarousel({ products = [] }) {
     const [perSlide, setPerSlide] = useState(getPerSlide());
@@ -100,51 +100,15 @@ export default function ProductsCarousel({ products = [] }) {
                     {slides.map((group, gi) => (
                         <div key={gi} className={styles.slide}>
                             {group.map((p, pi) => (
-                                <Link
-                                    href={"#"}
-                                    key={`${gi}-${pi}`}
-                                    className={styles.card}
-                                >
-                                    <div className={styles.cardImageWrap}>
-                                        <img
-                                            src={
-                                                p?.images_main?.product ||
-                                                "/storage/offer/templateP.png"
-                                            }
-                                            alt={p.name}
-                                        />
-                                    </div>
-                                    <div className={styles.cardFooter}>
-                                        <h5 className={styles.cardTitle}>
-                                            {p.name}
-                                        </h5>
-                                        {p?.promotion ? (
-                                            <div className={styles.priceRow}>
-                                                <span
-                                                    className={styles.oldPrice}
-                                                >
-                                                    {Number(p.price).toFixed(2)}
-                                                </span>
-                                                <span
-                                                    className={styles.percent}
-                                                >
-                                                    (-{p.promotion}%)
-                                                </span>
-                                                <span
-                                                    className={styles.newPrice}
-                                                >
-                                                    {Number(
-                                                        p.final_price
-                                                    ).toFixed(2)}
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <div className={styles.cardPrice}>
-                                                {Number(p.price).toFixed(2)}
-                                            </div>
-                                        )}
-                                    </div>
-                                </Link>
+                                <ProductCards
+                                    key={pi}
+                                    id={p.id}
+                                    image={p?.images_main?.banner}
+                                    name={p.name}
+                                    price={p.price}
+                                    promotion={p.promotion}
+                                    final_price={p.final_price}
+                                />
                             ))}
                         </div>
                     ))}

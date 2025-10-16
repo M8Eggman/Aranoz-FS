@@ -29,7 +29,15 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        Comment::create([
+            'message' => $request->message,
+            'website' => $request->website,
+            'blog_id' => null,
+            'product_id' => $request->product_id,
+            'user_id' => $request->user()->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Comment added successfully!');
     }
 
     /**

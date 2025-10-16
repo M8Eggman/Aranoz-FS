@@ -28,8 +28,8 @@ class Comment extends Model
         return $this->belongsTo(Blog::class);
     }
 
-    public function category()
+    public function product()
     {
-        return $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(Product::class);
     }
 }

@@ -1,0 +1,65 @@
+.card {
+    display: grid;
+    gap: var(--gap-sm);
+    transition: box-shadow 300ms ease;
+}
+
+.card:hover {
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cardImageWrap {
+    aspect-ratio: 1/1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.cardImageWrap img {
+    object-fit: contain;
+    object-position: center;
+}
+
+.cardFooter {
+    transition: transform 300ms ease;
+}
+
+.card:hover .cardFooter {
+    transform: translateX(1rem);
+}
+
+.cardTitle {
+    font-weight: 700;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-sm);
+    color: var(--charcoal);
+}
+
+.cardPrice {
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+}
+
+.priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: var(--gap-sm);
+}
+
+.oldPrice {
+    color: var(--gray);
+    text-decoration: line-through;
+    font-size: var(--font-sm);
+}
+
+.percent {
+    color: var(--gray);
+    font-size: var(--font-xs);
+}
+
+.newPrice {
+    color: var(--dark-pink);
+    font-weight: 700;
+    font-size: var(--font-sm);
+}

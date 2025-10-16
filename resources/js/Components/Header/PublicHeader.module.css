@@ -22,6 +22,7 @@
 }
 
 .info h1 {
+    line-height: 1.4;
     margin: 0;
     font-size: var(--font-h2);
     font-weight: 700;
@@ -34,6 +35,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .info {
+        width: 100%;
+    }
+
     .header {
         padding: var(--space-xl);
         background-image: none;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HomeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\MailingController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategorieController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\TagController;
@@ -26,16 +28,27 @@ use Illuminate\Support\Facades\Route;
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
+// Route contact public 
+Route::get('/contact', [MailingController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [MailingController::class, 'store'])
+    ->name('contact.store');
+
+
+Route::match(['get', 'post'], '/products', [ProductController::class, 'index'])
+    ->name('products');
+Route::get('/products/{id}', [ProductController::class, 'show'])
+    ->name('products.show');
+
+// Comments routes
+Route::post('/comments', [CommentController::class, 'store'])
+    ->name('comments.store')
+    ->middleware('auth');
+
 // Route pour suivre votre commande
 Route::match(['get', 'post'], '/track-your-order', [OrderController::class, 'trackYourOrder'])
     ->name('track-your-order');
 Route::get('/track-your-order/{order_number}', [OrderController::class, 'showTrackYourOrder'])
     ->name('track-your-order.show');
-
-// Route contact public 
-Route::get('/contact', [MailingController::class, 'contact'])->name('contact');
-Route::post('/contact/store', [MailingController::class, 'store'])
-    ->name('contact.store');
 
 // Route pour s'inscrire se désinscrire de la newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
