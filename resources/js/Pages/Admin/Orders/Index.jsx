@@ -3,7 +3,7 @@ import { Link, router, usePage } from "@inertiajs/react";
 import BackLayout from "@/Layouts/BackLayout";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
-import AdminHeader from "../partials/Header/AdminHeader";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 import styles from "../partials/AdminTable/AdminTable.module.css";
 
 export default function Orders({ orders, status }) {
@@ -103,16 +103,17 @@ export default function Orders({ orders, status }) {
                                                     Confirm
                                                 </AdminButton>
                                             )}
-                                        {!order.isArchived && order.status === "confirmed" && (
-                                            <AdminButton
-                                                onClick={() =>
-                                                    handleArchive(order.id)
-                                                }
-                                                variant="delete"
-                                            >
-                                                Archive
-                                            </AdminButton>
-                                        )}
+                                        {!order.isArchived &&
+                                            order.status === "confirmed" && (
+                                                <AdminButton
+                                                    onClick={() =>
+                                                        handleArchive(order.id)
+                                                    }
+                                                    variant="delete"
+                                                >
+                                                    Archive
+                                                </AdminButton>
+                                            )}
                                     </td>
                                 </tr>
                             ))}

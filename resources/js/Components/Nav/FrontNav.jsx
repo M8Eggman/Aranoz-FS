@@ -38,7 +38,7 @@ export default function BackNav() {
         {
             type: "link",
             label: "Contact",
-            route: "home",
+            route: "contact",
         },
     ];
 

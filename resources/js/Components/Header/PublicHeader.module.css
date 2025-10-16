@@ -1,0 +1,55 @@
+.header {
+    background-image: url("/storage/breadcrumb/breadcrumb.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--gap-2xl);
+    height: 25rem;
+}
+
+.info {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    right: 15rem;
+    text-align: center;
+    width: 100%;
+    padding: 0 var(--space-xl);
+}
+
+.info h1 {
+    margin: 0;
+    font-size: var(--font-h3);
+    font-weight: 700;
+}
+
+.info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: var(--space-xl);
+        background-image: none;
+        background-color: var(--blue);
+    }
+
+    .container {
+        height: auto;
+    }
+
+    .info {
+        position: relative;
+        inset: initial;
+        transform: none;
+    }
+}

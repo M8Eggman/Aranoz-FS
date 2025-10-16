@@ -1,5 +1,7 @@
-.input {
+.textarea {
+    resize: none;
     width: 100%;
+    height: 100px;
     padding: var(--space-xs) var(--space-sm);
     border: 1px solid var(--muted-blue);
     border-radius: 4px;
@@ -9,20 +11,14 @@
     transition: border 0.2s, background-color 0.2s;
 }
 
-.input:hover:not(.disabled) {
+.textarea:hover {
     border-color: var(--steel-blue);
     background-color: var(--soft-mint);
 }
 
-.input:focus:not(.disabled) {
+.textarea:focus {
     border-color: var(--blue);
     background-color: var(--soft-mint);
     box-shadow: none;
     outline: none;
-}
-
-.disabled {
-    background-color: var(--soft-gray);
-    color: var(--charcoal);
-    cursor: not-allowed;
 }

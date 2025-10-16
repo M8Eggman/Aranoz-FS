@@ -4,8 +4,12 @@ import TextInput from "@/Components/Form/TextInput/TextInput";
 import Button from "@/Components/Form/Buttons/Button";
 import Checkbox from "@/Components/Form/Checkbox/Checbox";
 import FrontLayout from "@/Layouts/FrontLayout";
+import { useEffect, useMemo, useRef } from "react";
 
 export default function Register() {
+    // Ref pour le input de fichier
+    const fileInputRef = useRef(null);
+
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         email: "",
@@ -16,19 +20,49 @@ export default function Register() {
         newsletter: false,
     });
 
-    function submit(e) {
-        e.preventDefault();
-        post(route("register"));
+    // Revoke Object URL pour éviter les fuites de mémoire lors du démontage du composant
+    useEffect(() => {
+        return () => data.image_file && URL.revokeObjectURL(data.image_file);
+    }, [data.image_file]);
+
+    // URL de l'image pour le preview de l'image
+    const src = useMemo(() => {
+        if (data.image_file) return URL.createObjectURL(data.image_file);
+        if (data.image_url?.trim()) return data.image_url;
+        return "/storage/users/templateU.png";
+    }, [data.image_file, data.image_url]);
+
+    // Handle change du fichier
+    function handleFileChange(e) {
+        const file = e.target.files[0];
+        if (file)
+            setData({
+                ...data,
+                image_file: file,
+                image_url: "",
+            });
     }
 
-    function getPreview() {
-        if (data.image_file) {
-            return URL.createObjectURL(data.image_file);
-        } else if (data.image_url?.trim() !== "") {
-            return data.image_url;
-        } else {
-            return "/storage/users/templateU.png";
-        }
+    // Handle change de l'URL
+    function handleUrlChange(e) {
+        setData({
+            ...data,
+            image_file: null,
+            image_url: e.target.value,
+        });
+        if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+
+    // Submit du formulaire
+    function submit(e) {
+        e.preventDefault();
+        post(route("register"), {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                if (fileInputRef.current) fileInputRef.current.value = "";
+            },
+        });
     }
 
     return (
@@ -75,22 +109,18 @@ export default function Register() {
                             <div className={styles.imageUpload}>
                                 <div className={styles.imagePreviewWrapper}>
                                     <img
-                                        src={getPreview()}
+                                        src={src}
                                         alt=""
                                         className={styles.imagePreview}
                                     />
                                 </div>
 
                                 <input
+                                    ref={fileInputRef}
                                     type="file"
                                     name="image_file"
                                     accept="image/*"
-                                    onChange={(e) => {
-                                        setData(
-                                            "image_file",
-                                            e.target.files[0]
-                                        );
-                                    }}
+                                    onChange={handleFileChange}
                                     className={styles.fileInput}
                                 />
                             </div>
@@ -105,10 +135,7 @@ export default function Register() {
                             name="image_url"
                             placeholder="Or paste image URL here"
                             value={data.image_url}
-                            onChange={(e) => {
-                                setData("image_file", null);
-                                setData("image_url", e.target.value);
-                            }}
+                            onChange={handleUrlChange}
                         />
 
                         <div className={styles.inputGroup}>

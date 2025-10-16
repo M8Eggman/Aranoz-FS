@@ -5,7 +5,7 @@ import BackLayout from "@/Layouts/BackLayout";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 import Modal from "@/Components/Modals/Modal";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
-import AdminHeader from "../partials/Header/AdminHeader";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 import { formatUnderscore } from "@/utils/StringHelper";
 
 export default function Users({ users: initialUsers, roles }) {

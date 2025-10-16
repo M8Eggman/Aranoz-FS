@@ -4,7 +4,7 @@ import Button from "@/Components/Form/Buttons/Button";
 import TextInput from "@/Components/Form/TextInput/TextInput";
 import BackLayout from "@/Layouts/BackLayout";
 import { useForm, usePage } from "@inertiajs/react";
-import AdminHeader from "../partials/Header/AdminHeader";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 import { useEffect } from "react";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 

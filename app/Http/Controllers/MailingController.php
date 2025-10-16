@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactInfo;
 use App\Models\Mailing;
 use App\Http\Requests\StoreMailingRequest;
 use App\Http\Requests\UpdateMailingRequest;
@@ -9,6 +10,12 @@ use Inertia\Inertia;
 
 class MailingController extends Controller
 {
+    public function contact()
+    {
+        $contactInfo = ContactInfo::first();
+        return Inertia::render('Contact/Index', compact('contactInfo'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -39,7 +46,21 @@ class MailingController extends Controller
      */
     public function store(StoreMailingRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        Mailing::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        return redirect()->route('contact')->with('success', 'Mail sent successfully.');
     }
 
     /**

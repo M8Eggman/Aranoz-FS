@@ -1,7 +1,7 @@
 import BackLayout from "@/Layouts/BackLayout";
 import React from "react";
 import AdminTable from "../partials/AdminTable/AdminTable";
-import AdminHeader from "../partials/Header/AdminHeader";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 
 export default function BlogCategories({
     categories: initialCategories,

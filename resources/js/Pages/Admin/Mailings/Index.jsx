@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { router } from "@inertiajs/react";
 import { IoMdMail, IoMdMailOpen } from "react-icons/io"; // icônes
 import BackLayout from "@/Layouts/BackLayout";
-import AdminHeader from "../partials/Header/AdminHeader";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 import AdminButton from "@/Components/Buttons/AdminPage/AdminButton";
 import styles from "./Mailings.module.css";

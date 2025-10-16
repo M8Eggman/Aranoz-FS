@@ -33,3 +33,66 @@
     flex-direction: column;
     gap: var(--gap-xs);
 }
+
+.imageUpload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.disclaimer {
+    font-size: var(--font-xs);
+    color: var(--dark-pink);
+    text-align: center;
+}
+
+.inputImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+}
+
+.imagePreviewWrapper {
+    position: relative;
+    width: 120px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--soft-gray);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.imagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.fileInput {
+    opacity: 0;
+    position: absolute;
+    width: 120px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.imagePreviewWrapper::after {
+    content: "Upload";
+    position: absolute;
+    color: var(--charcoal);
+    font-size: var(--font-sm);
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.imagePreviewWrapper:hover::after {
+    opacity: 1;
+}

@@ -25,9 +25,10 @@ use Illuminate\Support\Facades\Route;
 
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/contact', [MailingController::class, 'contact'])->name('contact');
 // Route pour envoyer un mail (contact form)
-Route::post('/mailings/store', [MailingController::class, 'store'])
-    ->name('mailings.store');
+Route::post('/contact/store', [MailingController::class, 'store'])
+    ->name('contact.store');
 
 // Route pour s'inscrire se désinscrire de la newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
@@ -169,7 +170,7 @@ Route::middleware(['auth', 'role:admin,webmaster,agent,community_manager'])->gro
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::match(['patch', 'post'], '/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import BackLayout from "@/Layouts/BackLayout";
-import AdminHeader from "@/Pages/Admin/partials/Header/AdminHeader";
+import AdminHeader from "@/Components/Header/AdminHeader";
 import QuickAccessCard from "@/Components/Cards/QuickAccessCard";
 import styles from "./Home.module.css";
 import StatCard from "@/Components/Cards/StatCard";
