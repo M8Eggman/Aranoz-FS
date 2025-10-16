@@ -33,11 +33,13 @@ class HomeController extends Controller
             return $category;
         });
 
-        // Compute end of the current week (upcoming Sunday 23:59:59) and pass ISO string
-        $now = Carbon::now();
-        $weeklySaleEndsAt = $now->copy()->next(Carbon::SUNDAY)->endOfDay()->toIso8601String();
+        // Calcul de la date de fin de la semaine en cours
+        $weeklySaleEndsAt = Carbon::now()->copy()->next(Carbon::SUNDAY)->endOfDay()->toIso8601String();
 
-        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories', 'products', 'weeklySaleEndsAt'));
+        // Récupère les 8 premiers produits les plus vendus
+        $bestSellers = Product::orderBy('sales_count', 'desc')->take(8)->get();
+
+        return Inertia::render('Home/Home', compact('randomProducts', 'pinnedProducts', 'categories', 'products', 'weeklySaleEndsAt', 'bestSellers'));
     }
 
     public function admin_home()

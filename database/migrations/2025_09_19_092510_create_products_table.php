@@ -16,7 +16,8 @@ return new class extends Migration {
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->decimal('final_price', 8, 2);
-            $table->unsignedInteger('stock');
+            $table->unsignedBigInteger('stock');
+            $table->unsignedBigInteger('sales_count')->default(0);
             $table->boolean('isPinned')->default(false);
             $table->json('images_main');
             $table->json('images_rear')->nullable();

@@ -306,10 +306,12 @@ class ProductSeeder extends Seeder
             $baseImage = $data['filename'];
 
             // 30% de chance d'avoir une promotion, sinon null
-            $promotion = rand(1, 100) <= 30 ? 5 * rand(1, 10) : null; 
+            $promotion = rand(1, 100) <= 30 ? 5 * rand(1, 10) : null;
 
             // 30% de chance d'être pinned
             $isPinned = rand(1, 100) <= 20;
+
+            $sales_count = rand(1, 100);
 
             $product = new Product();
             $product->name = $data['name'];
@@ -321,6 +323,7 @@ class ProductSeeder extends Seeder
             $product->price = $data['price'];
             $product->final_price = (float) $data['price'] * (1 - (int) $promotion / 100);
             $product->stock = $data['stock'];
+            $product->sales_count = $sales_count;
             $product->category_id = $data['category'];
             $product->color_id = $data['color'];
             $product->promotion = $promotion;
