@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./QuantitySelector.module.css";
 
-export default function QuantitySelector({ 
-    value, 
-    onChange, 
-    min = 1, 
-    max = 99, 
-    disabled = false 
+export default function QuantitySelector({
+    value,
+    onChange,
+    min = 1,
+    max,
+    disabled = false,
 }) {
     const handleDecrease = () => {
         if (value > min && !disabled) {
@@ -34,7 +34,6 @@ export default function QuantitySelector({
                 className={`${styles.quantityButton} ${styles.decrease}`}
                 onClick={handleDecrease}
                 disabled={disabled || value <= min}
-                aria-label="Decrease quantity"
             >
                 -
             </button>
@@ -46,14 +45,12 @@ export default function QuantitySelector({
                 min={min}
                 max={max}
                 disabled={disabled}
-                aria-label="Quantity"
             />
             <button
                 type="button"
                 className={`${styles.quantityButton} ${styles.increase}`}
                 onClick={handleIncrease}
                 disabled={disabled || value >= max}
-                aria-label="Increase quantity"
             >
                 +
             </button>

@@ -10,7 +10,11 @@ import {
 
 export default function Show({ order }) {
     const orderInfo = order;
-    const billingDetail = JSON.parse(orderInfo?.billing_detail);
+
+    const billingDetail = orderInfo?.billing_detail
+        ? orderInfo?.billing_detail
+        : JSON.parse(orderInfo?.billing_detail);
+
     const orderItems = orderInfo?.order_items;
     const promotion = orderInfo?.promotion;
 

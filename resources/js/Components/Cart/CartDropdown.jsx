@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import { FaShoppingCart, FaTrash } from "react-icons/fa";
 import styles from "./CartDropdown.module.css";
@@ -36,8 +36,10 @@ export default function CartDropdown() {
     );
 
     const handleRemoveItem = (itemId) => {
-        // Logique pour supprimer un article du panier
-        console.log("Remove item:", itemId);
+        router.delete(route("cart.destroy", itemId), {
+            preserveScroll: true,
+            preserveState: true,
+        });
     };
 
     if (!auth.user) {
@@ -134,7 +136,7 @@ export default function CartDropdown() {
                                     View Cart
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href={route("checkout")}
                                     className={styles.checkoutButton}
                                     onClick={() => setIsOpen(false)}
                                 >

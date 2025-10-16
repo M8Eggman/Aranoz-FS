@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->decimal('product_price', 8, 2);
             $table->decimal('product_final_price', 8, 2);
             $table->unsignedtinyInteger('product_promotion')->nullable();
-
             $table->decimal('total_price', 10, 2)->default(0);
         });
     }

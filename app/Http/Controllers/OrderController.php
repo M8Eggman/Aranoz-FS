@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\ContactInfo;
+use App\Models\Country;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Promotion;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Inertia\Inertia;
@@ -169,5 +173,168 @@ class OrderController extends Controller
         return Inertia::render('Orders/ViewOrders', [
             'orders' => $orders
         ]);
+    }
+
+    /**
+     * Display the checkout page
+     */
+    public function checkout(Request $request)
+    {
+        $user = $request->user();
+
+        // Récupérer les articles du panier
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with(['product'])
+            ->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
+        // Calculer le total
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->final_price * $item->quantity;
+        });
+
+        // Récupérer les billing details existants
+        $billingDetail = $user->billingDetail;
+
+        // Récupérer le coupon appliqué en session
+        $finalTotal = $subtotal;
+
+        $countries = Country::all();
+
+        return Inertia::render('Checkout/Index', [
+            'cartItems' => $cartItems,
+            'subtotal' => $subtotal,
+            'finalTotal' => $finalTotal,
+            'billingDetail' => $billingDetail,
+            'countries' => $countries,
+        ]);
+    }
+
+    /**
+     * Process the checkout
+     */
+    public function processCheckout(Request $request)
+    {
+        $user = $request->user();
+
+        // Validation
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'country_id' => 'required|integer|exists:countries,id',
+            'address' => 'required|string|max:255',
+            'number' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
+            'payment_method' => 'required|in:check_payments,paypal',
+        ]);
+
+
+        // Récupérer les articles du panier
+        $cartItems = Cart::where('user_id', $user->id)
+            ->with(['product'])
+            ->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
+        // Calculer le total
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->final_price * $item->quantity;
+        });
+
+        // Appliquer le coupon si présent
+        $appliedCoupon = session('applied_coupon');
+        $discount = 0;
+        $finalTotal = $subtotal;
+        $promotion = null;
+
+        if ($appliedCoupon) {
+            $promotion = Promotion::where('name', $appliedCoupon)->first();
+            if ($promotion) {
+                $discount = ($subtotal * $promotion->percentage) / 100;
+                $finalTotal = $subtotal - $discount;
+            }
+        }
+
+        // Créer ou mettre à jour les billing details
+        $billingDetail = $user->billingDetail()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'company' => $request->company,
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'country_id' => $request->country_id,
+                'address' => $request->address,
+                'number' => $request->number,
+                'city' => $request->city,
+                'zip' => $request->zip,
+            ]
+        );
+
+        // Génère la partie date et unique sécurisée
+        $datePart = now()->format('ymd'); // YYMMDD
+        $uniquePart = strtoupper(bin2hex(random_bytes(5))); // 10 chars uniques
+        $orderNumber = "ORD-{$datePart}-{$uniquePart}";
+
+        // Préparer les données de billing pour la commande
+        $billingData = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'company' => $request->company,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'country_id' => $request->country_id,
+            'address' => $request->address,
+            'number' => $request->number,
+            'city' => $request->city,
+            'zip' => $request->zip,
+        ];
+
+        // Créer la commande
+        $order = Order::create([
+            'user_id' => $user->id,
+            'order_number' => $orderNumber,
+            'status' => 'pending',
+            'total_price' => $finalTotal,
+            'sub_total_price' => $subtotal,
+            'payment_method' => $request->payment_method,
+            'billing_detail' => $billingData,
+            'promotion_percentage' => $promotion ? $promotion->percentage : null,
+            'promotion_name' => $promotion ? $promotion->name : null,
+            'promotion_id' => $promotion ? $promotion->id : null,
+        ]);
+
+        // Créer les order items
+        foreach ($cartItems as $cartItem) {
+            $product = $cartItem->product;
+            $finalPrice = $product->final_price ?? $product->price;
+
+            OrderItem::create([
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'product_name' => $product->name,
+                'product_price' => $product->price,
+                'product_final_price' => $finalPrice,
+                'product_promotion' => $product->promotion,
+                'total_price' => $finalPrice * $cartItem->quantity,
+                'order_id' => $order->id,
+            ]);
+        }
+
+        // Vider le panier 
+        Cart::where('user_id', $user->id)->delete();
+
+        return redirect()->route('view-orders')
+            ->with('success', 'Order placed successfully! Your order number is ' . $orderNumber);
     }
 }

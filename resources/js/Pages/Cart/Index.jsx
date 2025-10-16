@@ -143,7 +143,7 @@ export default function Index({ cartItems = [], total = 0 }) {
                                                         )
                                                     }
                                                     min={1}
-                                                    max={99}
+                                                    max={item.product.stock}
                                                 />
                                             </div>
 
@@ -221,7 +221,7 @@ export default function Index({ cartItems = [], total = 0 }) {
 
                                         <div className={styles.summaryActions}>
                                             <Link
-                                                href="#"
+                                                href={route("checkout")}
                                                 className={
                                                     styles.checkoutButton
                                                 }

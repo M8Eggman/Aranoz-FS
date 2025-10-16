@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import styles from "./ViewOrders.module.css";
 import { formatDate } from "@/utils/StringHelper";
+import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 
 export default function ViewOrders({ orders }) {
     const getStatusColor = (status) => {
@@ -57,6 +58,9 @@ export default function ViewOrders({ orders }) {
             <PublicHeader title="My Orders" subtitle="Home - My Orders" />
             <section className={styles.wrapper}>
                 <div className={styles.container}>
+
+                    <FlashMessage className="mb-5" />
+
                     {orders && orders.length > 0 ? (
                         <div className={styles.ordersGrid}>
                             {orders.map((order) => (

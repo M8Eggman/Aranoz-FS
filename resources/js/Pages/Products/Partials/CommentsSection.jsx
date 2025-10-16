@@ -20,7 +20,9 @@ export default function CommentsSection({ productId, comments }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("comments.store"), {
+        post(route("products.comments.store"), {
+            preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 reset();
                 setShowForm(false);
@@ -57,7 +59,7 @@ export default function CommentsSection({ productId, comments }) {
                     </p>
                 </div>
             )}
-            
+
             {/* Add Comment Form */}
             {auth.user && (
                 <form onSubmit={handleSubmit} className={styles.commentForm}>

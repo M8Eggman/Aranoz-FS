@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         // Construire la requête avec les filtres
-        $query = Product::with(['category', 'color', 'promo']);
+        $query = Product::with(['category', 'color']);
 
         // Filtre par catégorie
         $category_id = $request->input('category_id');

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
 import styles from "./FlashMessage.module.css";
 
-export default function FlashMessage() {
+export default function FlashMessage({ className }) {
     const { flash } = usePage().props;
     const [visible, setVisible] = useState(false);
     const [message, setMessage] = useState("");
@@ -29,7 +29,7 @@ export default function FlashMessage() {
 
     return (
         <div
-            className={`${styles.flashMessage} ${
+            className={`${styles.flashMessage} ${className} ${
                 type === "success" ? styles.flashSuccess : styles.flashError
             }`}
         >

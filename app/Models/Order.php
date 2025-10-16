@@ -24,11 +24,15 @@ class Order extends Model
         'sub_total_price',
     ];
 
+    protected $casts = [
+        'billing_detail' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function promotion()
     {
         return $this->belongsTo(Promotion::class);

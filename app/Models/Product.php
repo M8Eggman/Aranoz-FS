@@ -14,6 +14,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'final_price',
         'stock',
         'isPinned',
         'images_main',
@@ -22,7 +23,7 @@ class Product extends Model
         'images_right_side',
         'color_id',
         'category_id',
-        'promo_id',
+        'promotion',
     ];
 
     protected $casts = [
@@ -36,11 +37,6 @@ class Product extends Model
     public function color()
     {
         return $this->belongsTo(Color::class);
-    }
-
-    public function promo()
-    {
-        return $this->belongsTo(Promotion::class);
     }
 
     public function category()

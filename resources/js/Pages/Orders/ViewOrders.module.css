@@ -297,10 +297,6 @@
 }
 
 @media (max-width: 480px) {
-    .wrapper {
-        padding: var(--space-3xl) 0;
-    }
-
     .orderNumber {
         font-size: var(--font-h6);
     }

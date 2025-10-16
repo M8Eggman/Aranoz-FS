@@ -3,15 +3,14 @@ import { Link } from "@inertiajs/react";
 import FrontLayout from "@/Layouts/FrontLayout";
 import PublicHeader from "@/Components/Header/PublicHeader";
 import CommentsSection from "./Partials/CommentsSection";
-import QuantitySelector from "@/Components/Form/QuantitySelector/QuantitySelector";
 import AddToCartButton from "@/Components/Buttons/AddToCartButton/AddToCartButton";
 import LikeButton from "@/Components/Buttons/LikeButton/LikeButton";
 import styles from "./ShowProducts.module.css";
 import { capitalize, formatPrice } from "@/utils/StringHelper";
+import FlashMessage from "@/Components/FlashMessage/FlashMessage";
 
 export default function Show({
     product,
-    finalPrice,
     previousProduct,
     nextProduct,
 }) {
@@ -234,21 +233,21 @@ export default function Show({
                             </h1>
 
                             <div className={styles.pricing}>
-                                {product.promo && product.promo.percentage ? (
+                                {product.promotion ? (
                                     <div className={styles.priceRow}>
                                         <span className={styles.oldPrice}>
                                             {formatPrice(product.price)}
                                         </span>
                                         <span className={styles.discount}>
-                                            (-{product.promo.percentage}%)
+                                            (-{product.promotion}%)
                                         </span>
                                         <span className={styles.currentPrice}>
-                                            {formatPrice(finalPrice)}
+                                            {formatPrice(product.final_price)}
                                         </span>
                                     </div>
                                 ) : (
                                     <span className={styles.currentPrice}>
-                                        {formatPrice(product.price)}
+                                        {formatPrice(product.final_price)}
                                     </span>
                                 )}
                             </div>
@@ -279,32 +278,17 @@ export default function Show({
                             </div>
 
                             {/* Product Actions */}
-                            <div className={styles.productActions}>
-                                <div className={styles.quantitySection}>
-                                    <span className={styles.quantityLabel}>
-                                        Quantity:
-                                    </span>
-                                    <QuantitySelector
-                                        value={quantity}
-                                        onChange={setQuantity}
-                                        min={1}
-                                        max={product.stock || 99}
-                                        disabled={product.stock === 0}
-                                    />
-                                </div>
-
-                                <div className={styles.actionButtons}>
-                                    <AddToCartButton
-                                        productId={product.id}
-                                        disabled={product.stock === 0}
-                                        className={styles.addToCartBtn}
-                                    />
-                                    <LikeButton
-                                        productId={product.id}
-                                        size="medium"
-                                        className={styles.likeBtn}
-                                    />
-                                </div>
+                            <div className={styles.actionButtons}>
+                                <AddToCartButton
+                                    productId={product.id}
+                                    disabled={product.stock === 0}
+                                    className={styles.addToCartBtn}
+                                />
+                                <LikeButton
+                                    productId={product.id}
+                                    size="medium"
+                                    className={styles.likeBtn}
+                                />
                             </div>
                         </div>
                     </div>

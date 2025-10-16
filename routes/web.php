@@ -88,6 +88,14 @@ Route::get('/view-orders', [OrderController::class, 'viewOrders'])
     ->name('view-orders')
     ->middleware('auth');
 
+// Routes pour le checkout
+Route::get('/checkout', [OrderController::class, 'checkout'])
+    ->name('checkout')
+    ->middleware('auth');
+Route::post('/checkout', [OrderController::class, 'processCheckout'])
+    ->name('checkout.process')
+    ->middleware('auth');
+
 // Route pour s'inscrire se désinscrire de la newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
     ->name('newsletter.subscribe');

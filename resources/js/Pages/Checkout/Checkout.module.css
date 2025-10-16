@@ -1,0 +1,405 @@
+/* Wrapper et Container */
+.wrapper {
+    padding: var(--space-5xl) 0;
+}
+
+.container {
+    max-width: min(95vw, 1400px);
+    margin: 0 auto;
+}
+
+.checkoutForm {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+/* Left Column */
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Coupon Section */
+.couponSection {
+    background: var(--white);
+    border-radius: var(--space-sm);
+    padding: var(--space-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.couponBanner {
+    background: var(--soft-mint);
+    color: var(--charcoal);
+    padding: var(--space-md);
+    border-radius: var(--space-xs);
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.couponInput {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.couponField {
+    flex: 1;
+    padding: var(--space-md);
+    border: 1px solid var(--soft-gray);
+    border-radius: var(--space-xs);
+    font-size: var(--font-sm);
+}
+
+.couponField:focus {
+    outline: none;
+    border-color: var(--pink-red);
+}
+
+.applyCouponBtn {
+    background: var(--gray);
+    color: var(--white);
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--space-xs);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.applyCouponBtn:hover {
+    background: var(--charcoal);
+}
+
+.applyCouponBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Applied Coupon */
+.appliedCoupon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--soft-mint);
+    border: 1px solid var(--pink-red);
+    border-radius: var(--space-xs);
+}
+
+.couponInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.couponApplied {
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: var(--pink-red);
+}
+
+.discountAmount {
+    font-size: var(--font-xs);
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.removeCouponBtn {
+    background: var(--pink-red);
+    color: var(--white);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--space-xs);
+    cursor: pointer;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.removeCouponBtn:hover:not(:disabled) {
+    background: var(--dark-pink);
+}
+
+.removeCouponBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Coupon Messages */
+.couponSuccess {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: var(--space-xs);
+    font-size: var(--font-sm);
+    text-align: center;
+}
+
+.couponError {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--space-xs);
+    font-size: var(--font-sm);
+    text-align: center;
+}
+
+/* Billing Section */
+.billingSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    background: var(--white);
+    border-radius: var(--space-sm);
+    padding: var(--space-xl);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+    font-size: var(--font-h5);
+    font-weight: 700;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Form Styles */
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.formInput,
+.formSelect {
+    padding: var(--space-md);
+    border: 1px solid var(--soft-gray);
+    border-radius: var(--space-xs);
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+    transition: border-color 0.3s ease;
+}
+
+.formInput:focus,
+.formSelect:focus {
+    outline: none;
+    border-color: var(--pink-red);
+}
+
+.formSelect {
+    cursor: pointer;
+}
+
+.error {
+    color: var(--pink-red);
+    font-size: var(--font-xs);
+    margin-top: var(--space-xs);
+}
+
+/* Right Column */
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Order Section */
+.orderSection {
+    background: var(--white);
+    border-radius: var(--space-sm);
+    padding: var(--space-xl);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.orderItems {
+    margin-bottom: var(--space-lg);
+}
+
+.orderItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--soft-gray);
+}
+
+.orderItem:last-child {
+    border-bottom: none;
+}
+
+.itemName {
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+}
+
+.itemPrice {
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.orderSummary {
+    border-top: 1px solid var(--soft-gray);
+    padding-top: var(--space-md);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-sm);
+}
+
+.summaryRow:last-child {
+    font-weight: 700;
+    font-size: var(--font-md);
+    color: var(--charcoal);
+    border-top: 1px solid var(--soft-gray);
+    padding-top: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.freeShipping {
+    color: var(--pink-red);
+    font-weight: 600;
+}
+
+.discountText {
+    color: var(--pink-red);
+    font-weight: 600;
+}
+
+/* Payment Section */
+.paymentSection {
+    background: var(--white);
+    border-radius: var(--space-sm);
+    padding: var(--space-xl);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.paymentOptions {
+    margin-bottom: var(--space-lg);
+}
+
+.paymentOption {
+    margin-bottom: var(--space-md);
+}
+
+.radioInput {
+    display: none;
+}
+
+.paymentLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--soft-gray);
+    border-radius: var(--space-xs);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.radioInput:checked + .paymentLabel {
+    border-color: var(--pink-red);
+    background: var(--soft-mint);
+    color: var(--pink-red);
+}
+
+.paymentIcon {
+    color: var(--pink-red);
+    font-size: 16px;
+}
+
+.paymentInstructions {
+    background: var(--white);
+    border: 1px solid var(--soft-gray);
+    border-radius: var(--space-xs);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-sm);
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+.termsSection {
+    margin-bottom: var(--space-lg);
+}
+
+.termsLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+    cursor: pointer;
+}
+
+.checkboxInput {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--pink-red);
+}
+
+.termsLink {
+    color: var(--pink-red);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.checkoutButton {
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .checkoutForm {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+
+    .sectionTitle {
+        font-size: var(--font-h6);
+    }
+
+    .billingSection,
+    .orderSection,
+    .paymentSection {
+        padding: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .applyCouponBtn {
+        width: 100%;
+    }
+
+    .billingSection,
+    .orderSection,
+    .paymentSection {
+        padding: var(--space-md);
+    }
+}
