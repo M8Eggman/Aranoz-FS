@@ -2,22 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactInfo;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    // Route pour suivre votre commande (public)
+    public function trackYourOrder(Request $request)
     {
-        $this->middleware(['auth', 'role:admin,agent']);
+        $contactInfo = ContactInfo::first();
+        $orderId = $request->input('order_number');
+
+        if ($orderId) {
+            $order = Order::where('order_number', $orderId)->first();
+
+            if ($order) {
+                // Commande trouvée → redirige vers Show
+                return redirect()->route('track-your-order.show', $order->order_number);
+            } else {
+                // Commande non trouvée → retourne message d’erreur
+                return redirect()->route('track-your-order')
+                    ->with('error', 'Sorry, we couldn\'t find your order. Please check your order number and try again.');
+            }
+        }
+
+        return Inertia::render('Order/Index', compact('contactInfo'));
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index($status = null)
     {
+        $this->authorize('access', ['role', 'admin', 'agent']);
+
         $query = Order::with('user');
 
         if ($status === 'pending') {
@@ -54,8 +76,19 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('access', ['role', 'admin', 'agent']);
+
         $order = Order::findOrFail($id)->load(['user', 'orderItems.product']);
         return Inertia::render('Admin/Orders/Show', compact('order'));
+    }
+
+    public function showTrackYourOrder($orderNumber)
+    {
+        $order = Order::where('order_number', $orderNumber)
+            ->with(['orderItems.product'])
+            ->firstOrFail();
+
+        return Inertia::render('Order/Show', compact('order'));
     }
 
     /**
@@ -76,6 +109,8 @@ class OrderController extends Controller
 
     public function confirm($id)
     {
+        $this->authorize('access', ['role', 'admin', 'agent']);
+
         $order = Order::findOrFail($id);
 
         // Vérifie que la commande est pas déjà confirmée
@@ -91,6 +126,8 @@ class OrderController extends Controller
 
     public function archive($id)
     {
+        $this->authorize('access', ['role', 'admin', 'agent']);
+
         $order = Order::findOrFail($id);
 
         // Vérifie que la commande est confirmée

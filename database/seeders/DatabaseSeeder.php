@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
             ContactInfoSeeder::class,
             CountrySeeder::class,
+            BillingDetailSeeder::class,
             PromotionSeeder::class,
             OrderSeeder::class,
             MailingSeeder::class,
-            BillingDetailSeeder::class,
         ]);
     }
 }

@@ -25,8 +25,15 @@ use Illuminate\Support\Facades\Route;
 
 // Routes public
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+// Route pour suivre votre commande
+Route::match(['get', 'post'], '/track-your-order', [OrderController::class, 'trackYourOrder'])
+    ->name('track-your-order');
+Route::get('/track-your-order/{order_number}', [OrderController::class, 'showTrackYourOrder'])
+    ->name('track-your-order.show');
+
+// Route contact public 
 Route::get('/contact', [MailingController::class, 'contact'])->name('contact');
-// Route pour envoyer un mail (contact form)
 Route::post('/contact/store', [MailingController::class, 'store'])
     ->name('contact.store');
 

@@ -20,7 +20,12 @@ class OrderSeeder extends Seeder
         $products = Product::all();
         $promotions = Promotion::all();
 
+
+        $paymentMethods = ['check_payments', 'paypal'];
+
         foreach ($users as $user) {
+            $billingDetails = $user->billingDetail->load(['country','user'])->toArray();
+
             // 30% des commandes ont une promotion
             $promo = fake()->boolean(30) && $promotions->count() > 0 ? $promotions->random() : null;
 
@@ -32,6 +37,8 @@ class OrderSeeder extends Seeder
                 'status' => 'pending',
                 'isArchived' => false,
                 'user_id' => $user->id,
+                'billing_detail' => json_encode($billingDetails),
+                'payment_method' => $paymentMethods[fake()->numberBetween(0, 1)],
             ]);
 
             // Génère entre 1 et 4 order items
@@ -40,12 +47,14 @@ class OrderSeeder extends Seeder
 
             foreach ($orderItems as $product) {
                 $quantity = fake()->numberBetween(1, 3);
-                $itemTotal = $product->price * $quantity;
+                $itemTotal = $product->final_price * $quantity;
                 $subTotal += $itemTotal;
 
                 OrderItem::create([
                     'product_name' => $product->name,
                     'product_price' => $product->price,
+                    'product_final_price' => $product->final_price,
+                    'product_promotion' => $product?->promotion ?? null,
                     'quantity' => $quantity,
                     'total_price' => $itemTotal,
                     'order_id' => $order->id,

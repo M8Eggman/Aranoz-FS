@@ -27,7 +27,7 @@ export default function BackNav() {
             label: "Shop",
             options: [
                 { type: "link", route: "home", text: "Shop Category" },
-                { type: "link", route: "home", text: "Track Your Order" },
+                { type: "link", route: "track-your-order", text: "Track Your Order" },
             ],
         },
         {

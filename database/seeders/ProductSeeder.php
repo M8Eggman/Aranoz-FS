@@ -313,6 +313,9 @@ class ProductSeeder extends Seeder
 
             $sales_count = rand(1, 100);
 
+            $price = (float) $data['price'];
+            $final_price = $price - ($price * ($promotion / 100));
+
             $product = new Product();
             $product->name = $data['name'];
             $product->description = $data['description'];
@@ -321,7 +324,7 @@ class ProductSeeder extends Seeder
             $product->images_left_side = makeImageSet($baseImage, $folders);
             $product->images_right_side = makeImageSet($baseImage, $folders);
             $product->price = $data['price'];
-            $product->final_price = (float) $data['price'] * (1 - (int) $promotion / 100);
+            $product->final_price = $final_price;
             $product->stock = $data['stock'];
             $product->sales_count = $sales_count;
             $product->category_id = $data['category'];

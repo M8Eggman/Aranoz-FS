@@ -16,24 +16,21 @@
 
 .info {
     position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    right: 15rem;
-    text-align: center;
-    width: 100%;
+    top: 30%;
+    left: 20%;
     padding: 0 var(--space-xl);
 }
 
 .info h1 {
     margin: 0;
-    font-size: var(--font-h3);
+    font-size: var(--font-h2);
     font-weight: 700;
 }
 
 .info p {
     margin: 0.25rem 0 0;
-    font-size: 0.9rem;
-    color: #333;
+    font-size: var(--font-md);
+    color: var(--gray);
 }
 
 @media screen and (max-width: 768px) {

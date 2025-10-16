@@ -30,3 +30,21 @@ export function formatUnderscore(str) {
         .map((word) => capitalize(word))
         .join(" ");
 }
+
+export function formatDate(dateString) {
+    return new Date(dateString).toLocaleString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+    });
+};
+
+export function formatPrice(price) {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    }).format(price);
+};

@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
+            $table->enum('payment_method',['check_payments' ,'paypal']);
+            $table->json('billing_detail');
             $table->decimal('sub_total_price', 9, 2);
             $table->decimal('total_price', 9, 2);
             $table->enum('status', ['pending', 'confirmed'])->default('pending');
