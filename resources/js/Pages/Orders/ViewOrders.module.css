@@ -1,0 +1,323 @@
+/* Wrapper et Container */
+.wrapper {
+    padding: var(--space-5xl) 0;
+}
+
+.container {
+    max-width: min(95vw, 1200px);
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.title {
+    font-size: var(--font-h2);
+    font-weight: 700;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.subtitle {
+    font-size: var(--font-md);
+    color: var(--gray);
+    margin: 0;
+}
+
+/* Orders Grid */
+.ordersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--space-xl);
+}
+
+/* Order Card */
+.orderCard {
+    background: var(--white);
+    transition: all 0.3s ease;
+}
+
+/* Order Header */
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--soft-gray);
+}
+
+.orderInfo {
+    flex: 1;
+}
+
+.orderNumber {
+    font-size: var(--font-h5);
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.orderMeta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.orderDate,
+.orderItems {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-sm);
+    color: var(--gray);
+}
+
+.orderDate svg,
+.orderItems svg {
+    color: var(--pink-red);
+    font-size: 12px;
+}
+
+/* Order Status */
+.orderStatus {
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--space-xs);
+    font-size: var(--font-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statusPending {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.statusProcessing {
+    background: #cce5ff;
+    color: #004085;
+    border: 1px solid #b3d7ff;
+}
+
+.statusShipped {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.statusDelivered {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.statusCancelled {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.statusDefault {
+    background: var(--soft-gray);
+    color: var(--charcoal);
+    border: 1px solid var(--gray);
+}
+
+/* Order Details */
+.orderDetails {
+    margin-bottom: var(--space-lg);
+}
+
+.orderSummary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summaryLabel {
+    font-size: var(--font-sm);
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.summaryValue {
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.shippingInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-sm);
+    color: var(--gray);
+    padding: var(--space-sm);
+    background: var(--soft-mint);
+    border-radius: var(--space-xs);
+}
+
+.shippingInfo svg {
+    color: var(--pink-red);
+    font-size: 12px;
+}
+
+/* Order Actions */
+.orderActions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.trackButton {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--pink-red);
+    color: var(--white);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--space-xs);
+    text-decoration: none;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.trackButton:hover {
+    background: var(--dark-pink);
+    transform: translateY(-1px);
+}
+
+.trackButton svg {
+    font-size: 12px;
+}
+
+/* No Orders */
+.noOrders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-5xl) var(--space-lg);
+    background: var(--white);
+    border-radius: var(--space-sm);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.noOrdersIcon {
+    width: 80px;
+    height: 80px;
+    background: var(--soft-mint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-xl);
+}
+
+.noOrdersIcon svg {
+    font-size: 32px;
+    color: var(--pink-red);
+}
+
+.noOrders h2 {
+    font-size: var(--font-h4);
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.noOrders p {
+    font-size: var(--font-md);
+    color: var(--gray);
+    margin: 0 0 var(--space-xl) 0;
+}
+
+.shopButton {
+    display: inline-block;
+    background: var(--pink-red);
+    color: var(--white);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--space-xs);
+    text-decoration: none;
+    font-size: var(--font-md);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.shopButton:hover {
+    background: var(--dark-pink);
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ordersGrid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: var(--space-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .ordersGrid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .orderHeader {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+
+    .orderMeta {
+        flex-direction: row;
+        gap: var(--space-md);
+    }
+
+    .title {
+        font-size: var(--font-h3);
+    }
+
+    .noOrders {
+        padding: var(--space-4xl) var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        padding: var(--space-3xl) 0;
+    }
+
+    .orderNumber {
+        font-size: var(--font-h6);
+    }
+
+    .orderMeta {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .summaryItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+
+    .trackButton {
+        width: 100%;
+        justify-content: center;
+    }
+}

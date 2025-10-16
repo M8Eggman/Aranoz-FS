@@ -153,4 +153,21 @@ class OrderController extends Controller
     {
         //
     }
+
+    /**
+     * Display all orders for the authenticated user
+     */
+    public function viewOrders(Request $request)
+    {
+        $user = $request->user();
+
+        $orders = Order::where('user_id', $user->id)
+            ->with(['orderItems.product', 'user.billingDetail', 'promotion'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('Orders/ViewOrders', [
+            'orders' => $orders
+        ]);
+    }
 }

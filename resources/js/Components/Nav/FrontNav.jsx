@@ -63,8 +63,8 @@ export default function BackNav() {
         { type: "link", route: "cart.index", text: "View your cart" },
         {
             type: "link",
-            route: "home",
-            text: "View your last Order",
+            route: "view-orders",
+            text: "View your Orders",
         },
         {
             type: "link",

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FeaturedCategories.module.css";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { IoMdArrowDropright } from "react-icons/io";
 import { capitalize, formatUnderscore } from "@/utils/StringHelper";
 
@@ -13,7 +13,11 @@ export default function FeaturedCategories({ categories = [] }) {
                 <h3 className={styles.heading}>Featured Category</h3>
                 <div className={styles.grid}>
                     {items.map((c, idx) => (
-                        <Link key={idx} href={"#"} className={styles.card}>
+                        <div
+                            key={idx}
+                            onClick={() => router.visit(route("products"))}
+                            className={styles.card}
+                        >
                             <div className={styles.textBlock}>
                                 <span className={styles.subtitle}>
                                     Premium Quality
@@ -28,7 +32,7 @@ export default function FeaturedCategories({ categories = [] }) {
                             <span className={styles.link}>
                                 Explore now <IoMdArrowDropright size={30} />
                             </span>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>

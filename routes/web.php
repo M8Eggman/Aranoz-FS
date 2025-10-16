@@ -83,6 +83,11 @@ Route::match(['get', 'post'], '/track-your-order', [OrderController::class, 'tra
 Route::get('/track-your-order/{order_number}', [OrderController::class, 'showTrackYourOrder'])
     ->name('track-your-order.show');
 
+// Route pour voir toutes les commandes de l'utilisateur
+Route::get('/view-orders', [OrderController::class, 'viewOrders'])
+    ->name('view-orders')
+    ->middleware('auth');
+
 // Route pour s'inscrire se désinscrire de la newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
     ->name('newsletter.subscribe');
