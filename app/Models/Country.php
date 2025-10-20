@@ -16,6 +16,6 @@ class Country extends Model
 
     public function billingDetail()
     {
-        $this->hasMany(BillingDetail::class);
+        return $this->hasMany(BillingDetail::class);
     }
 }

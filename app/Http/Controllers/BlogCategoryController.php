@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\BlogCategory;
 use App\Http\Requests\StoreBlogCategoryRequest;
 use App\Http\Requests\UpdateBlogCategoryRequest;
+use Inertia\Inertia;
 
 class BlogCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:admin']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = BlogCategory::all();
+        $lastId = BlogCategory::query()->max('id') ?? 0;
+        return Inertia::render('Admin/BlogCategories/Index', compact('categories', 'lastId'));
     }
 
     /**
@@ -29,7 +37,10 @@ class BlogCategoryController extends Controller
      */
     public function store(StoreBlogCategoryRequest $request)
     {
-        //
+        $request->validate(['name' => 'required|string|max:255']);
+        BlogCategory::create(['name' => $request->name]);
+
+        return redirect()->back()->with('success', 'Category created');
     }
 
     /**
@@ -51,16 +62,24 @@ class BlogCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBlogCategoryRequest $request, BlogCategory $blogCategory)
+    public function update(UpdateBlogCategoryRequest $request, $id)
     {
-        //
+        $category = BlogCategory::findOrFail($id);
+
+        $request->validate(['name' => 'required|string|max:255']);
+        $category->update(['name' => $request->name]);
+
+        return redirect()->back()->with('success', 'Category updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogCategory $blogCategory)
+    public function destroy($id)
     {
-        //
+        $category = BlogCategory::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Category deleted');
     }
 }

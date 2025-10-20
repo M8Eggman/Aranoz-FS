@@ -1,0 +1,159 @@
+.wrapper {
+    padding: var(--space-5xl) 0;
+}
+
+.container {
+    max-width: min(1200px, 95vw);
+    margin: 0 auto;
+}
+
+.title {
+    font-size: var(--font-h5);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    color: var(--pink-red);
+    text-transform: uppercase;
+}
+
+.orderGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.card {
+    background: var(--blue);
+    padding: var(--space-lg);
+}
+
+.cardTitle {
+    font-size: var(--font-h6);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--charcoal);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: var(--space-xs);
+}
+
+.infoGrid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.infoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.infoItem:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: 500;
+    color: #64748b;
+    min-width: 120px;
+    font-size: var(--font-sm);
+}
+
+.value {
+    font-weight: 400;
+    color: var(--charcoal);
+    text-align: right;
+    flex: 1;
+    font-size: var(--font-sm);
+}
+
+.orderItemsCard {
+    background: var(--blue);
+    padding: var(--space-lg);
+}
+
+.tableWrapper {
+    overflow-x: auto;
+    margin-top: var(--space-md);
+}
+
+.orderTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-sm);
+}
+
+.orderTable th {
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 600;
+    color: var(--charcoal);
+    border-bottom: 2px solid var(--soft-gray);
+    white-space: nowrap;
+}
+
+.orderTable td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--soft-gray);
+    color: var(--charcoal);
+}
+
+.totalRow td {
+    border-bottom: none;
+}
+
+.promoRow td {
+    border-bottom: none;
+}
+
+.promoLabel {
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.promoValue {
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.totalLabel {
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.totalValue {
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .orderGrid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .infoItem {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .label {
+        min-width: auto;
+    }
+
+    .value {
+        text-align: left;
+    }
+
+    .orderTable {
+        font-size: var(--font-xs);
+        overflow-x: auto;
+    }
+
+    .orderTable th,
+    .orderTable td {
+        padding: var(--space-sm);
+    }
+}

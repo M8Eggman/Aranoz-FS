@@ -15,14 +15,16 @@ return new class extends Migration {
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 8, 2);
-            $table->unsignedInteger('stock');
+            $table->decimal('final_price', 8, 2);
+            $table->unsignedBigInteger('stock');
+            $table->unsignedBigInteger('sales_count')->default(0);
             $table->boolean('isPinned')->default(false);
-            $table->string('image_main');
-            $table->string('image_rear')->nullable();
-            $table->string('image_left_side')->nullable();
-            $table->string('image_right_side')->nullable();
-            $table->foreignId('color_id')->constrained('colors');
-            $table->foreignId('category_id')->constrained('product_categories');
+            $table->json('images_main');
+            $table->json('images_rear')->nullable();
+            $table->json('images_left_side')->nullable();
+            $table->json('images_right_side')->nullable();
+            $table->foreignId('color_id')->nullable()->constrained('colors')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('product_categories')->nullOnDelete();
             // Promotions sur le produits
             $table->unsignedTinyInteger('promotion')->nullable();
             $table->timestamps();

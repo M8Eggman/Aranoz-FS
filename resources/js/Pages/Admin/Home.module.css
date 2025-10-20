@@ -1,0 +1,27 @@
+.container {
+    padding-inline: min(var(--space-3xl), 5vw);
+    padding-block: var(--space-lg);
+}
+
+.container > h3 {
+    font-size: var(--font-h4);
+    font-weight: 600;
+    color: var(--dark-pink);
+    margin-bottom: var(--space-md);
+    border-left: 4px solid var(--dark-pink);
+    padding-left: var(--space-sm);
+    letter-spacing: 0.5px;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: var(--space-md);
+    justify-content: stretch;
+}
+
+@media screen and (max-width: 675px) {
+    .cardContainer {
+        grid-template-columns: 1fr;
+    }
+}

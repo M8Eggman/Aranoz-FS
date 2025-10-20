@@ -16,14 +16,30 @@ class Order extends Model
         'status',
         'isArchived',
         'user_id',
+        'promotion_id',
+        'promotion_percentage',
+        'promotion_name',
+        'billing_detail',
+        'payment_method',
+        'sub_total_price',
+    ];
+
+    protected $casts = [
+        'billing_detail' => 'array',
     ];
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
+
+    public function promotion()
+    {
+        return $this->belongsTo(Promotion::class);
+    }
+
     public function orderItems()
     {
-        $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class);
     }
 }

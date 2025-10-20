@@ -15,15 +15,15 @@ class RoleSeeder extends Seeder
     {
         Role::insert([
             // 1 : Client (acheter, commenter blog, suivre commandes)
-            ['name' => 'User'],
+            ['name' => 'user'],
             // 2 : Community Manager (CRUD blog, créer tags)
-            ['name' => 'Community Manager'],
+            ['name' => 'community_manager'],
             // 3 : Agent (gérer commandes, changer statut, envoyer mails dashboard)
-            ['name' => 'Agent'],
+            ['name' => 'agent'],
             // 4 : Webmaster (CRUD produit, pin sur home, gérer stock, modifier contact)
-            ['name' => 'Webmaster'],
+            ['name' => 'webmaster'],
             // 5 : Admin (tous droits)
-            ['name' => 'Admin'],
+            ['name' => 'admin'],
         ]);
     }
 }

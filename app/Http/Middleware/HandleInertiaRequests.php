@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use DB;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -31,9 +32,22 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
+            // Envoi des messages flash pour tout les composants et pages
+            'flash' => [
+                'success' => fn() => $request->session()->get('success'),
+                'error' => fn() => $request->session()->get('error'),
             ],
+            'auth' => [
+                'user' => $request->user()?->load(['role', 'newsletter', 'likedProducts', 'carts.product']),
+            ],
+            // Envoi les gates dans le front
+            'can' => [
+                'isAdmin' => $request->user()?->can('is-admin') ?? false,
+                'isWebmaster' => $request->user()?->can('is-webmaster') ?? false,
+                'isAgent' => $request->user()?->can('is-agent') ?? false,
+                'isCommunityManager' => $request->user()?->can('is-community-manager') ?? false,
+                'isUser' => $request->user()?->can('is-user') ?? false,
+            ]
         ];
     }
 }

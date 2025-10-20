@@ -1,0 +1,63 @@
+.wrapper {
+    padding-block: var(--space-5xl);
+}
+
+.container {
+    max-width: min(1200px, 95vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.description {
+    font-size: var(--font-md);
+    color: var(--charcoal);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: var(--gap-md);
+}
+
+.form input {
+    width: 60%;
+    padding: var(--space-sm);
+    border: 1px solid var(--gray);
+    border-radius: var(--space-sm);
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    padding: var(--space-sm);
+    background-color: var(--light-golden-brown);
+    border-radius: var(--space-sm);
+}
+
+.errorText {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    font-size: var(--font-sm);
+    color: var(--brown);
+}
+
+.errorIcon {
+    font-size: var(--font-lg);
+    color: var(--pink-red);
+}
+
+.phoneNumber {
+    color: var(--pink-red);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.phoneNumber:hover {
+    filter: brightness(0.8);
+}

@@ -22,6 +22,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'images',
+    ];
+
+    // Convertie l'array php en json
+    protected $casts = [
+        'images' => 'array',
     ];
 
     /**
@@ -49,26 +55,41 @@ class User extends Authenticatable
 
     public function role()
     {
-        $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function billingDetail()
     {
-        $this->hasOne(BillingDetail::class);
+        return $this->hasOne(BillingDetail::class);
     }
 
     public function blogs()
     {
-        $this->hasMany(Blog::class);
+        return $this->hasMany(Blog::class);
     }
 
     public function carts()
     {
-        $this->hasMany(Cart::class);
+        return $this->hasMany(Cart::class);
     }
 
     public function comments()
     {
-        $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class);
+    }
+
+    public function newsletter()
+    {
+        return $this->hasOne(Newsletter::class);
+    }
+
+    public function weeklySale()
+    {
+        return $this->hasOne(WeeklySale::class);
+    }
+
+    public function likedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_product');
     }
 }

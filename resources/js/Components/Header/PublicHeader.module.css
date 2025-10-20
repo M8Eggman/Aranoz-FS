@@ -1,0 +1,57 @@
+.header {
+    background-image: url("/storage/breadcrumb/breadcrumb.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--gap-2xl);
+    height: 25rem;
+}
+
+.info {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    padding: 0 var(--space-xl);
+}
+
+.info h1 {
+    line-height: 1.4;
+    margin: 0;
+    font-size: var(--font-h2);
+    font-weight: 700;
+}
+
+.info p {
+    margin: 0.25rem 0 0;
+    font-size: var(--font-md);
+    color: var(--gray);
+}
+
+@media screen and (max-width: 768px) {
+    .info {
+        width: 100%;
+    }
+
+    .header {
+        padding: var(--space-xl);
+        background-image: none;
+        background-color: var(--blue);
+    }
+
+    .container {
+        height: auto;
+    }
+
+    .info {
+        position: relative;
+        inset: initial;
+        transform: none;
+    }
+}

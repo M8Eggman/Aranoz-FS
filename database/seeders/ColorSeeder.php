@@ -11,25 +11,41 @@ class ColorSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
     public function run(): void
     {
         $colors = [
-            ['name' => 'bleu'],
-            ['name' => 'rose vif'],
-            ['name' => 'bleu acier'],
-            ['name' => 'menthe douce'],
-            ['name' => 'rose foncé'],
-            ['name' => 'bleu atténué'],
-            ['name' => 'charbon'],
-            ['name' => 'brun doré'],
-            ['name' => 'gris aqua'],
-            ['name' => 'gris mauve'],
-            ['name' => 'gris doux'],
-            ['name' => 'sauge'],
+            ['name' => 'blue', 'hex' => '#ecfdff'],
+            ['name' => 'bright pink', 'hex' => '#ff3368'],
+            ['name' => 'steel blue', 'hex' => '#5888b7'],
+            ['name' => 'soft mint', 'hex' => '#ecf8f8'],
+            ['name' => 'dark pink', 'hex' => '#e24175'],
+            ['name' => 'muted blue', 'hex' => '#86a5c2'],
+            ['name' => 'charcoal', 'hex' => '#1b1b1d'],
+            ['name' => 'golden brown', 'hex' => '#ac9758'],
+            ['name' => 'aqua gray', 'hex' => '#bcd9d4'],
+            ['name' => 'mauve gray', 'hex' => '#bba9b5'],
+            ['name' => 'soft gray', 'hex' => '#d2cfd6'],
+            ['name' => 'sage', 'hex' => '#c3c3a1'],
+            ['name' => 'pale pink', 'hex' => '#fdd4d4'],
+            ['name' => 'sand beige', 'hex' => '#e9dcc4'],
+            ['name' => 'mist blue', 'hex' => '#d8e4ec'],
+            ['name' => 'soft lavender', 'hex' => '#d7c8e2'],
+            ['name' => 'willow green', 'hex' => '#b9c8a3'],
+            ['name' => 'pearl gray', 'hex' => '#e5e5e5'],
+            ['name' => 'white', 'hex' => '#ffffff'],
+            ['name' => 'red', 'hex' => '#ff0000'],
+            ['name' => 'green', 'hex' => '#00ff00'],
+            ['name' => 'orange', 'hex' => '#ffa500'],
+            ['name' => 'turquoise', 'hex' => '#40e0d0'],
+            ['name' => 'yellow', 'hex' => '#ffff00'],
+            ['name' => 'brown', 'hex' => '#a52a2a'],
+            ['name' => 'multicolor', 'hex' => '#ffffff'],
         ];
 
-        foreach ($colors as $c) {
-            Color::create($c);
+        foreach ($colors as $color) {
+            Color::create($color);
         }
     }
 }
+

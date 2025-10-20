@@ -14,45 +14,59 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'final_price',
         'stock',
         'isPinned',
-        'image_main',
-        'image_rear',
-        'image_left_side',
-        'image_right_side',
+        'images_main',
+        'images_rear',
+        'images_left_side',
+        'images_right_side',
         'color_id',
         'category_id',
-        'promo_id',
+        'promotion',
     ];
+
+    protected $casts = [
+        'images_main' => 'array',
+        'images_rear' => 'array',
+        'images_left_side' => 'array',
+        'images_right_side' => 'array',
+    ];
+
 
     public function color()
     {
-        $this->belongsTo(Color::class);
-    }
-
-    public function promo()
-    {
-        $this->belongsTo(Promotion::class);
+        return $this->belongsTo(Color::class);
     }
 
     public function category()
     {
-        $this->belongsTo(ProductCategorie::class);
+        return $this->belongsTo(ProductCategorie::class, 'category_id');
     }
 
     public function specification()
     {
-        $this->hasOne(Specification::class);
+        return $this->hasOne(Specification::class);
     }
 
     public function carts()
     {
-        $this->hasMany(Cart::class);
+        return $this->hasMany(Cart::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function orderItems()
     {
-        $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function likedProducts()
+    {
+        return $this->belongsToMany(User::class, 'user_product');
     }
 
 }

@@ -14,10 +14,10 @@ class PromotionSeeder extends Seeder
     public function run(): void
     {
         $promos = [
-            ['name' => 'Promo Rentrée', 'percentage' => 10],
-            ['name' => 'Black Friday', 'percentage' => 20],
-            ['name' => 'Noël', 'percentage' => 15],
-            ['name' => 'Anniversaire', 'percentage' => 25],
+            ['name' => 'WELCOME10', 'percentage' => 10],
+            ['name' => 'SAVE20', 'percentage' => 20],
+            ['name' => 'SUMMER15', 'percentage' => 15],
+            ['name' => 'NEWUSER25', 'percentage' => 25],
         ];
 
         foreach ($promos as $promo) {

@@ -1,0 +1,165 @@
+.nav {
+    position: sticky;
+    top: 0;
+    padding: var(--space-sm);
+    z-index: 50;
+}
+/* couleur de la nav selon si on est dans une page publique ou privée */
+.navFront {
+    background: var(--blue);
+}
+.navBack {
+    background: var(--rose-pale);
+}
+/* couleur de la nav quand on est dans les pages auth (register/login) */
+.navAuth {
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 1400px;
+    gap: var(--gap-sm);
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link {
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: var(--font-md);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding: var(--space-xs);
+    transition: 200ms ease;
+}
+
+.link:hover {
+    color: var(--dark-pink);
+}
+
+.link:active {
+    color: var(--dark-pink);
+}
+
+.brand {
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: var(--font-2xl);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    font-weight: 900;
+}
+
+.label {
+    background: var(--pink-red);
+    color: white;
+    font-size: var(--font-xs);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.menu {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* style du menu dans les pages privée */
+.menuBack {
+    justify-content: space-between;
+    gap: 0;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.logout {
+    background: var(--pink-red);
+    color: white;
+    border: none;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.backHome {
+    text-decoration: underline;
+    color: black;
+}
+
+.burger {
+    display: none;
+    font-size: var(--font-2xl);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1400px) {
+    .brandContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .menu {
+        transform: scaleY(0%);
+        visibility: hidden;
+        pointer-events: none;
+        flex-direction: column;
+        align-items: start;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        gap: var(--gap-sm);
+        z-index: 100;
+        box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transform-origin: top;
+        transition: 200ms ease;
+        padding-bottom: 10px;
+    }
+    /* couleur du menu responsive selon si on est dans une page publique ou privée */
+    .menuFront {
+        background-color: var(--blue);
+    }
+    .menuBack {
+        background-color: var(--rose-pale);
+    }
+    /* couleur du menu responsive quand on est dans les pages auth (register/login) */
+    .menuAuth {
+        background-color: var(--white);
+    }
+
+    .menu.menuOpen {
+        transform: scaleY(100%);
+        visibility: visible;
+        pointer-events: all;
+    }
+
+    .menu li {
+        padding: var(--space-xs) var(--space-md);
+    }
+}

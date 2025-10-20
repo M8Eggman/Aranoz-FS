@@ -1,0 +1,129 @@
+.wrapper {
+    background: var(--white);
+    padding-top: var(--space-5xl);
+}
+
+.container {
+    max-width: min(1400px, 95vw);
+    margin: 0 auto;
+}
+
+.heading {
+    text-align: center;
+    font-size: var(--font-h3);
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: var(--space-2xl);
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+}
+
+.grid > .card:nth-of-type(1) {
+    flex: 1.5;
+    min-width: 45%;
+}
+.grid > .card:nth-of-type(2) {
+    flex: 1;
+    min-width: 45%;
+}
+.grid > .card:nth-of-type(3) {
+    flex: 1;
+    min-width: 45%;
+}
+.grid > .card:nth-of-type(4) {
+    flex: 1.5;
+    min-width: 45%;
+}
+
+.card {
+    position: relative;
+    background: var(--ice-white);
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-xl);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.textBlock {
+    display: grid;
+    gap: var(--gap-sm);
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: var(--font-sm);
+}
+
+.title {
+    color: var(--charcoal);
+    font-weight: 800;
+    font-size: var(--font-h4);
+}
+
+.image {
+    position: absolute;
+    right: var(--space-md);
+    bottom: var(--space-md);
+    object-fit: contain;
+    filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.12));
+}
+
+.link {
+    margin-top: var(--space-5xl);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    color: var(--pink-red);
+    font-weight: 700;
+    font-size: var(--font-md);
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translatey(-6px);
+    text-transform: uppercase;
+    transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.card:hover .link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .grid > .card {
+        flex: initial;
+        min-width: initial;
+    }
+
+    .link {
+        position: absolute;
+        margin-top: 0;
+        bottom: var(--space-xl);
+    }
+
+    .image {
+        position: relative;
+        inset: initial;
+        display: flex;
+        justify-content: center;
+        img {
+            width: 60%;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

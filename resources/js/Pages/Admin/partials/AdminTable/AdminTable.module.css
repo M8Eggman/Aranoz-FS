@@ -1,0 +1,129 @@
+.container {
+    max-width: min(1400px, 90vw);
+    overflow-x: auto;
+    margin: var(--space-md) auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.form {
+    display: flex;
+    gap: var(--gap-sm);
+}
+
+.inputGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.table th,
+.table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+}
+
+.table th {
+    background: var(--soft-mint);
+    font-size: var(--font-md);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.table td {
+    font-size: var(--font-sm);
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--muted-blue);
+}
+
+.actions {
+    display: flex;
+    gap: var(--gap-sm);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: var(--gap-sm);
+}
+
+.name {
+    font-weight: 500;
+}
+
+.modalContent {
+    background: var(--white);
+    padding: var(--space-2xl);
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalTitle {
+    font-size: var(--font-h3);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.modalText {
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--gap-xs);
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--pink-red);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.statusFilter {
+    display: flex;
+    gap: var(--gap-sm);
+    flex-wrap: wrap;
+}
+
+.noOrders {
+    font-size: var(--font-md);
+    color: var(--charcoal);
+    margin-top: var(--space-md);
+    text-align: center;
+}
+
+.deletedUser {
+    color: var(--muted-blue);
+    font-style: italic;
+}
+
+@media screen and (max-width: 576px) {
+    .form {
+        flex-direction: column;
+    }
+}

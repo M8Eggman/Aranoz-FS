@@ -1,0 +1,7 @@
+.label {
+    display: block;
+    font-size: var(--font-sm);
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: var(--space-xs);
+}

@@ -1,0 +1,25 @@
+.button {
+    background: var(--pink-red);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    padding: var(--space-sm) var(--space-lg);
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: background 300ms ease, transform 300ms ease;
+    box-shadow: 0 6px 15px rgba(255, 51, 104, 0.3);
+    font-size: var(--font-sm);
+}
+
+.button:hover {
+    background: var(--dark-pink);
+    transform: translateY(-2px);
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}

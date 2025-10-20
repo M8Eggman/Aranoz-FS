@@ -1,0 +1,39 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--rose-pale);
+    padding: var(--space-md);
+    border-radius: var(--space-sm);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.content h3 {
+    font-size: var(--font-h6);
+    font-weight: 600;
+}
+
+.description {
+    font-size: var(--font-sm);
+    color: var(--charcoal);
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-sm) 0 0 0;
+}
+
+.linkList li {
+    margin-bottom: var(--space-xs);
+}
+
+.linkList li a {
+    color: var(--dark-pink);
+    text-decoration: none;
+    font-size: var(--font-sm);
+}
+
+.linkList li a:hover {
+    text-decoration: underline;
+}
